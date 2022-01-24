@@ -46,3 +46,5 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem 'sumsub-ruby-sdk', '~> 0.1.3', require: 'sumsub', github: 'bitzlato/sumsub-ruby-sdk'
