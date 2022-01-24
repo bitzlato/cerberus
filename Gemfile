@@ -31,6 +31,10 @@ gem 'bootsnap', '>= 1.4.4', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'rspec-rails', '~> 4.0.2'
+  gem 'factory_bot'
+  gem 'rubocop', require: false
+
 end
 
 group :development do
@@ -48,8 +52,6 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'sumsub-ruby-sdk', '~> 0.1.3', require: 'sumsub', github: 'bitzlato/sumsub-ruby-sdk'
-
-gem 'rubocop', require: false
 
 
 gem "grape", "~> 1.6"
