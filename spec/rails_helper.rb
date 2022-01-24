@@ -7,6 +7,12 @@ require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
+
+Sumsub.configure do |config|
+  config.token = 'tst:P3Y8QoFQ3Wxqp2avcPEM8E8j.3GrVZg5p3DqJQM1jkGTt0jZG4sJqvlzF'
+  config.secret_key = 'v8s5Fh6kmfx1usNJlLs2oa0rWcc24y3S'
+  config.production = false # is true by default
+end
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -33,7 +39,7 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 RSpec.configure do |config|
-  config.include FactoryGirl::Syntax::Methods
+  config.include FactoryBot::Syntax::Methods
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
