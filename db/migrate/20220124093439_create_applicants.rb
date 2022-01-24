@@ -15,5 +15,4 @@ class CreateApplicants < ActiveRecord::Migration[6.1]
       t.string :review_reject_type
     end
   end
-  end
 end
