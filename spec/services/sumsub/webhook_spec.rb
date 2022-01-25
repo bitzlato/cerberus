@@ -9,13 +9,15 @@ describe SumSub::Webhook do
       ENV['SUMSUB_WEBHOOK_SECRET_KEY'] = '8ccj5ivpwku2u9by27otp969b9x'
       @secret = '8ccj5ivpwku2u9by27otp969b9x'
       @digest = 'ccfda551ed3ab0dc221952932ddf72050bd7707a'
+      @hmac = OpenSSL::HMAC.hexdigest(OpenSSL::Digest::Digest.new('sha1'), @secret, @body)
+
     end
     it 'ok' do
       webhook = described_class.new(params: @params, body: @body, digest: @digest, validate_request: true, secret_key: @secret)
-      expect( webhook.send(:validate_request)).to be_truthy
+      expect( webhook.send(:validate_request)).to be_true
     end
     it 'fail' do
-      webhook = described_class.new(params: @params, body: @body, digest: '1234', validate_request: true, secret_key: @secret)
+      webhook = described_class.new(params: @params, body: @body, digest: '1234', validate_request: true)
       expect{ webhook.send(:validate_request) }.to raise_error(SumSub::Webhook::InvalidRequest)
     end
   end
