@@ -20,7 +20,7 @@ class Webhook < Grape::API
       optional :applicantActionId, type: JSON, desc: 'Id of an applicant action.'
       optional :externalApplicantActionId, type: JSON, desc: 'Unique action Id on your side'
     end
-    post  'sumsub' do
+    post 'sumsub' do
       digest = request.headers['X-Payload-Digest']
       webhook = SumSub::Webhook.new(
         params: @params,
