@@ -11,7 +11,7 @@ class Applicant < ApplicationRecord
     reseted: 2
   }
 
-  before_commit do
+  before_save do
     self.status = 'verified' if review_answer == 'GREEN'
     self.status = 'banned'   if review_answer == 'RED' && review_reject_type == 'FINAL'
     self.status = 'rejected' if review_answer == 'RED' && review_reject_type == 'RETRY'
