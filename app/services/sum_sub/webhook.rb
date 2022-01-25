@@ -1,4 +1,5 @@
 module SumSub
+  # Service processing incoming webhook from sumsub
   class Webhook
     class InvalidRequest < StandardError; end
 
@@ -19,14 +20,14 @@ module SumSub
     private
 
     def process_webhook
-       if applicant.nil?
-         Applicant.create!(attributes_matcher)
-       else
-         applicant.update(attributes_matcher)
-       end
+      if applicant.nil?
+        Applicant.create!(attributes)
+      else
+        applicant.update(attributes)
+      end
     end
 
-    def attributes_matcher
+    def attributes
       {
         applicant_id: @params[:applicantId],
         inspection_id: @params[:inspectionId],
