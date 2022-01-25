@@ -35,6 +35,7 @@ module SumSub
         review_reject_type:  @params[:reviewResult][:reviewRejectType],
         review_answer:  @params[:reviewResult][:reviewAnswer],
         review_status:  @params[:reviewResult][:reviewStatus],
+        raw_request: @params,
       )
     end
 
