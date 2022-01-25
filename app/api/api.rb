@@ -4,4 +4,5 @@ class API < Grape::API
 
 
   mount Kyc
+  mount Webhook
 end

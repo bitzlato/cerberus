@@ -8,6 +8,8 @@ require File.expand_path('../config/environment', __dir__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
 
+
+
 Sumsub.configure do |config|
   config.token = 'tst:P3Y8QoFQ3Wxqp2avcPEM8E8j.3GrVZg5p3DqJQM1jkGTt0jZG4sJqvlzF'
   config.secret_key = 'v8s5Fh6kmfx1usNJlLs2oa0rWcc24y3S'
@@ -32,6 +34,10 @@ end
 
 # Checks for pending migrations and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove these lines.
+#
+FactoryBot.find_definitions
+
+
 begin
   ActiveRecord::Migration.maintain_test_schema!
 rescue ActiveRecord::PendingMigrationError => e
