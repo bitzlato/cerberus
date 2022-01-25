@@ -19,11 +19,15 @@ module SumSub
     private
 
     def process_webhook
-      create_applicant if applicant.nil?
+       if applicant.nil?
+         Applicant.create!(attributes_matcher)
+       else
+         applicant.update(attributes_matcher)
+       end
     end
 
-    def create_applicant
-      Applicant.create!(
+    def attributes_matcher
+      {
         applicant_id: @params[:applicantId],
         inspection_id: @params[:inspectionId],
         user_uid: @params[:externalUserId],
@@ -35,8 +39,8 @@ module SumSub
         review_reject_type:  @params[:reviewResult][:reviewRejectType],
         review_answer:  @params[:reviewResult][:reviewAnswer],
         review_status:  @params[:reviewResult][:reviewStatus],
-        raw_request: @params,
-      )
+        raw_request: @params
+      }
     end
 
     def applicant

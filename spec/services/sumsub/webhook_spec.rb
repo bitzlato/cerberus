@@ -46,6 +46,35 @@ describe SumSub::Webhook do
   end
 
   describe 'change applicant' do
+    before do
+      @applicant = create(:applicant, :rejected)
+      @params = {
+        'applicantId': @applicant.applicant_id,
+        'inspectionId': @applicant.inspection_id,
+        'applicantType': 'individual',
+        'correlationId': 'req-93309875-9699-4eae-8fb4-e4985d8a0ac0',
+        'externalUserId': '14577264',
+        'type': 'applicantReviewed',
+        'reviewResult': {
+          'reviewAnswer': 'GREEN',
+        },
+        'reviewStatus': 'completed',
+        'createdAt': '2022-01-25 13:09:11+0000',
+        'sourceKey': '',
+        'clientId': 'bitzlato'
+      }.with_indifferent_access
+    end
+
+    it 'ok' do
+      webhook = described_class.new(
+        params: @params,
+        validate_request: false
+      )
+      webhook.call
+      expect(@applicant.status).to eq('rejected')
+      @applicant.reload
+      expect(@applicant.status).to eq('verified')
+    end
   end
 
   describe 'validate' do
@@ -59,7 +88,6 @@ describe SumSub::Webhook do
         params: @params,
         body: @body,
         digest: @digest,
-        validate_request: true,
         secret_key: @secret
       )
       expect(webhook.send(:validate_request)).to be_truthy
@@ -70,11 +98,9 @@ describe SumSub::Webhook do
         params: @params,
         body: @body,
         digest: @digest,
-        validate_request: true,
         secret_key: @secret
       )
       expect { webhook.send(:validate_request) }.to raise_error(SumSub::Webhook::InvalidRequest)
     end
   end
-
 end
