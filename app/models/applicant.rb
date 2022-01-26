@@ -12,9 +12,24 @@ class Applicant < ApplicationRecord
   }
 
   before_save do
-    self.status = 'verified' if review_answer == 'GREEN'
-    self.status = 'banned'   if review_answer == 'RED' && review_reject_type == 'FINAL'
-    self.status = 'rejected' if review_answer == 'RED' && review_reject_type == 'RETRY'
+    unless status == 'reseted'
+      self.status = 'verified' if review_answer == 'GREEN'
+      self.status = 'banned'   if review_answer == 'RED' && review_reject_type == 'FINAL'
+      self.status = 'rejected' if review_answer == 'RED' && review_reject_type == 'RETRY'
+    end
+  end
+
+
+  def reset_applicant
+    response = Sumsub::Request.new.reset_applicant(applicant_id)
+    
+    if response['ok'] == 1
+      update(status: 'reseted')
+    else
+      false
+    end
+  rescue Dry::Struct::MissingAttributeError
+    false
   end
 
 end

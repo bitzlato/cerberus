@@ -25,6 +25,30 @@ describe Applicant, type: :model do
     end
 
   end
+
+  describe 'reset_applicant' do
+    before do
+      @applicant = create(:applicant, :verified)
+    end
+
+    it 'ok' do
+      response = {'ok': 1}
+      stub_request(:post, "https://test-api.sumsub.com/resources/applicants/#{@applicant.applicant_id}/reset").
+        to_return(status: 200, body: response.to_json, headers: {})
+
+      expect(@applicant.reset_applicant).to be_truthy
+      @applicant.reload
+      expect(@applicant.reseted?).to be_truthy
+    end
+
+    it 'fail' do
+      response = {'ok': 0}
+      stub_request(:post, "https://test-api.sumsub.com/resources/applicants/#{@applicant.applicant_id}/reset").
+        to_return(status: 200, body: response.to_json, headers: {})
+
+      expect(@applicant.reset_applicant).to be_falsey
+    end
+  end
 end
 
 # == Schema Information
