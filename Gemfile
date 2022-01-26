@@ -35,6 +35,7 @@ group :development, :test do
   gem 'factory_bot'
   gem 'rubocop', require: false
   gem 'webmock'
+  gem 'rspec-grape'
 end
 
 group :development do

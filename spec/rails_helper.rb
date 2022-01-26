@@ -7,6 +7,8 @@ require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
+require_relative 'support/request_helper'
+require_relative 'support/stub_helper'
 
 FactoryBot.find_definitions
 
@@ -17,7 +19,10 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 RSpec.configure do |config|
+  config.include StubHelper
+  config.include RequestHelper
   config.include FactoryBot::Syntax::Methods
+
 
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
