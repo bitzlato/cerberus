@@ -34,7 +34,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 4.0.2'
   gem 'factory_bot'
   gem 'rubocop', require: false
-
+  gem 'webmock'
 end
 
 group :development do
