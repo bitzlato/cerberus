@@ -25,7 +25,8 @@ class Webhook < Grape::API
       webhook = SumSub::Webhook.new(
         params: @params,
         body: request.body.string,
-        digest: digest
+        digest: digest,
+        validate_request: !Rails.env.test?
         )
       webhook.call
     end
