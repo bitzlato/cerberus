@@ -25,12 +25,12 @@ module SumSub
       else
         applicant.update(attributes)
       end
-      # need_reset
+      reset_condition
     end
 
-    # def need_reset
-    #   applicant.update(status: 'reseted') if @params[:type] == 'applicantReset'
-    # end
+    def reset_condition
+      applicant.update(status: 'reseted', review_answer: '', review_reject_type: '') if @params[:type] == 'applicantReset'
+    end
 
     def attributes
       {
@@ -49,6 +49,7 @@ module SumSub
         raw_request: @params
       }
     end
+
 
     def applicant
       @applicant ||= Applicant.find_by_applicant_id(@params[:applicantId])

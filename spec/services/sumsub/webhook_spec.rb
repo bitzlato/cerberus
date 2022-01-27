@@ -46,6 +46,36 @@ describe SumSub::Webhook do
     end
   end
 
+  describe 'reset applicant' do
+    before do
+      @applicant = create(:applicant, :verified)
+      @params = {
+        "applicantId": "5f194e74040c3f316bda271c",
+        "inspectionId": "5f194e74040c3f316bda271d",
+        "applicantType": "individual",
+        "correlationId": "req-57fed49a-07b8-4413-bdaa-a1be903769e9",
+        "externalUserId": "12672",
+        "type": "applicantReset",
+        "reviewResult": {
+          "reviewAnswer": "GREEN"
+        },
+        "reviewStatus": "init",
+        "createdAt": "2021-03-01 11:34:51+0000",
+        "clientId": "SumsubClient"
+      }.with_indifferent_access
+    end
+
+    it 'ok' do
+      webhook = described_class.new(
+        params: @params,
+        validate_request: false
+      )
+
+      webhook.call
+      expect(Applicant.last.status).to eq('reseted')
+    end
+  end
+
   describe 'change applicant' do
     before do
       @applicant = create(:applicant, :rejected)

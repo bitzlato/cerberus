@@ -37,8 +37,6 @@ describe Applicant, type: :model do
         to_return(status: 200, body: response.to_json, headers: {})
 
       expect(@applicant.reset_applicant).to be_truthy
-      @applicant.reload
-      expect(@applicant.reseted?).to be_truthy
     end
 
     it 'fail' do
