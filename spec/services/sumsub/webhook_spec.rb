@@ -40,6 +40,7 @@ describe SumSub::Webhook do
       expect(applicant.review_answer).to eq @params['reviewResult']['reviewAnswer']
       expect(applicant.review_status).to eq @params['reviewResult']['reviewStatus']
       expect(applicant.review_reject_type).to eq @params['reviewResult']['reviewRejectType']
+      expect(applicant.webhook_type).to eq @params['type']
       expect(applicant.raw_request).to eq @params
       expect(applicant.status).to eq 'rejected'
     end

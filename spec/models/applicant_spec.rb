@@ -68,6 +68,7 @@ end
 #  client_comment     :string
 #  review_answer      :string
 #  review_reject_type :string
+#  webhook_type       :string
 #  raw_request        :json
 #  fixed_info         :json
 #  reject_labels      :json

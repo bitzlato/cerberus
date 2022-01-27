@@ -13,6 +13,7 @@ class CreateApplicants < ActiveRecord::Migration[6.1]
       t.string :client_comment
       t.string :review_answer
       t.string :review_reject_type
+      t.string :webhook_type
 
       t.json :raw_request, default: {}
       t.json :fixed_info, default: {}
