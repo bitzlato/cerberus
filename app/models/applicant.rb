@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Applicant < ApplicationRecord
+  has_paper_trail
+
   validates :applicant_id, :user_uid, presence: true
   validates :applicant_id, uniqueness: true
 
