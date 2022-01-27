@@ -8,9 +8,9 @@ class Kyc < Grape::API
       requires :user_id, type: String, desc: 'Unique user ID'
     end
     get 'verification_url' do
-      #TODO: заменить на какую нибудь прослойку
-      request = Sumsub::Request.new.generate_external_link('basic-kyc-level', 3600, params[:id], locale: 'en')
-      present request
+      url = SumSub::GenerateUrl.new(user_id: params[:user_id]).call
+      response = {url: url}
+      present response
     end
   end
 end

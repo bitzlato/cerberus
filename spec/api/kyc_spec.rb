@@ -7,7 +7,7 @@ describe 'API::Kyc', type: :api do
     API::Kyc
   end
 
-  describe 'GET /api/kyc/verification_url' do
+  context 'GET /api/kyc/verification_url' do
     before do
       @params = {
         user_id: rand(999999)
@@ -17,7 +17,10 @@ describe 'API::Kyc', type: :api do
     it 'ok' do
       get '/api/kyc/verification_url', @params
       expect(last_response.status).to eq(200)
-      expect(json_response).to eq(@response[:url])
+      expect(json_response['url']).to eq(@response[:url])
     end
+  end
+
+  context 'POST /api/kyc/reset' do
   end
 end
