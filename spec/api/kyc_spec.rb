@@ -22,5 +22,16 @@ describe 'API::Kyc', type: :api do
   end
 
   context 'POST /api/kyc/reset' do
+    before do
+      @applicant = create(:applicant, :verified)
+      @params = {
+        user_id: @applicant.user_uid
+      }
+      stub_reset(applicant_id: @applicant.applicant_id)
+    end
+    it 'ok' do
+      post '/api/kyc/reset', @params
+      expect(json_response['reset']).to eq(true)
+    end
   end
 end

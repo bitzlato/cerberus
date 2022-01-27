@@ -12,5 +12,15 @@ class Kyc < Grape::API
       response = {url: url}
       present response
     end
+
+    desc 'Reset KYC verification in sumsub'
+    params do
+      requires :user_id, type: String, desc: 'Unique user ID'
+    end
+    post 'reset' do
+      applicant = Applicant.find_by(user_uid: @params[:user_id])
+      response = { reset: applicant.reset_applicant }
+      present response
+    end
   end
 end

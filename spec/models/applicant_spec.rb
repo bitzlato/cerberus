@@ -32,17 +32,13 @@ describe Applicant, type: :model do
     end
 
     it 'ok' do
-      response = {'ok': 1}
-      stub_request(:post, "https://test-api.sumsub.com/resources/applicants/#{@applicant.applicant_id}/reset").
-        to_return(status: 200, body: response.to_json, headers: {})
+      stub_reset(applicant_id: @applicant.applicant_id, body: {'ok': 1})
 
       expect(@applicant.reset_applicant).to be_truthy
     end
 
     it 'fail' do
-      response = {'ok': 0}
-      stub_request(:post, "https://test-api.sumsub.com/resources/applicants/#{@applicant.applicant_id}/reset").
-        to_return(status: 200, body: response.to_json, headers: {})
+      stub_reset(applicant_id: @applicant.applicant_id, body: {'ok': 0})
 
       expect(@applicant.reset_applicant).to be_falsey
     end
