@@ -7,9 +7,10 @@ class Kyc < Grape::API
     params do
       requires :user_id, type: String, desc: 'Unique user ID'
     end
-    get 'verification_url' do
+    post 'verification_url' do
       url = SumSub::GenerateUrl.new(user_id: params[:user_id]).call
       response = {url: url}
+      #201
       present response
     end
 

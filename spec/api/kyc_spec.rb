@@ -15,8 +15,8 @@ describe 'API::Kyc', type: :api do
       @response = stub_websdk_link(user_id: @params[:user_id])
     end
     it 'ok' do
-      get '/api/kyc/verification_url', @params
-      expect(last_response.status).to eq(200)
+      post '/api/kyc/verification_url', @params
+      expect(last_response.status).to eq(201)
       expect(json_response['url']).to eq(@response[:url])
     end
   end
