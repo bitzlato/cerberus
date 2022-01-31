@@ -30,6 +30,9 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.4', require: false
 
 gem 'paper_trail'
+gem 'jwt', github: 'jwt/ruby-jwt'
+gem 'jwt-multisig', '~> 1.0.0'
+gem 'jwt-rack', '~> 0.1.0', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
