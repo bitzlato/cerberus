@@ -40,6 +40,9 @@ group :development, :test do
   gem 'webmock'
   gem 'rspec-grape'
   gem 'foreman'
+
+  gem "better_errors"
+  gem "binding_of_caller"
 end
 
 group :test do
@@ -61,6 +64,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'sumsub-ruby-sdk', '~> 0.1.3', require: 'sumsub', github: 'bitzlato/sumsub-ruby-sdk'
+
 
 
 gem "grape", "~> 1.6"
