@@ -8,6 +8,19 @@ GIT
       mime-types (~> 3.3)
 
 GIT
+  remote: https://github.com/brandymint/capistrano-systemd-multiservice.git
+  revision: 47c98c65aa3d8f601efa4b947faf249c5abc9cab
+  specs:
+    capistrano-systemd-multiservice (0.1.0.beta12)
+      capistrano (>= 3.7.0, < 3.17.0)
+
+GIT
+  remote: https://github.com/brandymint/capistrano-tasks.git
+  revision: ed94c975c36a7ba41a173bddf6dba46034ca41e2
+  specs:
+    capistrano-tasks (0.0.1)
+
+GIT
   remote: https://github.com/jwt/ruby-jwt.git
   revision: 8a84340c39a9714c70ea99b021710da3932f6aa8
   specs:
@@ -77,6 +90,8 @@ GEM
       zeitwerk (~> 2.3)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
+    airbrussh (1.4.0)
+      sshkit (>= 1.6.1, != 1.7.0)
     ast (2.4.2)
     better_errors (2.9.1)
       coderay (>= 1.0.0)
@@ -87,8 +102,33 @@ GEM
       debug_inspector (>= 0.0.1)
     bootsnap (1.10.2)
       msgpack (~> 1.2)
+    bugsnag-capistrano (2.1.0)
     builder (3.2.4)
     byebug (11.1.3)
+    capistrano (3.16.0)
+      airbrussh (>= 1.0.0)
+      i18n
+      rake (>= 10.0.0)
+      sshkit (>= 1.9.0)
+    capistrano-bundler (2.0.1)
+      capistrano (~> 3.1)
+    capistrano-dotenv (0.0.5)
+      capistrano (>= 3.5.0, < 4.0.0)
+    capistrano-dotenv-tasks (0.1.5)
+      capistrano (~> 3.0)
+    capistrano-git-with-submodules (2.0.4)
+      capistrano (~> 3.7)
+    capistrano-rails (1.6.1)
+      capistrano (~> 3.1)
+      capistrano-bundler (>= 1.1, < 3)
+    capistrano-rails-console (2.3.0)
+      capistrano (>= 3.5.0, < 4.0.0)
+      sshkit-interactive (~> 0.3.0)
+    capistrano-rbenv (2.2.0)
+      capistrano (~> 3.1)
+      sshkit (~> 1.3)
+    capistrano-shell (0.2.0)
+      capistrano (~> 3.1)
     coderay (1.1.3)
     concurrent-ruby (1.1.9)
     crack (0.4.5)
@@ -182,6 +222,9 @@ GEM
       ruby2_keywords (~> 0.0.1)
     mustermann-grape (1.0.1)
       mustermann (>= 1.0.0)
+    net-scp (3.0.0)
+      net-ssh (>= 2.6.5, < 7.0.0)
+    net-ssh (6.1.0)
     nio4r (2.5.8)
     nokogiri (1.13.1)
       mini_portile2 (~> 2.7.0)
@@ -193,6 +236,11 @@ GEM
     parser (3.0.2.0)
       ast (~> 2.4.1)
     pg (1.3.0)
+    pry (0.14.1)
+      coderay (~> 1.1)
+      method_source (~> 1.0)
+    pry-rails (0.3.9)
+      pry (>= 0.10.4)
     public_suffix (4.0.6)
     puma (5.5.2)
       nio4r (~> 2.0)
@@ -285,6 +333,8 @@ GEM
       sprockets-rails
       tilt
     semantic_range (3.0.0)
+    slackistrano (4.0.1)
+      capistrano (>= 3.8.1)
     spring (4.0.0)
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
@@ -293,6 +343,11 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
+    sshkit (1.21.2)
+      net-scp (>= 1.1.2)
+      net-ssh (>= 2.8.0)
+    sshkit-interactive (0.3.0)
+      sshkit (~> 1.12)
     thor (1.2.1)
     tilt (2.0.10)
     timecop (0.9.4)
@@ -331,7 +386,19 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootsnap (>= 1.4.4)
+  bugsnag-capistrano
   byebug
+  capistrano
+  capistrano-bundler
+  capistrano-dotenv
+  capistrano-dotenv-tasks
+  capistrano-git-with-submodules
+  capistrano-rails
+  capistrano-rails-console
+  capistrano-rbenv
+  capistrano-shell
+  capistrano-systemd-multiservice!
+  capistrano-tasks!
   factory_bot
   foreman
   grape (~> 1.6)
@@ -342,6 +409,7 @@ DEPENDENCIES
   listen (~> 3.3)
   paper_trail
   pg (~> 1.1)
+  pry-rails
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.4, >= 6.1.4.4)
@@ -349,6 +417,7 @@ DEPENDENCIES
   rspec-rails (~> 4.0.2)
   rubocop
   sass-rails (>= 6)
+  slackistrano
   spring
   sumsub-ruby-sdk (~> 0.1.3)!
   timecop
