@@ -37,4 +37,4 @@ require 'capistrano/sentry' if Gem.loaded_specs.key?('capistrano-sentry')
 
 # require 'capistrano/master_key'
 require 'capistrano/systemd/multiservice'
-install_plugin Capistrano::Systemd::MultiService.new_service('mailer', service_type: 'user')
+install_plugin Capistrano::Systemd::MultiService.new_service('puma', service_type: 'user')
