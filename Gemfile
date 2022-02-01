@@ -56,7 +56,6 @@ group :test do
 end
 
 group :deploy do
-  gem 'spring'
   gem 'foreman'
   gem 'pry-rails'
   gem 'capistrano-dotenv'
