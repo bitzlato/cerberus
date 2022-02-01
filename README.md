@@ -1,24 +1,20 @@
-# README
+# KYC-Service
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+API for kyc. Works with https://sumsub.com/
 
-Things you may want to cover:
+# Development
 
-* Ruby version
+Installation:
+```bash
+bundle install
+rails db:setup
+```
 
-* System dependencies
+## Env
 
-* Configuration
+- SUMSUB_TOKEN - Token from sumsub
+- SUMSUB_SECRET - Secret from sumsub
+- SUMSUB_WEBHOOK_SECRET_KEY - Secret from Webhook. Verifies webhook request
+- SUMSUB_PRODUCTION - boolean. Sandbox or Production env. Default false. 
 
-* Database creation
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
