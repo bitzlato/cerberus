@@ -333,6 +333,7 @@ GEM
       sprockets-rails
       tilt
     semantic_range (3.0.0)
+    semver (1.0.1)
     slackistrano (4.0.1)
       capistrano (>= 3.8.1)
     spring (4.0.0)
@@ -417,6 +418,7 @@ DEPENDENCIES
   rspec-rails (~> 4.0.2)
   rubocop
   sass-rails (>= 6)
+  semver
   slackistrano
   spring
   sumsub-ruby-sdk (~> 0.1.3)!
