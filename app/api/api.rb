@@ -15,6 +15,10 @@ class API < Grape::API
     error_response(message: e.message, status: 500)
   end
 
+  rescue_from SumSub::Webhook::InvalidRequest do |e|
+    error_response(message: 'Unverified webhook', status: 401)
+  end
+
   helpers ::CurrentUser
   mount Kyc
   mount Webhook
