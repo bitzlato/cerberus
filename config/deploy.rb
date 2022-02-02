@@ -10,8 +10,8 @@ set :roles, %w[app db].freeze
 set :repo_url, ENV.fetch('DEPLOY_REPO', `git remote -v | grep origin | head -1 | awk  '{ print $2 }'`.chomp) if ENV['USE_LOCAL_REPO'].nil?
 set :keep_releases, 10
 
-set :linked_files, %w[.env]
-set :linked_dirs, %w[log tmp/pids tmp/cache tmp/sockets secrets]
+set :linked_files, [".env"]
+set :linked_dirs, %w[log tmp/pids tmp/cache tmp/sockets secrets ]
 set :config_files, fetch(:linked_files)
 
 set :deploy_to, -> { "/home/#{fetch(:user)}/#{fetch(:application)}" }
@@ -59,8 +59,21 @@ if Gem.loaded_specs.key?('capistrano-sentry')
   after 'deploy:published', 'sentry:notice_deployment'
 end
 
-after 'deploy:publishing', 'systemd:mailer:reload-or-restart'
-# after 'deploy:publishing', 'systemd:sidekiq:reload-or-restart'
+after 'deploy:publishing', 'systemd:puma:reload-or-restart'
+
+
+desc 'Setup deploy'
+task :setup => [:push_credentials, 'systemd:puma:setup']
+
+desc 'Push config/master.key and config/credentials/STAGE.key to stage'
+task :push_credentials => 'deploy:check:directories' do
+  on roles(:app) do
+    execute :mkdir, "-pv", "#{shared_path}/config"
+    # upload! 'config/master.key', "#{shared_path}/config/master.key"
+    execute :mkdir, "-pv", "#{shared_path}/config/credentials"
+    upload! "config/credentials/#{fetch(:rails_env)}.key", "#{shared_path}/config/credentials/#{fetch(:rails_env)}.key"
+  end
+end
 
 if defined? Slackistrano
   Rake::Task['deploy:starting'].prerequisites.delete('slack:deploy:starting')
