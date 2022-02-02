@@ -29,6 +29,7 @@ gem 'jbuilder', '~> 2.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
+gem 'bugsnag'
 gem 'paper_trail'
 gem 'jwt', github: 'jwt/ruby-jwt'
 gem 'jwt-multisig', '~> 1.0.0'

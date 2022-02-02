@@ -14,6 +14,16 @@ class Kyc < Grape::API
       present response
     end
 
+    desc 'Get kyc status info for current user'
+    params do
+      #requires :user_id, type: String, desc: 'Unique user ID'
+    end
+    get 'status' do
+      applicant = Applicant.find_by_user_uid!(current_user_uid)
+
+      present applicant
+    end
+
     desc 'Reset KYC verification in sumsub'
     params do
       # requires :user_id, type: String, desc: 'Unique user ID'

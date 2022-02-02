@@ -14,7 +14,6 @@ module SumSub
     def call
       validate_request if @validate_request
       process_webhook
-    rescue InvalidRequest
     end
 
     private
