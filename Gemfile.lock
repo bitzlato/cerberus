@@ -333,6 +333,7 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
+    sd_notify (0.1.1)
     semantic_range (3.0.0)
     semver (1.0.1)
     slackistrano (4.0.1)
@@ -420,6 +421,7 @@ DEPENDENCIES
   rspec-rails (~> 4.0.2)
   rubocop
   sass-rails (>= 6)
+  sd_notify (~> 0.1.1)
   semver
   slackistrano
   spring

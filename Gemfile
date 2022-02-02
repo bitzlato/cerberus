@@ -33,7 +33,7 @@ gem 'paper_trail'
 gem 'jwt', github: 'jwt/ruby-jwt'
 gem 'jwt-multisig', '~> 1.0.0'
 gem 'jwt-rack', '~> 0.1.0', require: false
-
+gem "sd_notify", "~> 0.1.1"
 gem 'dotenv'
 
 group :development, :test do
@@ -54,6 +54,8 @@ end
 group :test do
   gem 'timecop'
 end
+
+
 
 group :deploy do
   gem 'foreman'
