@@ -26,6 +26,15 @@ GIT
   specs:
     jwt (2.3.0)
 
+GIT
+  remote: https://github.com/seuros/capistrano-puma.git
+  revision: f9801f6762d152c5d9da18ce726c7561cc4f9a8b
+  specs:
+    capistrano3-puma (5.2.0)
+      capistrano (~> 3.7)
+      capistrano-bundler
+      puma (>= 4.0, < 6.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -405,6 +414,7 @@ DEPENDENCIES
   capistrano-shell
   capistrano-systemd-multiservice!
   capistrano-tasks!
+  capistrano3-puma!
   dotenv
   factory_bot
   foreman
