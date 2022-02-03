@@ -8,7 +8,7 @@ module SumSub
       @validate_request = validate_request
       @body = body
       @digest = digest
-      @secret_key = secret_key || ENV.fetch('SUMSUB_WEBHOOK_SECRET_KEY', '')
+      @secret_key = secret_key || Rails.application.credentials.dig(:sumsub, :webhook_secret_key)
     end
 
     def call

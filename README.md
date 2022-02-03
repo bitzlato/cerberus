@@ -1,3 +1,4 @@
+
 # KYC-Service
 
 API for kyc. Works with https://sumsub.com/
@@ -12,9 +13,20 @@ rails db:setup
 
 ## Env
 
-- SUMSUB_TOKEN - Token from sumsub
-- SUMSUB_SECRET - Secret from sumsub
-- SUMSUB_WEBHOOK_SECRET_KEY - Secret from Webhook. Verifies webhook request
-- SUMSUB_PRODUCTION - boolean. Sandbox or Production env. Default false. 
+- DATABASE_NAME - url of postgres 
+
+
+## Credentials 
+
+We are using credentials for all env 
+
+
+```yaml
+sumsub:
+  token: #Token from sumsub
+  secret: #Secret from sumsub
+  webhook_secret_key: #Secret from Webhook. Verifies webhook request
+  production: #boolean. Sandbox or Production env. Default false. 
+```
 
 

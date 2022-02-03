@@ -34,6 +34,8 @@ gem 'paper_trail'
 gem 'jwt', github: 'jwt/ruby-jwt'
 gem 'jwt-multisig', '~> 1.0.0'
 gem 'jwt-rack', '~> 0.1.0', require: false
+gem "sd_notify", "~> 0.1.1"
+gem 'dotenv'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -45,12 +47,33 @@ group :development, :test do
   gem 'rspec-grape'
   gem 'foreman'
 
+  gem 'semver'
   gem "better_errors"
   gem "binding_of_caller"
 end
 
 group :test do
   gem 'timecop'
+end
+
+
+
+group :deploy do
+  gem 'foreman'
+  gem 'pry-rails'
+  gem 'capistrano-dotenv'
+  gem 'capistrano-dotenv-tasks'
+  gem 'capistrano', require: false
+  gem 'capistrano-rbenv', require: false
+  gem 'capistrano-rails', require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-shell', require: false
+  gem 'capistrano-rails-console', require: false
+  gem 'capistrano-systemd-multiservice', github: 'brandymint/capistrano-systemd-multiservice', require: false
+  gem 'capistrano-tasks', github: 'brandymint/capistrano-tasks', require: false
+  gem 'capistrano-git-with-submodules'
+  gem 'bugsnag-capistrano', require: false
+  gem 'slackistrano', require: false
 end
 
 group :development do
