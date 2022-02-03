@@ -21,6 +21,7 @@ class Webhook < Grape::API
       optional :externalApplicantActionId, type: JSON, desc: 'Unique action Id on your side'
     end
     post 'sumsub' do
+      Rails.logger.info "Incoiming webhook: #{@params}"
       digest = request.headers['X-Payload-Digest']
       webhook = SumSub::Webhook.new(
         params: @params,
