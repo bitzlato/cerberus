@@ -4,7 +4,7 @@ set :user, 'app'
 set :rails_env, :staging
 
 set :disallow_pushing, false
-set :application, -> { 'kyc-service' + fetch(:stage).to_s }
+set :application, -> { 'kyc-' + fetch(:stage).to_s }
 set :deploy_to, -> { "/home/#{fetch(:user)}/#{fetch(:stage)}/#{fetch(:application)}" }
 # set :puma_bind, -> { ["tcp://0.0.0.0:960#{fetch(:stage)[1].to_i || 9}", "unix://#{shared_path}/tmp/sockets/puma.sock"] }
 append :linked_files, 'config/credentials/staging.key'
