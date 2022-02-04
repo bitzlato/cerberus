@@ -11,13 +11,15 @@ class Applicant < ApplicationRecord
     banned: -1,
     rejected: 0,
     verified: 1,
-    reseted: 2
+    reseted: 2,
+    init: 3
   }
 
   before_save do
     self.status = 'verified' if review_answer == 'GREEN'
     self.status = 'banned'   if review_answer == 'RED' && review_reject_type == 'FINAL'
     self.status = 'rejected' if review_answer == 'RED' && review_reject_type == 'RETRY'
+    self.status = 'init' if review_status == 'init'
   end
 
   # Create Applicant(on sumsub) with reviewStatus: init
