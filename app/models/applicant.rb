@@ -24,7 +24,14 @@ class Applicant < ApplicationRecord
 
   # Create Applicant(on sumsub) with reviewStatus: init
   def self.init_applicant(external_user_id)
-    Sumsub::Request.new.create_applicant('basic-kyc-level', {externalUserId: external_user_id})
+    p response = Sumsub::Request.new.create_applicant('basic-kyc-level', {externalUserId: external_user_id})
+    unless response.is_a? Sumsub::Struct::ErrorResponse
+      Applicant.create! applicant_id: response['id'],
+                        create_date: response['createdAt'],
+                        inspection_id: response['inspectionId'],
+                        user_uid: response['externalUserId'],
+                        review_status: response.dig('review','reviewStatus')
+    end
   end
 
   def reset_applicant

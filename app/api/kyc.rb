@@ -16,7 +16,6 @@ class Kyc < Grape::API
       applicant = Applicant.find_by_user_uid(current_user_uid)
       unless applicant
         create_response = Applicant.init_applicant(current_user_uid)
-        sleep 0.3 # Time for webhook
         applicant = Applicant.find_by_user_uid(current_user_uid)
         raise "Applicant not created after init_applicant: #{create_response}" if applicant.nil?
       end
