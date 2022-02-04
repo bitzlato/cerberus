@@ -28,14 +28,10 @@ describe 'API::Kyc', type: :api do
         get '/api/kyc/status'
         expect(last_response.status).to eq(200)
         expect(json_response['status']).to eq(@applicant.status)
-        expect(json_response['applicant_id']).to eq(@applicant.applicant_id)
-        expect(json_response['user_uid']).to eq(@applicant.user_uid)
         expect(json_response['reject_labels']).to eq(@applicant.reject_labels)
         expect(json_response['client_comment']).to eq(@applicant.client_comment)
         expect(json_response['review_status']).to eq(@applicant.review_status)
-        expect(json_response['source_key']).to eq(@applicant.source_key)
         expect(json_response['start_date']).to eq(@applicant.start_date)
-        expect(json_response['create_date']).to eq(@applicant.create_date)
       end
     end
     describe 'not found' do
