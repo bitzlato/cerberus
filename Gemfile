@@ -30,7 +30,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.4', require: false
 
 gem 'bugsnag'
-gem 'paper_trail'
+gem 'paper_trail', '>= 12.0.0'
 gem 'jwt', github: 'jwt/ruby-jwt'
 gem 'jwt-multisig', '~> 1.0.0'
 gem 'jwt-rack', '~> 0.1.0', require: false
