@@ -1,12 +1,6 @@
 module TestWebhook
   extend ActiveSupport::Concern
   included do
-    def create_appicant
-      raise 'Cant use test webhook API in production' if Rails.env.production?
-      Sumsub::Request.new.create_applicant('basic-kyc-level', {'externalUserId': rand(9999)})
-
-    end
-
     def test_webhook(status)
       raise 'Cant use test webhook API in production' if Rails.env.production?
 

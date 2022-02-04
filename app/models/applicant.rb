@@ -20,6 +20,7 @@ class Applicant < ApplicationRecord
     self.status = 'banned'   if review_answer == 'RED' && review_reject_type == 'FINAL'
     self.status = 'rejected' if review_answer == 'RED' && review_reject_type == 'RETRY'
     self.status = 'init' if review_status == 'init'
+    self.status = 'reseted' if webhook_type == 'applicantReset'
   end
 
   # Create Applicant(on sumsub) with reviewStatus: init

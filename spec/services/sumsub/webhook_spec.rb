@@ -34,11 +34,10 @@ describe SumSub::Webhook do
       expect(applicant.inspection_id).to eq @params['inspectionId']
       expect(applicant.user_uid).to eq @params['externalUserId']
       expect(applicant.source_key).to eq @params['sourceKey']
-      expect(applicant.create_date).to eq @params['createdAt']
       expect(applicant.reject_labels).to eq @params['reviewResult']['rejectLabels']
       expect(applicant.moderation_comment).to eq @params['reviewResult']['moderationComment']
       expect(applicant.review_answer).to eq @params['reviewResult']['reviewAnswer']
-      expect(applicant.review_status).to eq @params['reviewResult']['reviewStatus']
+      expect(applicant.review_status).to eq @params['reviewStatus']
       expect(applicant.review_reject_type).to eq @params['reviewResult']['reviewRejectType']
       expect(applicant.webhook_type).to eq @params['type']
       expect(applicant.raw_request).to eq @params

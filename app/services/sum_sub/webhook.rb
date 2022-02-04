@@ -43,7 +43,7 @@ module SumSub
         client_comment: @params.dig(:reviewResult, :clientComment),
         review_reject_type: @params.dig(:reviewResult, :reviewRejectType),
         review_answer: @params.dig(:reviewResult, :reviewAnswer),
-        review_status: @params.dig(:reviewResult, :reviewStatus),
+        review_status: @params.dig(:reviewStatus),
         webhook_type: @params[:type],
         raw_request: @params
       }
