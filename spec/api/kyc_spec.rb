@@ -41,7 +41,7 @@ describe 'API::Kyc', type: :api do
         expect(last_response.status).to eq(200)
         applicant = Applicant.last
         expect(applicant.user_uid).to eq('1111')
-        # expect(json_response['status']).to 'init'
+        expect(json_response['status']).to eq('init')
       end
     end
   end

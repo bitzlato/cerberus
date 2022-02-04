@@ -27,7 +27,7 @@ module StubHelper
                             applicant_id: response_json['id'],
                             create_date: response_json['createdAt'],
                             user_uid: response_json['externalUserId'],
-                            review_status: response_json['reviewStatus']
+                            review_status: response_json.dig('review', 'reviewStatus')
                             )
       end
     end
