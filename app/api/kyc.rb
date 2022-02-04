@@ -15,7 +15,7 @@ class Kyc < Grape::API
     get 'status' do
       applicant = Applicant.find_by_user_uid!(current_user_uid)
 
-      present applicant.as_json(only: [:status, :reject_labels, :client_comment, :review_status, :start_dat])
+      present applicant.as_json(only: [:status, :reject_labels, :client_comment, :review_status, :start_date])
     end
 
     desc 'Reset KYC verification in sumsub'
