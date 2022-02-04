@@ -6,6 +6,7 @@ class Applicant < ApplicationRecord
 
   validates :applicant_id, :user_uid, presence: true
   validates :applicant_id, uniqueness: true
+  validates :user_uid, uniqueness: true
 
   enum status: {
     banned: -1,
