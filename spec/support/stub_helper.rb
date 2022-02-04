@@ -26,7 +26,8 @@ module StubHelper
                             inspection_id: response_json['inspectionId'],
                             applicant_id: response_json['id'],
                             create_date: response_json['createdAt'],
-                            user_uid: response_json['externalUserId']
+                            user_uid: response_json['externalUserId'],
+                            review_status: response_json['reviewStatus']
                             )
       end
     end
