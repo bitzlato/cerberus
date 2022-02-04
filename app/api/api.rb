@@ -10,6 +10,10 @@ class API < Grape::API
     error_response(message: e.message, status: 422)
   end
 
+  rescue_from Grape::Exceptions::MethodNotAllowed do |e|
+    error_response(message: e.message, status: 405)
+  end
+
   rescue_from StandardError do |e|
     Bugsnag.notify(e) if defined? Bugsnag
     error_response(message: e.message, status: 500)
