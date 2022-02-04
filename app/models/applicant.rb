@@ -20,6 +20,10 @@ class Applicant < ApplicationRecord
     self.status = 'rejected' if review_answer == 'RED' && review_reject_type == 'RETRY'
   end
 
+  # Create Applicant(on sumsub) with reviewStatus: init
+  def self.init_applicant(external_user_id)
+    Sumsub::Request.new.create_applicant('basic-kyc-level', {externalUserId: external_user_id})
+  end
 
   def reset_applicant
     response = Sumsub::Request.new.reset_applicant(applicant_id)

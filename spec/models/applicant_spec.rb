@@ -24,6 +24,10 @@ describe Applicant, type: :model do
       expect(applicant.status).to eq('reseted')
     end
 
+    it 'init' do
+      applicant = create(:applicant, :init)
+      expect(applicant.status).to eq('init')
+    end
   end
 
   describe 'reset_applicant' do

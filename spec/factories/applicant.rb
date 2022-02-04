@@ -19,5 +19,9 @@ FactoryBot.define do
       review_answer { 'RED' }
       review_reject_type { 'FINAL' }
     end
+
+    trait :init do
+      review_status { 'init' }
+    end
   end
 end
