@@ -34,11 +34,14 @@ describe 'API::Kyc', type: :api do
         expect(json_response['start_date']).to eq(@applicant.start_date)
       end
     end
-    describe 'not found' do
+    describe 'init applicant' do
       it 'ok' do
+        stub_create_applicant(user_id: 1111)
         get '/api/kyc/status'
-        expect(last_response.status).to eq(404)
-        expect(json_response['error']).to be_truthy
+        expect(last_response.status).to eq(200)
+        applicant = Applicant.last
+        expect(applicant.user_uid).to eq('1111')
+        # expect(json_response['status']).to 'init'
       end
     end
   end
