@@ -18,4 +18,3 @@ rails db:setup
 - SUMSUB_SECRET 
 - SUMSUB_WEBHOOK_SECRET_KEY 
 - SUMSUB_PRODUCTION=false
-- DATABASE_URL=postgres://postgres:{{ postgres.password }}@{{ postgres.host }}:{{ item.0.ports.db }}/kyc_staging
