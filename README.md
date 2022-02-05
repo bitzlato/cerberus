@@ -13,20 +13,9 @@ rails db:setup
 
 ## Env
 
-- DATABASE_NAME - url of postgres 
-
-
-## Credentials 
-
-We are using credentials for all env 
-
-
-```yaml
-sumsub:
-  token: #Token from sumsub
-  secret: #Secret from sumsub
-  webhook_secret_key: #Secret from Webhook. Verifies webhook request
-  production: #boolean. Sandbox or Production env. Default false. 
-```
-
-
+- DATABASE_NAME - url of postgres
+- SUMSUB_TOKEN 
+- SUMSUB_SECRET 
+- SUMSUB_WEBHOOK_SECRET_KEY 
+- SUMSUB_PRODUCTION=false
+- DATABASE_URL=postgres://postgres:{{ postgres.password }}@{{ postgres.host }}:{{ item.0.ports.db }}/kyc_staging
