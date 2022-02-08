@@ -61,7 +61,7 @@ staging:
     url: <%= ENV['BITZLATO_DATABASE_URL'] %>
   peatio:
     <<: *peatio
-    database: <%= ENV.fetch('PEATIO_DATABASE_NAME', 'peatio_production') %>
+    url:  <%= ENV.fetch('PEATIO_DATABASE_URL', 'peatio_production') %>
 
 production:
   primary:
