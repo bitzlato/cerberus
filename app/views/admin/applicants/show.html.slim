@@ -1,1 +1,10 @@
-h1 show
+hr
+.row
+  .col-md-4
+    table.table.table-striped.table-hover.table-narrow
+      -@applicant.attributes.each do |key, value|
+        tr
+          th class='text-right' = key
+          td class='text-right' = value
+
+
