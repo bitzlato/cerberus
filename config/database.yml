@@ -17,18 +17,54 @@ default: &default
   password: <%= ENV['DATABASE_PASS'] %>
   <% end %>
 
+bitzlato_default: &bitzlato_default
+  adapter: postgresql
+  encoding: utf8
+  schema_search_path: p2p,public
+  <% if ENV.key?('DATABASE_COLLATION') %>
+  collation: <%= ENV.fetch('DATABASE_COLLATION', 'C') %>
+  <% end %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS", 8).to_i * ENV.fetch("WEB_CONCURRENCY", 1).to_i %>
+  <% if ENV.key?('DATABASE_HOST') %>
+  host: <%= ENV.fetch('DATABASE_HOST', '127.0.0.1') %>
+  <% end %>
+  port: <%= ENV.fetch('DATABASE_PORT', 5432) %>
+  <% if ENV.key?('DATABASE_USER') %>
+  username: <%= ENV.fetch('DATABASE_USER', `whoami`.chomp) %>
+  <% end %>
+  <% if ENV.key?('DATABASE_PASS') %>
+  password: <%= ENV['DATABASE_PASS'] %>
+  <% end %>
+  migrations_paths: db/migrate_bitzlato
+
 development:
-  <<: *default
-  database: <%= ENV.fetch('DATABASE_NAME', 'kyc_service_development') %>
+  primary:
+    <<: *default
+    database: <%= ENV.fetch('DATABASE_NAME', 'kyc_service_development') %>
+  bitzlato:
+    <<: *bitzlato_default
+    database: bitzlato_development
 
 staging:
-  <<: *default
-  url: <%= ENV.fetch('DATABASE_URL', 'barong_staging_url') %>
+  primary:
+    <<: *default
+    url: <%= ENV.fetch('DATABASE_URL', '') %>
+  bitzlato:
+    <<: *bitzlato_default
+    url: <%= ENV['BITZLATO_DATABASE_URL'] %>
 
 production:
-  <<: *default
-  url: <%= ENV.fetch('DATABASE_URL', 'barong_production_url') %>
+  primary:
+    <<: *default
+    url: <%= ENV.fetch('DATABASE_URL', '') %>
+  bitzlato:
+    <<: *bitzlato_default
+    url: <%= ENV['BITZLATO_DATABASE_URL'] %>
 
 test:
   <<: *default
   database: kyc_service_test
+
+
+
+
