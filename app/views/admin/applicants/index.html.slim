@@ -1,0 +1,19 @@
+
+
+
+table.table.table-striped
+  thead
+    th id
+    th status
+    th applicant_id
+    th user_uid
+    th create_date
+  tbody
+    -@applicants.each do |applicant|
+      tr
+        td =applicant.id
+        td =applicant.status
+        td =applicant.applicant_id
+        td =applicant.user_uid
+        td =applicant.create_date
+        td =link_to 'Show', admin_applicant_path(applicant), target: '_blank'
