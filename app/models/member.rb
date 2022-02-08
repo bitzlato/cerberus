@@ -3,7 +3,7 @@
 # frozen_string_literal: true
 
 class Member < PeatioRecord
-  BOT_UIDS = ENV.fetch('STATS_EXCLUDE_MEMBER_UIDS').split(',')
+  BOT_UIDS = ENV.fetch('STATS_EXCLUDE_MEMBER_UIDS', []).split(',')
 
   has_many :orders
   has_many :accounts
