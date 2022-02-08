@@ -17,6 +17,10 @@ default: &default
   password: <%= ENV['DATABASE_PASS'] %>
   <% end %>
 
+peatio: &peatio
+  <<: *default
+  migrations_paths: db/peatio_migrate
+
 bitzlato_default: &bitzlato_default
   adapter: postgresql
   encoding: utf8
@@ -44,6 +48,9 @@ development:
   bitzlato:
     <<: *bitzlato_default
     database: bitzlato_development
+  peatio:
+    <<: *peatio
+    database: <%= ENV.fetch('PEATIO_DATABASE_NAME', 'peatio_development') %>
 
 staging:
   primary:
@@ -52,6 +59,9 @@ staging:
   bitzlato:
     <<: *bitzlato_default
     url: <%= ENV['BITZLATO_DATABASE_URL'] %>
+  peatio:
+    <<: *peatio
+    database: <%= ENV.fetch('PEATIO_DATABASE_NAME', 'peatio_production') %>
 
 production:
   primary:
@@ -60,10 +70,19 @@ production:
   bitzlato:
     <<: *bitzlato_default
     url: <%= ENV['BITZLATO_DATABASE_URL'] %>
+  peatio:
+    <<: *peatio
+    database: <%= ENV.fetch('PEATIO_DATABASE_NAME', 'peatio_production') %>
 
 test:
-  <<: *default
-  database: kyc_service_test
+  primary:
+    <<: *default
+    database: kyc_service_test
+  bitzlato:
+    <<: *bitzlato_default
+  peatio:
+    <<: *peatio
+    database: peatio_test
 
 
 
