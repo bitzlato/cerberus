@@ -1,4 +1,13 @@
 GIT
+  remote: https://github.com/activerecord-hackery/ransack.git
+  revision: 49a43fc9519408e47a4844d3cdbeb2838687041a
+  specs:
+    ransack (2.5.0)
+      activerecord (>= 5.2.4)
+      activesupport (>= 5.2.4)
+      i18n
+
+GIT
   remote: https://github.com/bitzlato/sumsub-ruby-sdk.git
   revision: 115dfd4bc83ae873270938eedc35127ea247c297
   specs:
@@ -438,6 +447,7 @@ DEPENDENCIES
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.4, >= 6.1.4.4)
+  ransack!
   rspec-grape
   rspec-rails (~> 4.0.2)
   rubocop
