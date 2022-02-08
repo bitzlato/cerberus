@@ -52,7 +52,6 @@ group :development, :test do
   gem 'rspec-grape'
   gem 'foreman'
 
-  gem 'semver2', '~> 3.4'
   gem "better_errors"
   gem "binding_of_caller"
 end
@@ -60,8 +59,8 @@ end
 group :test do
   gem 'timecop'
 end
-
-
+gem 'semver2', '~> 3.4'
+gem 'semver'
 
 group :deploy do
   gem 'foreman'

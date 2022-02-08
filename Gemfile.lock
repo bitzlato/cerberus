@@ -367,6 +367,7 @@ GEM
       tilt
     sd_notify (0.1.1)
     semantic_range (3.0.0)
+    semver (1.0.1)
     semver2 (3.4.2)
     slackistrano (4.0.1)
       capistrano (>= 3.8.1)
@@ -466,6 +467,7 @@ DEPENDENCIES
   rubocop
   sass-rails (>= 6)
   sd_notify (~> 0.1.1)
+  semver
   semver2 (~> 3.4)
   slackistrano
   slim-rails
