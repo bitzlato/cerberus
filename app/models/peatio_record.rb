@@ -5,4 +5,8 @@
 class PeatioRecord < ApplicationRecord
   self.abstract_class = true
   connects_to database: { reading: :peatio, writing: :peatio }
+
+  def readonly?
+    true
+  end
 end
