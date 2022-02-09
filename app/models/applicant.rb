@@ -25,7 +25,7 @@ class Applicant < ApplicationRecord
   end
 
   def member
-    Member.find_by(uid: user_uid)
+    @member ||= Member.find_by(uid: user_uid)
   end
 
   # Create Applicant(on sumsub) with reviewStatus: init
