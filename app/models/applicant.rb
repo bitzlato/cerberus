@@ -24,6 +24,10 @@ class Applicant < ApplicationRecord
     self.status = 'reseted' if webhook_type == 'applicantReset'
   end
 
+  def member
+    Member.find_by(uid: user_uid)
+  end
+
   # Create Applicant(on sumsub) with reviewStatus: init
   def self.init_applicant(external_user_id)
     p response = Sumsub::Request.new.create_applicant('basic-kyc-level', {externalUserId: external_user_id, sourceKey: "kyc-service-#{Rails.env}"})

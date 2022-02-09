@@ -20,6 +20,7 @@ install_plugin Capistrano::SCM::Git::WithSubmodules
 
 require 'capistrano/rbenv'
 require 'capistrano/bundler'
+require 'capistrano-db-tasks'
 require 'capistrano/shell'
 
 require 'capistrano/rails/console'

@@ -68,6 +68,7 @@ group :deploy do
   gem 'capistrano-dotenv'
   gem 'capistrano-dotenv-tasks'
   gem 'capistrano', require: false
+  gem 'capistrano-db-tasks', require: false
   gem 'capistrano3-puma', github: 'seuros/capistrano-puma'
   gem 'capistrano-rbenv', require: false
   gem 'capistrano-rails', require: false
