@@ -15,7 +15,6 @@ class Transaction < PeatioRecord
   end
 
   scope :failed_or_success, -> { where status: [SUCCESS_STATUS, FAIL_STATUS] }
-
   # TODO: fee payed by us
   scope :accountable_fee, -> { where from: %i[wallet deposit] }
   # TODO: blockchain normalize
@@ -26,6 +25,8 @@ class Transaction < PeatioRecord
   scope :by_txout, ->(value) { where txout: value }
   scope :by_kind, ->(value) { where kind: value }
   scope :by_direction, ->(value) { where direction: value }
+  scope :last_1_month, -> { where('created_at > ?', 1.month.ago) }
+  scope :last_24_hours, -> { where('created_at > ?', 24.hour.ago) }
 
   belongs_to :reference, polymorphic: true
   belongs_to :currency

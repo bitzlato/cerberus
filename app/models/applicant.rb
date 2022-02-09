@@ -2,6 +2,7 @@
 
 class Applicant < ApplicationRecord
   include TestWebhook
+  include PeatioMethods
   has_paper_trail
 
   validates :applicant_id, :user_uid, presence: true
@@ -24,9 +25,6 @@ class Applicant < ApplicationRecord
     self.status = 'reseted' if webhook_type == 'applicantReset'
   end
 
-  def member
-    @member ||= Member.find_by(uid: user_uid)
-  end
 
   # Create Applicant(on sumsub) with reviewStatus: init
   def self.init_applicant(external_user_id)
