@@ -9,6 +9,7 @@ module CurrencyConvert
   end
 
   def rates(target: 'USD')
+    target = target.upcase
     Rails.cache.fetch("#{target}_currency_rate", expire_in: RATE_CACHE_EXPIRE ) do
       uri = URI("https://account.bitzlato.com/api/public/v1/rates?target_currency=#{target}")
       JSON.parse(Net::HTTP.get(uri)).dig('rates')
