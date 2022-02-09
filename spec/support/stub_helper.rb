@@ -19,4 +19,48 @@ module StubHelper
       to_return(status: 200, body: response.to_json, headers: {})
   end
 
+  def stub_rates(body: nil, target: 'USD')
+    rate =
+      {
+        "target_currency": "USD",
+        "rates": {
+          "USDC": "1.0",
+          "LTC": "2",
+          "BCH": "2",
+          "DAI": "2",
+          "USDT": "2",
+          "BTC": "2",
+          "ETH": "2",
+          "MCR": "2",
+          "MDT": "2",
+          "DOGE": "2",
+          "DASH": "2",
+          "AVAX": "2",
+          "BNB-BEP20": "2",
+          "DAI-ERC20": "2",
+          "HT-HRC20": "2",
+          "MATIC": "2",
+          "MCR-ERC20": "2",
+          "MDT-ERC20": "2",
+          "UNI-ERC20": "2",
+          "USDC-BEP20": "2",
+          "USDC-ERC20": "2",
+          "USDC-HRC20": "2",
+          "USDC-PLGN": "2",
+          "USDCE-ARC20": "2.0",
+          "USDT-BEP20": "2",
+          "USDT-ERC20": "2",
+          "USDT-HRC20": "2",
+          "USDT-PLGN": "2",
+          "USDTE-ARC20": "2",
+          "WAVAX-ARC20": "2"
+        },
+        "at": Time.now.utc.iso8601
+      }
+    response = body || rate
+    stub_request(:get, "https://account.bitzlato.com/api/public/v1/rates?target_currency=#{target}").
+      to_return(status: 200, body:  response.to_json, headers: {})
+    response
+  end
+
 end
