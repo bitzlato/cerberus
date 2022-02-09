@@ -7,8 +7,8 @@ describe CurrencyConvert do
 
   let (:currency_hash) {
     {
-      'BTC': '1.0000001',
-      'ETH': '111.111'
+      'BTC': rand(1..9.999).to_s,
+      'ETH': rand(1..9.999).to_s
     }
   }
 
@@ -22,4 +22,6 @@ describe CurrencyConvert do
   describe 'rates' do
     it { expect(described_class.rates(target: target)).to be_truthy }
   end
+
+
 end

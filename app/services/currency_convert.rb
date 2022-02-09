@@ -3,7 +3,16 @@ module CurrencyConvert
   class << self
 
   def convert(currency_hash)
-    return 1
+    result = {}
+    currencies.each do |rate_key, rate_value|
+      result[rate_key] = 0
+      summ = 0
+      currency_hash.each do |key, value|
+        summ += convert_unit(key, value)
+      end
+      result[rate_key] = convert_unit(rate_key, summ)
+    end
+    return result
   end
 
   def rates(target: 'USD')
@@ -20,6 +29,9 @@ module CurrencyConvert
 
   private
 
+  def convert_unit(key, value)
+    rates[key].to_f * value.to_f
+  end
 
   end
 end
