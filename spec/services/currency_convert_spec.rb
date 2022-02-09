@@ -3,9 +3,11 @@ require 'rails_helper'
 
 describe CurrencyConvert do
   describe 'rates' do
+    let! (:target) { 'USD' }
+    let! (:rates) { stub_rates(target: target) }
+
     it 'ok' do
-      rates = stub_rates
-      expect(described_class.rates).to be_truthy
+      expect(described_class.rates(target: target)).to be_truthy
     end
   end
 end
