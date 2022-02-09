@@ -22,7 +22,7 @@ module StubHelper
   def stub_rates(body: nil, target: 'USD')
     rate =
       {
-        "target_currency": "USD",
+        "target_currency": target,
         "rates": {
           "USDC": "1.0",
           "LTC": "2",
