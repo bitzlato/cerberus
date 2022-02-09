@@ -19,4 +19,54 @@ module StubHelper
       to_return(status: 200, body: response.to_json, headers: {})
   end
 
+  def stub_rates(body: nil, target: 'USD')
+    rate =
+      {
+        "target_currency": target,
+        "rates": {
+          "USDC": "1.0",
+          "LTC": rand_currency,
+          "BCH": rand_currency,
+          "DAI": rand_currency,
+          "USDT": rand_currency,
+          "BTC": rand_currency,
+          "ETH": rand_currency,
+          "MCR": rand_currency,
+          "MDT": rand_currency,
+          "DOGE": rand_currency,
+          "DASH": rand_currency,
+          "AVAX": rand_currency,
+          "BNB-BEP20": rand_currency,
+          "DAI-ERC20": rand_currency,
+          "HT-HRC20": rand_currency,
+          "MATIC": rand_currency,
+          "MCR-ERC20": rand_currency,
+          "MDT-ERC20": rand_currency,
+          "UNI-ERC20": rand_currency,
+          "USDC-BEP20": rand_currency,
+          "USDC-ERC20": rand_currency,
+          "USDC-HRC20": rand_currency,
+          "USDC-PLGN": rand_currency,
+          "USDCE-ARC20": rand_currency,
+          "USDT-BEP20": rand_currency,
+          "USDT-ERC20": rand_currency,
+          "USDT-HRC20": rand_currency,
+          "USDT-PLGN": rand_currency,
+          "USDTE-ARC20": rand_currency,
+          "WAVAX-ARC20": rand_currency
+        },
+        "at": Time.now.utc.iso8601
+      }
+    response = body || rate
+    stub_request(:get, "https://account.bitzlato.com/api/public/v1/rates?target_currency=#{target}").
+      to_return(status: 200, body:  response.to_json, headers: {})
+    response
+  end
+
+  private
+
+  def rand_currency
+    rand(1..99.999999).to_s
+  end
+
 end
