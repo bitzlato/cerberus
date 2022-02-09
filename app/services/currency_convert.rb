@@ -14,8 +14,11 @@ module CurrencyConvert
     end&.with_indifferent_access
   end
 
-  private
+  def currencies
+    @currencies ||= rates.keys
+  end
 
+  private
 
 
   end
