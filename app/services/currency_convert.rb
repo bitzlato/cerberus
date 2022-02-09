@@ -1,5 +1,5 @@
 module CurrencyConvert
-  RATE_CACHE_EXPIRE_IN = 100.second
+  RATE_CACHE_EXPIRE_IN = 10.second
   class << self
 
   def convert(currency_hash)
