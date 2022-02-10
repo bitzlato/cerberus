@@ -11,7 +11,7 @@ module CurrencyConvert
     def convert(currency_hash)
       result = {}
       currencies.each do |rate_key, rate_value|
-        result[rate_key] = convert_unit(rate_key, summarize_сurrency(currency_hash))
+        result[rate_key] = reverse_convert_unit(rate_key, summarize_сurrency(currency_hash))
       end
       result
     end
@@ -41,6 +41,11 @@ module CurrencyConvert
 
     def convert_unit(key, value)
       rates[key].to_f * value.to_f
+    end
+
+    def reverse_convert_unit(key, value)
+      raise 'Zero Currency Value division' if value.zero?
+      value.to_f / rates[key].to_f
     end
   end
 end
