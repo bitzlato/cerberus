@@ -6,6 +6,17 @@ module P2PMethods
       @p2p_user ||= BitzlatoUser.find(user_uid)
     end
 
+    def p2p_voucher_withdraw
+      #TODO: непонятно это вводы или вывод
+      amount = BitzlatoWithdrawVoucher.joins(:voucher)
+                             .where(user: p2p_user)
+                             .select('sum(voucher.amount) as sum_amount, voucher.cc_code as currency_id')
+                             .group(:currency_id)
+                             .map { |t| { "#{t.currency_id.upcase}" => t.sum_amount } }
+                             .reduce({}, :merge)
+
+      {origin: amount, converted: CurrencyConvert.convert(amount)}
+    end
 
     def p2p_income
       income = BitzlatoDeposit.success

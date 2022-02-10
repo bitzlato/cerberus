@@ -1,4 +1,5 @@
-class BitzlatoWithdraw < BitzlatoRecord
+class BitzlatoVoucher < BitzlatoRecord
+  #bitzlato/p2p/voucher
   self.table_name = :voucher
   belongs_to :user, class_name: 'BitzlatoUser'
 
