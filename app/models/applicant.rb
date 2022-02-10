@@ -3,6 +3,7 @@
 class Applicant < ApplicationRecord
   include TestWebhook
   include PeatioMethods
+  include P2PMethods
   has_paper_trail
 
   validates :applicant_id, :user_uid, presence: true
