@@ -8,7 +8,15 @@ module P2PMethods
 
 
     def p2p_income
+      income = BitzlatoDeposit.success
+                              .last_1_month
+                              .where(user: p2p_user)
+                              .select('sum(fee) + sum(amount) as sum_amount , cc_code as currency_id')
+                              .group('currency_id')
+                              .map { |t| { "#{t.currency_id.upcase}" => t.sum_amount } }
+                              .reduce({}, :merge)
 
+      {origin: income, converted: CurrencyConvert.convert(income)}
     end
 
 
