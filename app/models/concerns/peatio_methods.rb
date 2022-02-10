@@ -16,6 +16,9 @@ module PeatioMethods
                       .reduce({}, :merge)
 
       {origin: income, converted: CurrencyConvert.convert(income)}
+    rescue StandardError => e
+      p e
+      {origin: {}, converted: {}}
     end
 
     def month_outcome_exchange
@@ -28,6 +31,9 @@ module PeatioMethods
                         .reduce({}, :merge)
 
       {origin: outcome, converted: CurrencyConvert.convert(outcome)}
+    rescue StandardError => e
+      p e
+      {origin: {}, converted: {}}
     end
 
   end

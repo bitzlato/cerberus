@@ -5,6 +5,8 @@ table.table.table-striped
   thead
     th id
     th status
+    th income
+    th outcome
     th applicant_id
     th user_uid
     th create_date
@@ -13,6 +15,8 @@ table.table.table-striped
       tr
         td =applicant.id
         td =applicant.status
+        td =applicant.income[:converted]['USDC'].round(2) rescue 0
+        td =applicant.outcome[:converted]['USDC'].round(2) rescue 0
         td =applicant.applicant_id
         td =applicant.user_uid
         td =applicant.create_date

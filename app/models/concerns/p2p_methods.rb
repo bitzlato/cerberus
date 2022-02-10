@@ -17,6 +17,9 @@ module P2PMethods
                                       .reduce({}, :merge)
 
       {origin: amount, converted: CurrencyConvert.convert(amount)}
+    rescue StandardError => e
+      p e
+      {origin: {}, converted: {}}
     end
 
     def p2p_income
@@ -29,6 +32,9 @@ module P2PMethods
                               .reduce({}, :merge)
 
       {origin: income, converted: CurrencyConvert.convert(income)}
+    rescue StandardError => e
+      p e
+      {origin: {}, converted: {}}
     end
 
 
@@ -43,6 +49,9 @@ module P2PMethods
 
 
       {origin: outcome, converted: CurrencyConvert.convert(outcome)}
+    rescue StandardError => e
+      p e
+      {origin: {}, converted: {}}
     end
 
   end
