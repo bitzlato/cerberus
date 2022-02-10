@@ -20,13 +20,13 @@ describe CurrencyConvert do
     it 'all currencies correct' do
       converted_currency_hash = described_class.convert(currency_hash)
 
+      in_usdc = 0
+      currency_hash.each do |key, value|
+        in_usdc += currency_hash[key].to_f*rates['rates'][key].to_f
+      end
 
-      CurrencyConvert.currencies do |in_currency_tag|
-        in_currency = 0
-        currency_hash.each do |key, value|
-          in_currency += currency_hash[key].to_f*rates['rates'][key].to_f
-        end
-        
+      CurrencyConvert.currencies.each do |in_currency_tag|
+        in_currency = in_usdc.to_f / rates['rates'][in_currency_tag].to_f
         expect(converted_currency_hash[in_currency_tag]).to eq in_currency
       end
     end
