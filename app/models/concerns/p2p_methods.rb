@@ -21,6 +21,7 @@ module P2PMethods
                                   .map { |t| { "#{t.currency_id.upcase}" => t.sum_amount } }
                                   .reduce({}, :merge)
 
+
       {origin: outcome, converted: CurrencyConvert.convert(outcome)}
     end
 
