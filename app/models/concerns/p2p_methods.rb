@@ -9,6 +9,7 @@ module P2PMethods
     def p2p_voucher_withdraw
       #TODO: непонятно это вводы или вывод
       amount = BitzlatoWithdrawVoucher.joins(:voucher)
+                                      .last_1_month
                                       .where(user: p2p_user)
                                       .select('sum(voucher.amount) as sum_amount, voucher.cc_code as currency_id')
                                       .group(:currency_id)
