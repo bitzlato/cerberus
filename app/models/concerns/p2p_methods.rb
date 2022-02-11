@@ -6,7 +6,7 @@ module P2PMethods
       @p2p_user ||= BitzlatoUser.find(user_uid)
     end
 
-    def p2p_voucher_withdraw
+    def p2p_voucher_withdraw(period: :monthly, start_date: nil, end_date: nil)
       #TODO: непонятно это вводы или вывод
       amount = BitzlatoWithdrawVoucher.joins(:voucher)
                                       .last_1_month
@@ -22,9 +22,9 @@ module P2PMethods
       {origin: {}, converted: {}}
     end
 
-    def p2p_income
+    def p2p_income(period: :monthly)
       income = BitzlatoDeposit.success
-                              .last_1_month
+                              .period(period)
                               .where(user: p2p_user)
                               .select('sum(fee) + sum(amount) as sum_amount , cc_code as currency_id')
                               .group('currency_id')
@@ -38,9 +38,9 @@ module P2PMethods
     end
 
 
-    def p2p_outcome
+    def p2p_outcome(period: :monthly)
       outcome = BitzlatoWithdrawal.processed
-                                  .last_1_month
+                                  .period(period)
                                   .where(user: p2p_user)
                                   .select('sum(amount) as sum_amount, cc_code as currency_id')
                                   .group('currency_id')
@@ -52,6 +52,12 @@ module P2PMethods
     rescue StandardError => e
       p e
       {origin: {}, converted: {}}
+    end
+
+    private
+
+    def p2p_period
+
     end
 
   end

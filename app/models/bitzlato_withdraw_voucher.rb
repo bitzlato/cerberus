@@ -1,4 +1,6 @@
 class BitzlatoWithdrawVoucher < BitzlatoRecord
+  include Period
+
   self.table_name = :withdraw_voucher
 
   belongs_to :user, class_name: 'BitzlatoUser'

@@ -1,15 +1,21 @@
 module Limit
   extend ActiveSupport::Concern
   included do
-    def income
-      incomes = [p2p_income, month_income_exchange]
+    def income(period: :monthly)
+      incomes = []
+      incomes << p2p_income(period: :monthly)
+      incomes << month_income_exchange(period: :monthly)
       summarize = summarize_hash_limits(incomes)
 
       {p2p: incomes[0], exchange: incomes[1], summarize: summarize}.with_indifferent_access
     end
 
-    def outcome
-      outcomes =[ p2p_outcome, p2p_voucher_withdraw, month_outcome_exchange]
+    def outcome(period: :monthly)
+      outcomes = []
+      outcomes << p2p_outcome(period: :monthly)
+      outcomes << p2p_voucher_withdraw(period: :monthly)
+      outcomes << month_outcome_exchange(period: :monthly)
+
       summarize = summarize_hash_limits(outcomes)
       p2p_summarize = summarize_hash_limits([outcomes[0], outcomes[1]])
 

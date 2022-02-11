@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Applicant < ApplicationRecord
+  include Period
   include TestWebhook
   include PeatioMethods
   include P2PMethods
