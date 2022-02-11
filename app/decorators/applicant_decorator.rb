@@ -8,7 +8,7 @@ class ApplicantDecorator < Draper::Decorator
     when 'verified'
       class_name = 'text-success'
     when 'banned'
-      class_name = 'text-danget'
+      class_name = 'text-danger'
     when 'rejected'
       class_name = 'text-warning'
     when 'init'
