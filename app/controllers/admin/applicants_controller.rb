@@ -1,9 +1,9 @@
 class Admin::ApplicantsController < Admin::AdminController
   def index
-    @applicants = Applicant.all
+    @applicants = Applicant.all.decorate
   end
 
   def show
-    @applicant = Applicant.find(params[:id])
+    @applicant = Applicant.find(params[:id]).decorate
   end
 end
