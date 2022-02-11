@@ -6,8 +6,7 @@ table.table.table-striped
     th id
     th status
     th user_uid
-    th income monthly
-    th outcome montly
+    th email
     th applicant_id
     th create_date
   tbody
@@ -16,8 +15,7 @@ table.table.table-striped
         td =applicant.id
         td =applicant.status_colored
         td =applicant.user_uid
-        td =applicant.income_detailed
-        td =applicant.outcome_detailed
+        td =applicant.email
         td =applicant.applicant_id
         td =applicant.create_date
         td =link_to 'Show', (Rails.env.development? ? admin_applicant_path(applicant) : "/kyc/applicants/#{applicant.id}"), target: '_blank'

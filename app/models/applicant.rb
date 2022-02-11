@@ -28,6 +28,10 @@ class Applicant < ApplicationRecord
     self.status = 'reseted' if webhook_type == 'applicantReset'
   end
 
+  def email
+    peatio_member&.email || p2p_user&.real_email
+  end
+
   def sumsub_url
     @sumsub_url ||= SumSub::GenerateUrl.new(user_id: user_uid).call
   end

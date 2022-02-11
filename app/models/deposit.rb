@@ -9,7 +9,7 @@ class Deposit < PeatioRecord
 
   self.inheritance_column = :fake_type
 
-  belongs_to :member, required: true
+  belongs_to :peatio_member, required: true
 
   scope :success, -> { completed }
   scope :skipped, -> { where aasm_state: %i[skipped] }
@@ -20,7 +20,7 @@ class Deposit < PeatioRecord
 
   scope :recent, -> { order(id: :desc) }
 
-  delegate :uid, to: :member, prefix: true
+  delegate :uid, to: :peatio_member, prefix: true
 
   def to_s
     ['deposit#', id.to_s, ' ', amount.to_s, ' ', currency_id].join
