@@ -14,7 +14,7 @@ table.table.table-striped
     -@applicants.each do |applicant|
       tr is='dapi-tr'
         td =applicant.id
-        td =applicant.status
+        td =applicant.status_colored
         td =applicant.user_uid
         td =applicant.income_detailed
         td =applicant.outcome_detailed
