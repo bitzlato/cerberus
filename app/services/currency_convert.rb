@@ -45,7 +45,6 @@ module CurrencyConvert
     end
 
     def reverse_convert_unit(key, value)
-      raise 'Zero Currency Value division' if value.zero?
       value.to_f / rates[key].to_f
     end
   end

@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
 class Applicant < ApplicationRecord
+  include Period
   include TestWebhook
   include PeatioMethods
+  include P2PMethods
+  include Limit
   has_paper_trail
 
   validates :applicant_id, :user_uid, presence: true
@@ -24,6 +27,7 @@ class Applicant < ApplicationRecord
     self.status = 'init' if review_status == 'init'
     self.status = 'reseted' if webhook_type == 'applicantReset'
   end
+
 
 
   # Create Applicant(on sumsub) with reviewStatus: init

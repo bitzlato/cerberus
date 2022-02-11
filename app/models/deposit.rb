@@ -3,6 +3,7 @@
 # frozen_string_literal: true
 
 class Deposit < PeatioRecord
+  include Period
   COMPLETED_STATES = %i[dispatched].freeze
   TRANSFER_TYPES = { fiat: 100, crypto: 200 }.freeze
 
@@ -16,8 +17,6 @@ class Deposit < PeatioRecord
   scope :completed, -> { where aasm_state: COMPLETED_STATES }
   scope :uncompleted, -> { where.not(aasm_state: COMPLETED_STATES) }
   scope :locked, -> { where(is_locked: true) }
-  scope :last_24_hours, -> { where('created_at > ?', 24.hour.ago) }
-  scope :last_1_month, -> { where('created_at > ?', 1.month.ago) }
 
   scope :recent, -> { order(id: :desc) }
 
