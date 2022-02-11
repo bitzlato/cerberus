@@ -19,7 +19,7 @@ module Limit
       summarize = summarize_hash_limits(outcomes)
       p2p_summarize = summarize_hash_limits([outcomes[0], outcomes[1]])
 
-      {p2p: p2p_summarize, exchange: outcomes[1], summarize: summarize}.with_indifferent_access
+      {p2p: p2p_summarize, exchange: outcomes[2], summarize: summarize}.with_indifferent_access
     end
 
     private

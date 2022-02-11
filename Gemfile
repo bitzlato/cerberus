@@ -21,7 +21,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'slim-rails'
 gem 'ransack', github: 'activerecord-hackery/ransack'
 gem 'kaminari'
-
+gem 'draper'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'

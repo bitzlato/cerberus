@@ -5,19 +5,19 @@ table.table.table-striped
   thead
     th id
     th status
+    th user_uid
     th income monthly
     th outcome montly
     th applicant_id
-    th user_uid
     th create_date
   tbody
     -@applicants.each do |applicant|
       tr
         td =applicant.id
         td =applicant.status
-        td =applicant.income[:summarize][:converted]['USDC'].round(2) rescue 0
-        td =applicant.outcome[:summarize][:converted]['USDC'].round(2) rescue 0
-        td =applicant.applicant_id
         td =applicant.user_uid
+        td =applicant.income_detailed
+        td =applicant.outcome_detailed
+        td =applicant.applicant_id
         td =applicant.create_date
-        td =link_to 'Show', admin_applicant_path(applicant), target: '_blank'
+        td =link_to 'Show', (Rails.env.development? ? admin_applicant_path(applicant) : "/kyc/applicants/#{applicant.id}"), target: '_blank'
