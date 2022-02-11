@@ -1,5 +1,6 @@
 hr
 .row
+
   .col-md-4
     table.table.table-striped.table-hover.table-narrow
       -@applicant.attributes.each do |key, value|
@@ -7,4 +8,47 @@ hr
           th class='text-right' = key
           td class='text-right' = value
 
-
+  .col-md-2
+    table.table.table-striped.table-hover.table-narrow
+      tr
+        th class='text-right'  usd_income
+        td class='text-right' = @applicant.usd_income
+      tr
+        th class='text-right'  btc_income
+        td class='text-right' = @applicant.btc_income
+      tr
+        th class='text-right'  usd_outcome
+        td class='text-right' = @applicant.usd_outcome
+      tr
+        th class='text-right'  btc_outcome
+        td class='text-right' = @applicant.btc_outcome
+      tr
+        th class='text-right'  --------------
+        td class='text-right'  --------------
+      tr
+        th class='text-right'  usd_exchange_income
+        td class='text-right' = @applicant.usd_exchange_income
+      tr
+        th class='text-right'  usd_exchange_income
+        td class='text-right' = @applicant.usd_p2p_income
+      tr
+        th class='text-right'  usd_p2p_income
+        td class='text-right' = @applicant.usd_p2p_income
+      tr
+        th class='text-right'  btc_p2p_income
+        td class='text-right' = @applicant.btc_p2p_income
+      tr
+        th class='text-right'  --------------
+        td class='text-right'  --------------
+      tr
+        th class='text-right'  usd_exchange_outcome
+        td class='text-right' = @applicant.usd_exchange_outcome
+      tr
+        th class='text-right'  btc_exchange_outcome
+        td class='text-right' = @applicant.btc_exchange_outcome
+      tr
+        th class='text-right'  usd_p2p_outcome
+        td class='text-right' = @applicant.usd_p2p_outcome
+      tr
+        th class='text-right'  btc_p2p_outcome
+        td class='text-right' = @applicant.btc_p2p_outcome
