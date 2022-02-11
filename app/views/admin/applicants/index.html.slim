@@ -12,7 +12,7 @@ table.table.table-striped
     th create_date
   tbody
     -@applicants.each do |applicant|
-      tr
+      tr is='dapi-tr'
         td =applicant.id
         td =applicant.status
         td =applicant.user_uid
