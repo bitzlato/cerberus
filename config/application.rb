@@ -38,6 +38,7 @@ module KycService
     # Auto-load API and its subdirectories
     config.paths.add 'app/api', glob: '**/*.rb'
     config.autoload_paths += Dir["#{Rails.root}/app/api/*"]
+    config.i18n.default_locale = :ru
 
   end
 end
