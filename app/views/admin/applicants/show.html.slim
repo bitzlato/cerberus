@@ -18,15 +18,18 @@ hr
       tr
         th class='text-right' Create Date
         td class='text-right' = @applicant.create_date
-      tr
-        th class='text-right' Moderation Comment
-        td class='text-right' = @applicant.moderation_comment
-      tr
-        th class='text-right' Client Comment
-        td class='text-right' = @applicant.client_comment
-      tr
-        th class='text-right' Reject Labels
-        td class='text-right' = @applicant.reject_labels.split(' ,') rescue nil
+      -if @applicant.moderation_comment
+        tr
+          th class='text-right' Moderation Comment
+          td class='text-right' = @applicant.moderation_comment
+      -if @applicant.client_comment
+        tr
+          th class='text-right' Client Comment
+          td class='text-right' = @applicant.client_comment
+      -if @applicant.reject_labels
+        tr
+          th class='text-right' Reject Labels
+          td class='text-right' = @applicant.reject_labels.split(' ,') rescue nil
       tr
         th class='text-right' SumSub URL:
         td class='text-right' = link_to @applicant.sumsub_url, @applicant.sumsub_url, target: '_blank'
