@@ -28,6 +28,9 @@ class Applicant < ApplicationRecord
     self.status = 'reseted' if webhook_type == 'applicantReset'
   end
 
+  def sumsub_url
+    @sumsub_url ||= SumSub::GenerateUrl.new(user_id: user_uid).call
+  end
 
 
   # Create Applicant(on sumsub) with reviewStatus: init

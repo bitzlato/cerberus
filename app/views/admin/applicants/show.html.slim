@@ -3,6 +3,9 @@ hr
 
   .col-md-4
     table.table.table-striped.table-hover.table-narrow
+      tr
+        th class='text-right' SumSub URL:
+        td class='text-right' = link_to @applicant.sumsub_url, @applicant.sumsub_url, target: '_blank'
       -@applicant.attributes.each do |key, value|
         tr
           th class='text-right' = key
