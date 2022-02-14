@@ -84,7 +84,7 @@ production:
     database: <%= ENV.fetch('PEATIO_DATABASE_NAME', 'peatio_production') %>
   barong:
     <<: *barong
-    url: <%= ENV.fetch('BARONG_DATABASE_URL', 'barong_production') %>
+    url: <%= ENV.fetch('BARONG_DATABASE_URL') %>
 
 test:
   primary:
