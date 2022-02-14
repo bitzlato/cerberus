@@ -92,6 +92,7 @@ test:
     database: kyc_service_test
   bitzlato:
     <<: *bitzlato_default
+    database: bitzlato_test
   peatio:
     <<: *peatio
     database: peatio_test
