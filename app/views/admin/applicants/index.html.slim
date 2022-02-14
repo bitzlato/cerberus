@@ -18,4 +18,4 @@ table.table.table-striped
         td =applicant.email
         td =applicant.applicant_id
         td =applicant.create_date
-        td =link_to 'Show', (Rails.env.development? ? admin_applicant_path(applicant) : "/kyc/applicants/#{applicant.id}"), target: '_blank'
+        td =link_to 'Show', admin_applicant_path(applicant), target: '_blank'
