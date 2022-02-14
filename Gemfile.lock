@@ -195,6 +195,7 @@ GEM
       dry-inflector (~> 0.1, >= 0.1.2)
       dry-logic (~> 1.0, >= 1.0.2)
     erubi (1.10.0)
+    execjs (2.7.0)
     factory_bot (6.1.0)
       activesupport (>= 5.0.0)
     ffi (1.15.5)
@@ -413,6 +414,8 @@ GEM
     turbolinks-source (5.2.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
+    uglifier (4.2.0)
+      execjs (>= 0.3.0, < 3)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.8)
@@ -491,6 +494,7 @@ DEPENDENCIES
   timecop
   turbolinks (~> 5)
   tzinfo-data
+  uglifier
   web-console (>= 4.1.0)
   webmock
   webpacker (~> 5.0)

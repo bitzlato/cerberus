@@ -11,11 +11,10 @@ table.table.table-striped
     th create_date
   tbody
     -@applicants.each do |applicant|
-      tr is='dapi-tr'
+      tr is='dapi-tr' data-href=admin_applicant_path(applicant)
         td =applicant.id
         td =applicant.status_colored
         td =applicant.user_uid
         td =applicant.email
         td =applicant.applicant_id
         td =applicant.create_date
-        td =link_to 'Show', admin_applicant_path(applicant), target: '_blank'

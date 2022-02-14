@@ -1,32 +1,19 @@
+//= require rails-ujs
+//= require turbolinks
+//  require better-dom
+//  require better-dateinput-polyfill/dist/better-dateinput-polyfill.min.js
+//= require moment
+// require bootstrap
+// require bootstrap4-datetimepicker/build/js/bootstrap-datetimepicker.min
+// require selectize.js
+// require simple_form_extension
+// require simple_form_extension/selectize
+//= require_tree ./elements
+//= require_tree ./extra
 
-class RowElement extends HTMLTableRowElement {
-    connectedCallback() {
-        this.addEventListener('click', this.onClick)
-        this.style='cursor: pointer'
-    }
-
-    onClick(e) {
-        const $target = $(e.target)
-        if ( $target.closest('a').length > 0 ||
-            $target.is('.btn') ||
-            $target.is('input') ||
-            $target.is('select') ||
-            $target.is('.best_in_place') ||
-            $target.closest('.project-actions').length > 0 )
-        {
-            return
-        }
-
-        e.preventDefault()
-
-        if (this.dataset.hrefTarget) {
-            window.open(this.dataset.href, this.dataset.hrefTarget)
-        } else {
-            window.location = this.dataset.href
-        }
-    }
-}
-
-document.addEventListener("DOMContentLoaded", function(){
-    customElements.define('dapi-tr', RowElement, {extends: 'tr'});
-});
+// document.addEventListener("turbolinks:load", function() {
+//   $('[data-toggle="tooltip"]').tooltip()
+//   $('.datetimepicker').datetimepicker({
+//      format: 'YYYY-MM-DD HH:mm'
+//   })
+// })
