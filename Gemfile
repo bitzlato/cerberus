@@ -24,7 +24,7 @@ gem 'kaminari'
 gem 'draper'
 gem 'uglifier'
 gem 'execjs'
-gem 'mini_racer'
+gem 'mini_racer', '~> 0.4.0'
 
 
 # Use Redis adapter to run Action Cable in production
