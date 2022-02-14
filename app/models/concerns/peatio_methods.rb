@@ -3,17 +3,17 @@ module PeatioMethods
   included do
 
     def peatio_member
-      @member ||= Member.find_by(uid: user_uid)
+      @member ||= Peatio::Member.find_by(uid: user_uid)
     end
 
     def month_income_exchange(period: :monthly)
-      income = Deposit.select('sum(amount) as sum_amount, currency_id')
-                      .success
-                      .period(period)
-                      .where(member_id: peatio_member.id)
-                      .group('currency_id')
-                      .map { |t| { "#{t.currency_id.upcase}" => t.sum_amount } }
-                      .reduce({}, :merge)
+      income = Peatio::Deposit.select('sum(amount) as sum_amount, currency_id')
+                              .success
+                              .period(period)
+                              .where(member_id: peatio_member.id)
+                              .group('currency_id')
+                              .map { |t| { "#{t.currency_id.upcase}" => t.sum_amount } }
+                              .reduce({}, :merge)
 
       {origin: income, converted: CurrencyConvert.convert(income)}
     rescue StandardError => e
@@ -22,13 +22,13 @@ module PeatioMethods
     end
 
     def month_outcome_exchange(period: :monthly)
-      outcome = Withdraw.select('sum(amount) as sum_amount, currency_id')
-                        .success
-                        .period(period)
-                        .where(member_id: peatio_member.id)
-                        .group('currency_id')
-                        .map { |t| { "#{t.currency_id.upcase}" => t.sum_amount } }
-                        .reduce({}, :merge)
+      outcome = Peatio::Withdraw.select('sum(amount) as sum_amount, currency_id')
+                                .success
+                                .period(period)
+                                .where(member_id: peatio_member.id)
+                                .group('currency_id')
+                                .map { |t| { "#{t.currency_id.upcase}" => t.sum_amount } }
+                                .reduce({}, :merge)
 
       {origin: outcome, converted: CurrencyConvert.convert(outcome)}
     rescue StandardError => e
