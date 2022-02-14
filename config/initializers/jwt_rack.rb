@@ -17,7 +17,7 @@ auth_args = {
   secret: Rails.configuration.x.jwt_public_key,
   options: Rails.configuration.x.jwt_options,
   verify: Rails.configuration.x.jwt_public_key.present?,
-  exclude: %w[/api/webhook/sumsub /admin],
+  exclude: %w[/api/webhook/sumsub /admin /assets],
   on_error: on_error
 }
 
