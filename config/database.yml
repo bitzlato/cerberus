@@ -81,7 +81,7 @@ production:
     url: <%= ENV['BITZLATO_DATABASE_URL'] %>
   peatio:
     <<: *peatio
-    database: <%= ENV.fetch('PEATIO_DATABASE_NAME') %>
+    url: <%= ENV.fetch('PEATIO_DATABASE_URL') %>
   barong:
     <<: *barong
     url: <%= ENV.fetch('BARONG_DATABASE_URL') %>
