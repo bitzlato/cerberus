@@ -22,6 +22,10 @@ gem 'slim-rails'
 gem 'ransack', github: 'activerecord-hackery/ransack'
 gem 'kaminari'
 gem 'draper'
+gem 'uglifier'
+gem 'execjs'
+gem 'mini_racer', '~> 0.4.0'
+
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
@@ -63,7 +67,6 @@ gem 'semver2', '~> 3.4'
 gem 'semver'
 
 group :deploy do
-  gem 'foreman'
   gem 'pry-rails'
   gem 'capistrano-dotenv'
   gem 'capistrano-dotenv-tasks'

@@ -3,7 +3,7 @@ module P2PMethods
   included do
 
     def p2p_user
-      @p2p_user ||= BitzlatoUser.find(user_uid)
+      @p2p_user ||= BitzlatoUser.find_by_id(user_uid)
     end
 
     def p2p_voucher_withdraw(period: :monthly, start_date: nil, end_date: nil)

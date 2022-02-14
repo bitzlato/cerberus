@@ -195,6 +195,7 @@ GEM
       dry-inflector (~> 0.1, >= 0.1.2)
       dry-logic (~> 1.0, >= 1.0.2)
     erubi (1.10.0)
+    execjs (2.7.0)
     factory_bot (6.1.0)
       activesupport (>= 5.0.0)
     ffi (1.15.5)
@@ -244,6 +245,7 @@ GEM
       activerecord
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
+    libv8-node (15.14.0.1)
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -262,6 +264,8 @@ GEM
     mime-types-data (3.2022.0105)
     mini_mime (1.1.2)
     mini_portile2 (2.7.1)
+    mini_racer (0.4.0)
+      libv8-node (~> 15.14.0.0)
     minitest (5.15.0)
     msgpack (1.4.4)
     mustermann (1.1.1)
@@ -413,6 +417,8 @@ GEM
     turbolinks-source (5.2.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
+    uglifier (4.2.0)
+      execjs (>= 0.3.0, < 3)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.8)
@@ -461,6 +467,7 @@ DEPENDENCIES
   capistrano3-puma!
   dotenv
   draper
+  execjs
   factory_bot
   foreman
   grape (~> 1.6)
@@ -470,6 +477,7 @@ DEPENDENCIES
   jwt-rack (~> 0.1.0)
   kaminari
   listen (~> 3.3)
+  mini_racer (~> 0.4.0)
   paper_trail (>= 12.0.0)
   pg (~> 1.1)
   pry-rails
@@ -491,6 +499,7 @@ DEPENDENCIES
   timecop
   turbolinks (~> 5)
   tzinfo-data
+  uglifier
   web-console (>= 4.1.0)
   webmock
   webpacker (~> 5.0)
