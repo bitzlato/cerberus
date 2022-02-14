@@ -23,13 +23,13 @@ module P2PMethods
     end
 
     def p2p_income(period: :monthly)
-      income = Bitzlato:BitzlatoDeposit.success
-                                       .period(period)
-                                       .where(user: p2p_user)
-                                       .select('sum(fee) + sum(amount) as sum_amount , cc_code as currency_id')
-                                       .group('currency_id')
-                                       .map { |t| { "#{t.currency_id.upcase}" => t.sum_amount } }
-                                       .reduce({}, :merge)
+      income = Bitzlato::BitzlatoDeposit.success
+                                        .period(period)
+                                        .where(user: p2p_user)
+                                        .select('sum(fee) + sum(amount) as sum_amount , cc_code as currency_id')
+                                        .group('currency_id')
+                                        .map { |t| { "#{t.currency_id.upcase}" => t.sum_amount } }
+                                        .reduce({}, :merge)
 
       {origin: income, converted: CurrencyConvert.convert(income)}
     rescue StandardError => e
@@ -39,13 +39,13 @@ module P2PMethods
 
 
     def p2p_outcome(period: :monthly)
-      outcome = Bitzlato:Withdrawal.processed
-                                   .period(period)
-                                   .where(user: p2p_user)
-                                   .select('sum(amount) as sum_amount, cc_code as currency_id')
-                                   .group('currency_id')
-                                   .map { |t| { "#{t.currency_id.upcase}" => t.sum_amount } }
-                                   .reduce({}, :merge)
+      outcome = Bitzlato::Withdrawal.processed
+                                    .period(period)
+                                    .where(user: p2p_user)
+                                    .select('sum(amount) as sum_amount, cc_code as currency_id')
+                                    .group('currency_id')
+                                    .map { |t| { "#{t.currency_id.upcase}" => t.sum_amount } }
+                                    .reduce({}, :merge)
 
 
       {origin: outcome, converted: CurrencyConvert.convert(outcome)}
