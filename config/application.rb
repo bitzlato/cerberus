@@ -24,6 +24,9 @@ module KycService
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
 
+
+    config.assets.js_compressor = Uglifier.new(harmony: true)
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
@@ -38,6 +41,7 @@ module KycService
     # Auto-load API and its subdirectories
     config.paths.add 'app/api', glob: '**/*.rb'
     config.autoload_paths += Dir["#{Rails.root}/app/api/*"]
+    config.i18n.default_locale = :ru
 
   end
 end

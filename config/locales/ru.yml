@@ -29,12 +29,12 @@
 # To learn more, please read the Rails Internationalization guide
 # available at https://guides.rubyonrails.org/i18n.html.
 
-en:
+ru:
   income:
-    total: 'Total Income'
-    exchange: 'Income from Exchange'
-    p2p: 'Income from P2P'
+    total: 'Всего поступлений'
+    exchange: 'Поступления с биржы'
+    p2p: 'Поступления с p2p'
   outcome:
-    total: 'Total Outcome'
-    exchange: 'Outcome from Exchange'
-    p2p: 'Outcome from P2P'
+    total: 'Всего выводов'
+    exchange: 'Выводы с биржы'
+    p2p: 'Выводы с p2p'

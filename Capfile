@@ -27,6 +27,7 @@ require 'capistrano/rails/console'
 
 require 'slackistrano/capistrano'
 require 'capistrano/tasks'
+require 'capistrano/rails/assets'
 require 'capistrano/my'
 install_plugin Capistrano::My
 require 'capistrano/slackistrano' # My Custom Message
@@ -41,3 +42,4 @@ install_plugin Capistrano::Puma
 # require 'capistrano/master_key'
 require 'capistrano/systemd/multiservice'
 install_plugin Capistrano::Systemd::MultiService.new_service('puma', service_type: 'user')
+

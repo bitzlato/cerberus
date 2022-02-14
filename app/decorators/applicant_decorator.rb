@@ -2,6 +2,25 @@ class ApplicantDecorator < Draper::Decorator
   delegate_all
 
 
+  def status_colored
+    class_name = ''
+    case object.status
+    when 'verified'
+      class_name = 'text-success'
+    when 'banned'
+      class_name = 'text-danger'
+    when 'rejected'
+      class_name = 'text-warning'
+    when 'init'
+      class_name = 'text-info'
+    when 'reseted'
+      class_name = 'text-muted'
+    end
+    h.content_tag(:span, object.status, class: class_name)
+  end
+
+  ######
+
   def usd_income
     "#{income_lazy.dig(:summarize, :converted, 'USDC').round(2) rescue 0} $"
   end

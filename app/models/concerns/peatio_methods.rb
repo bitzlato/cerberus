@@ -2,7 +2,7 @@ module PeatioMethods
   extend ActiveSupport::Concern
   included do
 
-    def member
+    def peatio_member
       @member ||= Member.find_by(uid: user_uid)
     end
 
@@ -10,7 +10,7 @@ module PeatioMethods
       income = Deposit.select('sum(amount) as sum_amount, currency_id')
                       .success
                       .period(period)
-                      .where(member_id: member.id)
+                      .where(member_id: peatio_member.id)
                       .group('currency_id')
                       .map { |t| { "#{t.currency_id.upcase}" => t.sum_amount } }
                       .reduce({}, :merge)
@@ -25,7 +25,7 @@ module PeatioMethods
       outcome = Withdraw.select('sum(amount) as sum_amount, currency_id')
                         .success
                         .period(period)
-                        .where(member_id: member.id)
+                        .where(member_id: peatio_member.id)
                         .group('currency_id')
                         .map { |t| { "#{t.currency_id.upcase}" => t.sum_amount } }
                         .reduce({}, :merge)
