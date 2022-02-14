@@ -245,6 +245,7 @@ GEM
       activerecord
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
+    libv8-node (16.10.0.0)
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -263,6 +264,8 @@ GEM
     mime-types-data (3.2022.0105)
     mini_mime (1.1.2)
     mini_portile2 (2.7.1)
+    mini_racer (0.6.2)
+      libv8-node (~> 16.10.0.0)
     minitest (5.15.0)
     msgpack (1.4.4)
     mustermann (1.1.1)
@@ -474,6 +477,7 @@ DEPENDENCIES
   jwt-rack (~> 0.1.0)
   kaminari
   listen (~> 3.3)
+  mini_racer
   paper_trail (>= 12.0.0)
   pg (~> 1.1)
   pry-rails
