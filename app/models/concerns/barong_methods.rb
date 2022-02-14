@@ -3,7 +3,7 @@ module BarongMethods
   included do
 
     def barong_user
-      @barong_user ||= BarongUser.find_by_uid(user_uid)
+      @barong_user ||= Barong::User.find_by_uid(user_uid)
     end
 
   end
