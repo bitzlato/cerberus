@@ -5,6 +5,7 @@ class Applicant < ApplicationRecord
   include TestWebhook
   include PeatioMethods
   include P2PMethods
+  include BarongMethods
   include Limit
   has_paper_trail
 
@@ -29,7 +30,7 @@ class Applicant < ApplicationRecord
   end
 
   def email
-    peatio_member&.email || p2p_user&.real_email
+    barong_user&.email || p2p_user&.real_email
   end
 
   def sumsub_url
