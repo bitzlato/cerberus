@@ -69,7 +69,7 @@ staging:
     url:  <%= ENV.fetch('PEATIO_DATABASE_URL', 'peatio_production') %>
   barong:
     <<: *barong
-    url: <%= ENV.fetch('BARONG_URL', 'barong_staging') %>
+    url: <%= ENV.fetch('BARONG_DATABASE_URL', 'barong_staging') %>
 
 
 production:
@@ -84,7 +84,7 @@ production:
     database: <%= ENV.fetch('PEATIO_DATABASE_NAME', 'peatio_production') %>
   barong:
     <<: *barong
-    url: <%= ENV.fetch('BARONG_URL', 'barong_production') %>
+    url: <%= ENV.fetch('BARONG_DATABASE_URL', 'barong_production') %>
 
 test:
   primary:
