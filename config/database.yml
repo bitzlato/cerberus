@@ -20,6 +20,8 @@ default: &default
 peatio: &peatio
   <<: *default
   migrations_paths: db/peatio_migrate
+barong: &barong
+  <<: *default
 
 bitzlato_default: &bitzlato_default
   adapter: postgresql
@@ -51,6 +53,9 @@ development:
   peatio:
     <<: *peatio
     database: <%= ENV.fetch('PEATIO_DATABASE_NAME', 'peatio_development') %>
+  barong:
+    <<: *barong
+    database: <%= ENV.fetch('BARONG_DATABASE_NAME', 'barong_development') %>
 
 staging:
   primary:
@@ -61,7 +66,11 @@ staging:
     url: <%= ENV['BITZLATO_DATABASE_URL'] %>
   peatio:
     <<: *peatio
-    url:  <%= ENV.fetch('PEATIO_DATABASE_URL', 'peatio_production') %>
+    url:  <%= ENV.fetch('PEATIO_DATABASE_URL') %>
+  barong:
+    <<: *barong
+    url: <%= ENV.fetch('BARONG_DATABASE_URL') %>
+
 
 production:
   primary:
@@ -72,7 +81,10 @@ production:
     url: <%= ENV['BITZLATO_DATABASE_URL'] %>
   peatio:
     <<: *peatio
-    database: <%= ENV.fetch('PEATIO_DATABASE_NAME', 'peatio_production') %>
+    url: <%= ENV.fetch('PEATIO_DATABASE_URL') %>
+  barong:
+    <<: *barong
+    url: <%= ENV.fetch('BARONG_DATABASE_URL') %>
 
 test:
   primary:
@@ -83,6 +95,11 @@ test:
   peatio:
     <<: *peatio
     database: peatio_test
+  barong:
+    <<: *barong
+    database: barong_test
+
+
 
 
 
