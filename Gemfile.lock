@@ -464,6 +464,7 @@ DEPENDENCIES
   capistrano3-puma!
   dotenv
   draper
+  execjs
   factory_bot
   foreman
   grape (~> 1.6)

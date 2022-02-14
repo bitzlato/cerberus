@@ -23,6 +23,7 @@ gem 'ransack', github: 'activerecord-hackery/ransack'
 gem 'kaminari'
 gem 'draper'
 gem 'uglifier'
+gem 'execjs'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
