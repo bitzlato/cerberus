@@ -66,10 +66,10 @@ staging:
     url: <%= ENV['BITZLATO_DATABASE_URL'] %>
   peatio:
     <<: *peatio
-    url:  <%= ENV.fetch('PEATIO_DATABASE_URL', 'peatio_production') %>
+    url:  <%= ENV.fetch('PEATIO_DATABASE_URL') %>
   barong:
     <<: *barong
-    url: <%= ENV.fetch('BARONG_DATABASE_URL', 'barong_staging') %>
+    url: <%= ENV.fetch('BARONG_DATABASE_URL') %>
 
 
 production:
@@ -81,7 +81,7 @@ production:
     url: <%= ENV['BITZLATO_DATABASE_URL'] %>
   peatio:
     <<: *peatio
-    database: <%= ENV.fetch('PEATIO_DATABASE_NAME', 'peatio_production') %>
+    database: <%= ENV.fetch('PEATIO_DATABASE_NAME') %>
   barong:
     <<: *barong
     url: <%= ENV.fetch('BARONG_DATABASE_URL') %>
