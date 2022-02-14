@@ -2,7 +2,7 @@
 //= require turbolinks
 //  require better-dom
 //  require better-dateinput-polyfill/dist/better-dateinput-polyfill.min.js
-//= require moment
+// require moment
 // require bootstrap
 // require bootstrap4-datetimepicker/build/js/bootstrap-datetimepicker.min
 // require selectize.js
