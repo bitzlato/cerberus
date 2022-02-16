@@ -8,6 +8,8 @@ module P2PMethods
 
     def p2p_voucher_outcome(period: :monthly)
       amount = Bitzlato::Voucher.where('voucher.cashed_by_user_id is NULL and user_id = ?', p2p_user&.id)
+                                .period(period)
+                                .not_deleted
                                 .select('sum(amount) as sum_amount, cc_code as currency_id')
                                 .group(:currency_id)
                                 .map { |t| { "#{t.currency_id.upcase}" => t.sum_amount } }
@@ -19,6 +21,8 @@ module P2PMethods
 
     def p2p_voucher_income(period: :monthly)
       amount = Bitzlato::Voucher.where('voucher.cashed_by_user_id = ?', p2p_user&.id)
+                                .period(period)
+                                .not_deleted
                                 .select('sum(amount) as sum_amount, cc_code as currency_id')
                                 .group(:currency_id)
                                 .map { |t| { "#{t.currency_id.upcase}" => t.sum_amount } }
