@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_27_072445) do
+ActiveRecord::Schema.define(version: 2022_02_16_083819) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "applicants", force: :cascade do |t|
-    t.string "applicant_id", null: false
+    t.string "sumsub_applicant_id", null: false
     t.string "inspection_id", null: false
-    t.string "user_uid", null: false
+    t.string "barong_uid", null: false
     t.string "source_key"
     t.datetime "start_date"
     t.datetime "create_date"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 2022_01_27_072445) do
     t.json "raw_request", default: {}
     t.json "fixed_info", default: {}
     t.json "reject_labels", default: []
+    t.string "bitzlato_id"
   end
 
   create_table "versions", force: :cascade do |t|
