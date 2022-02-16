@@ -5,16 +5,18 @@ table.table.table-striped
   thead
     th id
     th status
-    th user_uid
+    th barong_uid
+    th bitzlato_id
     th email
-    th applicant_id
+    th sumsub_applicant_id
     th create_date
   tbody
     -@applicants.each do |applicant|
       tr is='dapi-tr' data-href=admin_applicant_path(applicant)
         td =applicant.id
         td =applicant.status_colored
-        td =applicant.user_uid
+        td =applicant.barong_uid
+        td =applicant.bitzlato_id
         td =applicant.email
-        td =applicant.applicant_id
+        td =applicant.sumsub_applicant_id
         td =applicant.create_date
