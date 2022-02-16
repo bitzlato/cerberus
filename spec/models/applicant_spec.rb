@@ -32,7 +32,7 @@ describe Applicant, type: :model do
 
   describe 'init_applicant' do
     before do
-      stub_create_applicant(user_id: 1111)
+      stub_create_applicant(applicant_id: 1111)
     end
     it 'ok' do
       applicant = Applicant.init_applicant(1111)

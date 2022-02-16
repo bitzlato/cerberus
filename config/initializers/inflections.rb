@@ -8,6 +8,7 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.acronym 'UUID'
   inflect.acronym 'P2P'
   inflect.acronym 'CRUD'
+  inflect.acronym 'KYC'
   inflect.acronym 'TID'
   inflect.acronym 'OWHDWallet'
   inflect.irregular 'cash', 'cash'

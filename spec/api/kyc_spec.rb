@@ -15,7 +15,7 @@ describe 'API::Kyc', type: :api do
   end
 
   def app
-    API::Kyc
+    API::KYC
   end
 
   context 'GET /api/kyc/status' do

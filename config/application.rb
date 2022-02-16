@@ -39,9 +39,9 @@ module KycService
     config.generators.system_tests = nil
 
     # Auto-load API and its subdirectories
-    config.paths.add 'app/api', glob: '**/*.rb'
-    config.autoload_paths += Dir["#{Rails.root}/app/api/*"]
+    # config.paths.add 'app/api', glob: '**/*.rb'
+    # config.autoload_paths += Dir["#{Rails.root}/app/api/*"]
     config.i18n.default_locale = :ru
-
+    config.autoloader = :classic
   end
 end

@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 # Webhook endpoints
-class Webhook < Grape::API
-  resource :webhook do
+module API
+  class Webhook < Grape::API
     desc 'Incoming webhook from SumSub. Contains review result'
     params do
       requires :applicantId, type: String, desc: 'Applicant ID'
