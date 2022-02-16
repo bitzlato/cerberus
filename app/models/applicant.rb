@@ -42,6 +42,8 @@ class Applicant < ApplicationRecord
   def self.init_applicant(applicant_id)
     p response = Sumsub::Request.new.create_applicant('basic-kyc-level', {externalUserId: applicant_id, sourceKey: "kyc-service-#{Rails.env}"})
     unless response.is_a? Sumsub::Struct::ErrorResponse
+      #TODO: find or create applicant by response['externalUserId']
+      #TODO: update fields this applicant from response
       Applicant.create! sumsub_applicant_id: response['id'],
                         create_date: response['createdAt'],
                         inspection_id: response['inspectionId'],
