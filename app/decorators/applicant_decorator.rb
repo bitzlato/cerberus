@@ -6,15 +6,15 @@ class ApplicantDecorator < Draper::Decorator
     class_name = ''
     case object.status
     when 'verified'
-      class_name = 'text-success'
+      class_name = 'badge badge-success'
     when 'banned'
-      class_name = 'text-danger'
+      class_name = 'badge badge-danger'
     when 'rejected'
-      class_name = 'text-warning'
+      class_name = 'badge badge-warning'
     when 'init'
-      class_name = 'text-info'
+      class_name = 'badge badge-info'
     when 'reseted'
-      class_name = 'text-muted'
+      class_name = 'badge badge-muted'
     end
     h.content_tag(:span, object.status, class: class_name)
   end
