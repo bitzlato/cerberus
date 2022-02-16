@@ -33,7 +33,7 @@ module SumSub
 
     def attributes
       {
-        applicant_id: @params[:applicantId],
+        sumsub_applicant_id: @params[:applicantId],
         inspection_id: @params[:inspectionId],
         user_uid: @params[:externalUserId],
         source_key: @params[:sourceKey],

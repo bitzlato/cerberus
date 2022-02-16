@@ -32,7 +32,7 @@ describe Applicant, type: :model do
 
   describe 'init_applicant' do
     before do
-      stub_create_applicant(applicant_id: 1111)
+      stub_create_applicant(sumsub_applicant_id: 1111)
     end
     it 'ok' do
       applicant = Applicant.init_applicant(1111)
@@ -47,13 +47,13 @@ describe Applicant, type: :model do
     end
 
     it 'ok' do
-      stub_reset(applicant_id: @applicant.applicant_id, body: {'ok': 1})
+      stub_reset(sumsub_applicant_id: @applicant.applicant_id, body: { 'ok': 1})
 
       expect(@applicant.reset_applicant).to be_truthy
     end
 
     it 'fail' do
-      stub_reset(applicant_id: @applicant.applicant_id, body: {'ok': 0})
+      stub_reset(sumsub_applicant_id: @applicant.applicant_id, body: { 'ok': 0})
 
       expect(@applicant.reset_applicant).to be_falsey
     end

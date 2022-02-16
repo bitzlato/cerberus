@@ -9,8 +9,8 @@ class Applicant < ApplicationRecord
   include Limit
   has_paper_trail
 
-  validates :applicant_id, :user_uid, presence: true
-  validates :applicant_id, uniqueness: true
+  validates :sumsub_applicant_id, :user_uid, presence: true
+  validates :sumsub_applicant_id, uniqueness: true
   validates :user_uid, uniqueness: true
 
   enum status: {
@@ -39,13 +39,13 @@ class Applicant < ApplicationRecord
 
 
   # Create Applicant(on sumsub) with reviewStatus: init
-  def self.init_applicant(external_user_id)
-    p response = Sumsub::Request.new.create_applicant('basic-kyc-level', {externalUserId: external_user_id, sourceKey: "kyc-service-#{Rails.env}"})
+  def self.init_applicant(applicant_id)
+    p response = Sumsub::Request.new.create_applicant('basic-kyc-level', {externalUserId: applicant_id, sourceKey: "kyc-service-#{Rails.env}"})
     unless response.is_a? Sumsub::Struct::ErrorResponse
-      Applicant.create! applicant_id: response['id'],
+      Applicant.create! sumsub_applicant_id: response['id'],
                         create_date: response['createdAt'],
                         inspection_id: response['inspectionId'],
-                        user_uid: response['externalUserId'],
+                        user_uid: response['externalUserId'], #TODO: тут
                         review_status: response.dig('review','reviewStatus')
     end
   end
