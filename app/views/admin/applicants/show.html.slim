@@ -1,7 +1,7 @@
 hr
 .row
 
-  .col-md-4
+  .col-md-6
     table.table.table-striped.table-hover.table-narrow
       tr
         th class='text-right' Applicant ID
@@ -34,7 +34,7 @@ hr
         th class='text-right' SumSub URL:
         td class='text-right' = link_to @applicant.sumsub_url, @applicant.sumsub_url, target: '_blank'
 
-  .col-md-2
+  .col-md-6
     table.table.table-striped.table-hover.table-narrow
       tr
         th class='text-right' = I18n.t 'income.total'
@@ -45,6 +45,9 @@ hr
       tr
         th class='text-right' = I18n.t 'income.p2p'
         td class='text-right' = "#{@applicant.usd_p2p_income} / #{@applicant.btc_p2p_income}"
+      tr
+        th class='text-right' = I18n.t 'income.voucher'
+        td class='text-right' = "#{@applicant.usd_voucher_income} / #{@applicant.btc_voucher_income}"
       tr
         th class='text-right'  --------------
         td class='text-right'  --------------
@@ -57,46 +60,6 @@ hr
       tr
         th class='text-right' = I18n.t 'outcome.p2p'
         td class='text-right' = "#{@applicant.usd_p2p_outcome} / #{@applicant.btc_p2p_outcome}"
-      / tr
-      / tr
-      /   th class='text-right' usd_income
-      /   td class='text-right' = @applicant.usd_income
-      / tr
-      /   th class='text-right'  btc_income
-      /   td class='text-right' = @applicant.btc_income
-      / tr
-      /   th class='text-right'  usd_outcome
-      /   td class='text-right' = @applicant.usd_outcome
-      / tr
-      /   th class='text-right'  btc_outcome
-      /   td class='text-right' = @applicant.btc_outcome
-      / tr
-      /   th class='text-right'  --------------
-      /   td class='text-right'  --------------
-      / tr
-      /   th class='text-right'  usd_exchange_income
-      /   td class='text-right' = @applicant.usd_exchange_income
-      / tr
-      /   th class='text-right'  usd_exchange_income
-      /   td class='text-right' = @applicant.usd_p2p_income
-      / tr
-      /   th class='text-right'  usd_p2p_income
-      /   td class='text-right' = @applicant.usd_p2p_income
-      / tr
-      /   th class='text-right'  btc_p2p_income
-      /   td class='text-right' = @applicant.btc_p2p_income
-      / tr
-      /   th class='text-right'  --------------
-      /   td class='text-right'  --------------
-      / tr
-      /   th class='text-right'  usd_exchange_outcome
-      /   td class='text-right' = @applicant.usd_exchange_outcome
-      / tr
-      /   th class='text-right'  btc_exchange_outcome
-      /   td class='text-right' = @applicant.btc_exchange_outcome
-      / tr
-      /   th class='text-right'  usd_p2p_outcome
-      /   td class='text-right' = @applicant.usd_p2p_outcome
-      / tr
-      /   th class='text-right'  btc_p2p_outcome
-      /   td class='text-right' = @applicant.btc_p2p_outcome
+      tr
+        th class='text-right' = I18n.t 'outcome.voucher'
+        td class='text-right' = "#{@applicant.usd_voucher_outcome} / #{@applicant.btc_voucher_outcome}"

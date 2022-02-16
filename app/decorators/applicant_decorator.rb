@@ -33,6 +33,10 @@ class ApplicantDecorator < Draper::Decorator
     "#{income_lazy.dig(:p2p, :converted, 'USDC').round(2) rescue 0} $"
   end
 
+  def usd_voucher_income
+    "#{income_lazy.dig(:voucher, :converted, 'USDC').round(2) rescue 0} $"
+  end
+
   #####################################
 
   def usd_outcome
@@ -45,6 +49,10 @@ class ApplicantDecorator < Draper::Decorator
 
   def usd_p2p_outcome
     "#{outcome_lazy.dig(:p2p, :converted, 'USDC').round(2) rescue 0} $"
+  end
+
+  def usd_voucher_outcome
+    "#{outcome_lazy.dig(:voucher, :converted, 'USDC').round(2) rescue 0} $"
   end
 
   #####################################
@@ -62,6 +70,10 @@ class ApplicantDecorator < Draper::Decorator
     "#{outcome_lazy.dig(:p2p, :converted, 'BTC').round(4) rescue 0} ₿"
   end
 
+  def btc_voucher_outcome
+    "#{outcome_lazy.dig(:voucher, :converted, 'BTC').round(4) rescue 0} ₿"
+  end
+
   #####################################
 
   def btc_income
@@ -76,6 +88,10 @@ class ApplicantDecorator < Draper::Decorator
     "#{income_lazy.dig(:p2p, :converted, 'BTC').round(4) rescue 0} ₿"
   end
 
+  def btc_voucher_income
+    "#{income_lazy.dig(:voucher, :converted, 'BTC').round(4) rescue 0} ₿"
+  end
+
   #####################################
   #####################################
 
@@ -83,6 +99,7 @@ class ApplicantDecorator < Draper::Decorator
     outcome = outcome_lazy
     "Exchange: (#{usd_exchange_outcome}, #{btc_exchange_outcome})\n
      p2p: (#{usd_p2p_outcome}, #{btc_p2p_outcome})\n
+     voucher: (#{usd_voucher_outcome}, #{btc_voucher_outcome})\n
      sum: (#{usd_outcome}, #{btc_outcome})\n
     "
   end
@@ -91,6 +108,7 @@ class ApplicantDecorator < Draper::Decorator
     outcome = outcome_lazy
     "Exchange: (#{usd_exchange_income}, #{btc_exchange_income})\n
      p2p: (#{usd_p2p_income}, #{btc_p2p_income})\n
+     voucher: (#{usd_voucher_income}, #{btc_voucher_income})\n
      sum: (#{usd_income}, #{btc_income})\n
     "
   end
