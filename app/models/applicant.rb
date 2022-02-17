@@ -36,14 +36,15 @@ class Applicant < ApplicationRecord
   end
 
   def sumsub_url
-    @sumsub_url ||= SumSub::GenerateUrl.new(applicant_id: id).call
+    @sumsub_url ||= SumSub::GenerateUrl.new(applicant_id: uid).call
   end
 
 
   # Create Applicant(on sumsub) with reviewStatus: init
-  def self.init_applicant(applicant_id)
+
     p response = Sumsub::Request.new.create_applicant('basic-kyc-level', {externalUserId: applicant_id, sourceKey: "kyc-service-#{Rails.env}"})
     unless response.is_a? Sumsub::Struct::ErrorResponse
+      applicant = Applicant.find()
       #TODO: find or create applicant by response['externalUserId']
       #TODO: update fields this applicant from response
       Applicant.create! sumsub_applicant_id: response['id'],
@@ -69,7 +70,7 @@ class Applicant < ApplicationRecord
 
   def assign_uid
     return unless uid.blank?
-    self.uid = UIDGenerator.generate
+    self.uid = UidGenerator.generate
   end
 end
 
