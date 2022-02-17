@@ -6,7 +6,7 @@ module API
       content_type   :json, 'application/json'
 
       include API::ErrorsHandler
-      mount API::Admin::KYC
+      mount API::Admin::Verifications
     end
   end
 end

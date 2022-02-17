@@ -3,7 +3,7 @@
 # KYC endpoints
 module API
   module Admin
-    class KYC < Grape::API
+    class Verifications < Grape::API
       resource :verifications do
         desc 'Applicant Inddex'
         get do
