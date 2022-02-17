@@ -1,9 +1,11 @@
 class CreateApplicants < ActiveRecord::Migration[6.1]
   def change
     create_table :applicants do |t|
-      t.string :applicant_id, null: false
-      t.string :inspection_id, null: false
-      t.string :user_uid, null: false
+      t.string :uid
+      t.string :sumsub_applicant_id
+      t.string :inspection_id
+      t.string :barong_uid
+      t.string :bitzlati_id
       t.string :source_key
       t.datetime :start_date
       t.datetime :create_date
