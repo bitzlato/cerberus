@@ -49,3 +49,31 @@ module Peatio
     end
   end
 end
+
+# == Schema Information
+#
+# Table name: transactions
+#
+#  id              :bigint           not null, primary key
+#  currency_id     :string           not null
+#  reference_type  :string
+#  reference_id    :bigint
+#  txid            :string
+#  from_address    :string
+#  to_address      :string
+#  amount          :decimal(36, 18)  default(0.0), not null
+#  block_number    :integer
+#  txout           :integer
+#  status          :string
+#  options         :json
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  fee             :decimal(36, 18)
+#  fee_currency_id :string
+#  blockchain_id   :bigint           not null
+#  is_followed     :boolean          default(FALSE), not null
+#  to              :integer
+#  from            :integer
+#  kind            :integer
+#  direction       :integer
+#

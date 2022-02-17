@@ -41,7 +41,8 @@ class Applicant < ApplicationRecord
 
 
   # Create Applicant(on sumsub) with reviewStatus: init
-
+  def self.init_applicant(applicant_id)
+    applicant = Applicant.find()
     p response = Sumsub::Request.new.create_applicant('basic-kyc-level', {externalUserId: applicant_id, sourceKey: "kyc-service-#{Rails.env}"})
     unless response.is_a? Sumsub::Struct::ErrorResponse
       applicant = Applicant.find()
@@ -78,21 +79,23 @@ end
 #
 # Table name: applicants
 #
-#  id                 :bigint           not null, primary key
-#  applicant_id       :string           not null
-#  inspection_id      :string           not null
-#  user_uid           :string           not null
-#  source_key         :string
-#  start_date         :datetime
-#  create_date        :datetime
-#  status             :integer
-#  review_status      :string
-#  moderation_comment :string
-#  client_comment     :string
-#  review_answer      :string
-#  review_reject_type :string
-#  webhook_type       :string
-#  raw_request        :json
-#  fixed_info         :json
-#  reject_labels      :json
+#  id                  :bigint           not null, primary key
+#  uid                 :string
+#  sumsub_applicant_id :string
+#  inspection_id       :string
+#  barong_uid          :string
+#  bitzlato_id         :string
+#  source_key          :string
+#  start_date          :datetime
+#  create_date         :datetime
+#  status              :integer
+#  review_status       :string
+#  moderation_comment  :string
+#  client_comment      :string
+#  review_answer       :string
+#  review_reject_type  :string
+#  webhook_type        :string
+#  raw_request         :json
+#  fixed_info          :json
+#  reject_labels       :json
 #

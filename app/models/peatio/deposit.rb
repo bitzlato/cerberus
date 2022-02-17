@@ -48,3 +48,32 @@ module Peatio
     end
   end
 end
+
+# == Schema Information
+#
+# Table name: deposits
+#
+#  id                 :bigint           not null, primary key
+#  member_id          :bigint           not null
+#  currency_id        :string(20)       not null
+#  amount             :decimal(36, 18)  not null
+#  fee                :decimal(36, 18)  not null
+#  txid               :citext
+#  aasm_state         :string(30)       not null
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  completed_at       :datetime
+#  type               :string(30)       not null
+#  txout              :integer
+#  tid                :citext           not null
+#  address            :string(95)
+#  block_number       :integer
+#  from_addresses     :text
+#  transfer_type      :integer
+#  data               :json
+#  invoice_id         :string
+#  error              :json
+#  blockchain_id      :bigint           not null
+#  invoice_expires_at :datetime
+#  is_locked          :boolean          default(FALSE), not null
+#
