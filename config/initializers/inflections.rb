@@ -6,8 +6,6 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.acronym 'CORS'
   inflect.acronym 'UI'
   inflect.acronym 'UUID'
-  inflect.acronym 'UIDG'
-  inflect.acronym 'UID'
   inflect.acronym 'P2P'
   inflect.acronym 'CRUD'
   inflect.acronym 'KYC'
