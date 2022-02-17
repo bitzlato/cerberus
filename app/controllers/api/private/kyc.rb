@@ -20,7 +20,7 @@ module API
 
         desc 'Get kyc status info for current user'
         get 'verification' do
-          applicant = Applicant.find_by_user_uid(current_user_uid)
+          applicant = Applicant.find_by(barong_uid: current_user_uid)
           unless applicant
             applicant = Applicant.init_applicant(current_user_uid)
             raise "Applicant not created after init_applicant: #{create_response}" if applicant.nil?
