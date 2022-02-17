@@ -6,15 +6,20 @@ module API
     class KYC < Grape::API
       resource :kyc do
         desc 'Get verification KYC url for current user'
-        post 'verification_url' do
-          url = SumSub::GenerateUrl.new(applicant_id: current_user_uid).call
+        post 'verification' do
+          applicant = Applicant.find_by(barong_uid: current_user_uid)
+          unless applicant
+            applicant = Applicant.init_applicant(current_user_uid)
+          end
+
+          url = SumSub::GenerateUrl.new(applicant_id: applicant.uid).call
           response = {url: url}
 
           present response
         end
 
         desc 'Get kyc status info for current user'
-        get 'status' do
+        get 'verification' do
           applicant = Applicant.find_by_user_uid(current_user_uid)
           unless applicant
             applicant = Applicant.init_applicant(current_user_uid)
