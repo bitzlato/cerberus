@@ -57,7 +57,7 @@ class Applicant < ApplicationRecord
   end
 
   def reset_applicant
-    raise "Uknown sumsub_applicant_id in Applicant##{uid}" if self.sumsub_applicant_id.nil?
+    raise "Unknown sumsub_applicant_id in Applicant##{uid}" if self.sumsub_applicant_id.nil?
     response = Sumsub::Request.new.reset_applicant(sumsub_applicant_id)
     if response['ok'] == 1
       true
