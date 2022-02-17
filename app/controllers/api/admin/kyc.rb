@@ -4,16 +4,24 @@
 module API
   module Admin
     class KYC < Grape::API
-      resource :kyc do
-        desc '123 '
-        get 'test' do
-          present 'test'
+      resource :verifications do
+        desc 'Applicant Inddex'
+        get do
+          present 'applicant index'
         end
+
         desc 'Reset KYC verification in sumsub'
-        post 'reset' do
-          applicant = Applicant.find_by(user_uid: current_user_uid)
-          response = { reset: applicant.reset_applicant }
-          present response
+        route_param :uid do
+          desc 'Get Applicant by uid'
+          get do
+            applicant = Applicant.find_by(uid: params[:uid])
+            present applicant.as_json
+          end
+          get 'reset' do
+            applicant = Applicant.find_by(uid: params[:uid])
+            response = { reset: applicant.reset_applicant }
+            present response
+          end
         end
       end
     end
