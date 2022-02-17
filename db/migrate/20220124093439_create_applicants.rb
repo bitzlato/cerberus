@@ -5,7 +5,7 @@ class CreateApplicants < ActiveRecord::Migration[6.1]
       t.string :sumsub_applicant_id
       t.string :inspection_id
       t.string :barong_uid
-      t.string :bitzlati_id
+      t.string :bitzlato_id
       t.string :source_key
       t.datetime :start_date
       t.datetime :create_date
