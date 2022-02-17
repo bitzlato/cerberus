@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_16_083819) do
+ActiveRecord::Schema.define(version: 2022_02_17_095748) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 2022_02_16_083819) do
     t.json "fixed_info", default: {}
     t.json "reject_labels", default: []
     t.string "bitzlato_id"
+    t.string "uid"
   end
 
   create_table "versions", force: :cascade do |t|

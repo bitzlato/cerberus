@@ -9,9 +9,11 @@ class Applicant < ApplicationRecord
   include Limit
   has_paper_trail
 
-  validates :sumsub_applicant_id, :user_uid, presence: true
+  before_validation :assign_uid
+
+  validates :uid, presence: true
   validates :sumsub_applicant_id, uniqueness: true
-  validates :user_uid, uniqueness: true
+  validates :uid, uniqueness:  true
 
   enum status: {
     banned: -1,
@@ -61,6 +63,13 @@ class Applicant < ApplicationRecord
     end
   rescue Dry::Struct::MissingAttributeError
     false
+  end
+
+  private
+
+  def assign_uid
+    return unless uid.blank?
+    self.uid = UIDGenerator.generate
   end
 end
 
