@@ -28,11 +28,11 @@ module SumSub
     end
 
     def set_status
-      status = 'verified' if review_answer == 'GREEN'
-      status = 'banned'   if review_answer == 'RED' && review_reject_type == 'FINAL'
-      status = 'rejected' if review_answer == 'RED' && review_reject_type == 'RETRY'
-      status = 'init' if review_status == 'init'
-      status = 'reseted' if webhook_type == 'applicantReset'
+      status = 'verified' if @params.dig(:reviewResult, :reviewAnswer) == 'GREEN'
+      status = 'banned'   if @params.dig(:reviewResult, :reviewAnswer) == 'RED' && @params.dig(:reviewResult, :reviewRejectType) == 'FINAL'
+      status = 'rejected' if @params.dig(:reviewResult, :reviewAnswer) == 'RED' && @params.dig(:reviewResult, :reviewRejectType) == 'RETRY'
+      status = 'init'     if @params.dig(:reviewStatus) == 'init'
+      status = 'reseted'  if @params[:type] == 'applicantReset'
       applicant.update(status: status)
     end
 
