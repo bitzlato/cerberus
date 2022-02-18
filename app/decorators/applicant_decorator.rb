@@ -2,15 +2,15 @@ class ApplicantDecorator < Draper::Decorator
   delegate_all
 
 
-  CSS_CLASSES = { 'reseted' => 'badge badge-muted',
-                  'rejected' => 'badge badge-warning',
-                  'verified' => 'badge badge-success',
-                  'banned' => 'badge badge-danger',
-                  'init' => 'badge badge-info', }
+  CSS_STATUS_CLASSES = { 'reseted' => 'badge badge-muted',
+                         'rejected' => 'badge badge-warning',
+                         'verified' => 'badge badge-success',
+                         'banned' => 'badge badge-danger',
+                         'init' => 'badge badge-info', }
 
 
   def status_colored
-    h.content_tag(:span, object.status, class: CSS_CLASSES[object.status])
+    h.content_tag(:span, object.status, class: CSS_STATUS_CLASSES[object.status])
   end
 
   ######
