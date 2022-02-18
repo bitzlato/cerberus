@@ -4,6 +4,7 @@ module API
   module Helpers
     module CurrentUser
       def current_user_info
+        raise 'No JWT payload' unless request.env.key?('jwt.payload')
         @current_user_info ||= request.env['jwt.payload']&.with_indifferent_access
       end
 
