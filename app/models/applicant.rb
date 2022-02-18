@@ -22,14 +22,6 @@ class Applicant < ApplicationRecord
     init: 3
   }
 
-  before_save do
-    self.status = 'verified' if review_answer == 'GREEN'
-    self.status = 'banned'   if review_answer == 'RED' && review_reject_type == 'FINAL'
-    self.status = 'rejected' if review_answer == 'RED' && review_reject_type == 'RETRY'
-    self.status = 'init' if review_status == 'init'
-    self.status = 'reseted' if webhook_type == 'applicantReset'
-  end
-
   def email
     barong_user&.email || p2p_user&.real_email
   end
