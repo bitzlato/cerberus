@@ -26,11 +26,11 @@ class Applicant < ApplicationRecord
   end
 
   def sumsub_url
-    @sumsub_url ||= SumSub::GenerateUrl.new(applicant_id: uid).call
+    @sumsub_url ||= SumSub::GenerateUrl.new(public_id: uid).call
   end
 
-  def applicant_id
-    "#{id}-cerberus-#{Rails.env}"
+  def public_id
+    "cerberus-#{id}-#{Rails.env}"
   end
 
   # Create Applicant(on sumsub) with reviewStatus: init

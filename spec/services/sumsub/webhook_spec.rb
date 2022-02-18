@@ -30,7 +30,7 @@ describe SumSub::Webhook do
       )
       webhook.call
       applicant = Applicant.last
-      expect(applicant.applicant_id).to eq @params['applicantId']
+      expect(applicant.public_id).to eq @params['applicantId']
       expect(applicant.inspection_id).to eq @params['inspectionId']
       expect(applicant.user_uid).to eq @params['externalUserId']
       expect(applicant.source_key).to eq @params['sourceKey']
@@ -79,7 +79,7 @@ describe SumSub::Webhook do
     before do
       @applicant = create(:applicant, :rejected)
       @params = {
-        'applicantId': @applicant.applicant_id,
+        'applicantId': @applicant.public_id,
         'inspectionId': @applicant.inspection_id,
         'applicantType': 'individual',
         'correlationId': 'req-93309875-9699-4eae-8fb4-e4985d8a0ac0',

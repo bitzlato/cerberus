@@ -7,9 +7,9 @@ module SumSub
 
     CACHE_TIME = 10.minutes
 
-    def initialize(applicant_id:, locale: 'en', level_name: 'basic-kyc-level', ttl: 3600)
+    def initialize(public_id:, locale: 'en', level_name: 'basic-kyc-level', ttl: 3600)
       #TODO: applicant_id -> sumsub_applicant_id
-      @applicant_id = applicant_id
+      @public_id = public_id
       @locale = locale
       @level_name = level_name
       @ttl = ttl
@@ -29,19 +29,19 @@ module SumSub
       response = request.generate_external_link(
         @level_name,
         @ttl,
-        @applicant_id,
+        @public_id,
         locale: @locale
       )
       response['url']
     end
 
     def read_cache
-      cache = @@cached_url[@applicant_id]
+      cache = @@cached_url[@public_id]
       return cache[:url] if cache && (cache[:generated_at] + CACHE_TIME) > Time.now
     end
 
     def write_cache(url)
-      @@cached_url[@applicant_id] = {
+      @@cached_url[@public_id] = {
         url: url,
         generated_at: Time.now
       }

@@ -36,7 +36,7 @@ describe 'API::Kyc', type: :api do
     end
     describe 'init applicant' do
       it 'ok' do
-        stub_create_applicant(applicant_id: 1111)
+        stub_create_applicant(public_id: 1111)
         get '/api/kyc/status'
         expect(last_response.status).to eq(200)
         applicant = Applicant.last
@@ -53,7 +53,7 @@ describe 'API::Kyc', type: :api do
         uid: 1111
       }
 
-      @response = stub_websdk_link(applicant_id: @params[:uid])
+      @response = stub_websdk_link(public_id: @params[:uid])
     end
     it 'ok' do
       post '/api/kyc/verification_url'
@@ -68,9 +68,9 @@ describe 'API::Kyc', type: :api do
     before do
       @applicant = create(:applicant, :verified, user_uid: 1111)
       @params = {
-        applicant_id: @applicant.user_uid
+        public_id: @applicant.user_uid
       }
-      stub_reset(applicant_id: @applicant.applicant_id)
+      stub_reset(public_id: @applicant.public_id)
     end
     it 'ok' do
       post '/api/kyc/reset', @params

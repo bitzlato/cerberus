@@ -3,7 +3,7 @@
 
 table.table.table-striped
   thead
-    th applicant_id
+    th public
     th sumsub_applicant_id
     th status
     th barong_uid
@@ -12,7 +12,7 @@ table.table.table-striped
   tbody
     -@applicants.each do |applicant|
       tr is='dapi-tr' data-href=admin_applicant_path(applicant)
-        td =applicant.applicant_id
+        td =applicant.public_id
         td =applicant.sumsub_applicant_id
         td =applicant.status_colored
         td =applicant.barong_uid

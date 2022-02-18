@@ -8,7 +8,7 @@ module API
         desc 'Get verification KYC url for current user'
         post 'verification' do
           applicant = Applicant.find_or_create_by(barong_uid: current_user_uid)
-          url = SumSub::GenerateUrl.new(applicant_id: applicant.applicant_id).call
+          url = SumSub::GenerateUrl.new(public_id: applicant.public_id).call
           response = {url: url}
 
           present response
