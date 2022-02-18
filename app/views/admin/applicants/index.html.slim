@@ -15,7 +15,6 @@ table.table.table-striped
     -@applicants.each do |applicant|
       tr is='dapi-tr' data-href=admin_applicant_path(applicant)
         td =applicant.id
-        td =applicant.uid
         td =applicant.status_colored
         td =applicant.barong_uid
         td =applicant.bitzlato_id

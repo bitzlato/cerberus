@@ -13,7 +13,6 @@ class Applicant < ApplicationRecord
 
   validates :uid, presence: true
   validates :sumsub_applicant_id, uniqueness: true
-  validates :uid, uniqueness:  true
 
   enum status: {
     banned: -1,
@@ -66,13 +65,6 @@ class Applicant < ApplicationRecord
     end
   rescue Dry::Struct::MissingAttributeError
     false
-  end
-
-  private
-
-  def assign_uid
-    return unless uid.blank?
-    self.uid = UidGenerator.generate
   end
 end
 
