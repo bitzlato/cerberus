@@ -24,11 +24,16 @@ module SumSub
       else
         applicant.update(attributes)
       end
-      reset_condition
+      set_status
     end
 
-    def reset_condition
-      applicant.update(status: 'reseted', review_answer: '', review_reject_type: '') if @params[:type] == 'applicantReset'
+    def set_status
+      status = 'verified' if review_answer == 'GREEN'
+      status = 'banned'   if review_answer == 'RED' && review_reject_type == 'FINAL'
+      status = 'rejected' if review_answer == 'RED' && review_reject_type == 'RETRY'
+      status = 'init' if review_status == 'init'
+      status = 'reseted' if webhook_type == 'applicantReset'
+      applicant.update(status: status)
     end
 
     def attributes
@@ -45,10 +50,9 @@ module SumSub
         review_answer: @params.dig(:reviewResult, :reviewAnswer),
         review_status: @params.dig(:reviewStatus),
         webhook_type: @params[:type],
-        raw_request: @params
+        sumsub_request: @params
       }
     end
-
 
     def applicant
       @applicant ||= Applicant.find_by_applicant_id(@params[:applicantId])
