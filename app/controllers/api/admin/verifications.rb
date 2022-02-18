@@ -5,20 +5,20 @@ module API
   module Admin
     class Verifications < Grape::API
       resource :verifications do
-        desc 'Applicant Inddex'
+        desc 'Applicant Index'
         get do
           present 'applicant index'
         end
 
         desc 'Reset KYC verification in sumsub'
-        route_param :uid do
-          desc 'Get Applicant by uid'
+        route_param :id do
+          desc 'Get Applicant by id'
           get do
-            applicant = Applicant.find_by(uid: params[:uid])
+            applicant = Applicant.find_by(id: params[:id])
             present applicant.as_json
           end
           get 'reset' do
-            applicant = Applicant.find_by(uid: params[:uid])
+            applicant = Applicant.find_by(id: params[:id])
             response = { reset: applicant.reset_applicant }
             present response
           end
