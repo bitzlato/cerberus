@@ -30,13 +30,13 @@ class Applicant < ApplicationRecord
   end
 
   def applicant_id
-    "#{id}-#{Rails.env}"
+    "#{id}-cerberus-#{Rails.env}"
   end
 
   # Create Applicant(on sumsub) with reviewStatus: init
   def self.init_applicant(applicant_id)
     applicant = Applicant.find()
-    p response = Sumsub::Request.new.create_applicant('basic-kyc-level', {externalUserId: applicant_id, sourceKey: "kyc-service-#{Rails.env}"})
+    p response = Sumsub::Request.new.create_applicant('basic-kyc-level', {externalUserId: applicant_id, sourceKey: "cerberus-#{Rails.env}"})
     unless response.is_a? Sumsub::Struct::ErrorResponse
       applicant = Applicant.find()
       #TODO: find or create applicant by response['externalUserId']
