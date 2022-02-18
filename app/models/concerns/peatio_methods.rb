@@ -3,10 +3,10 @@ module PeatioMethods
   included do
 
     def peatio_member
-      @member ||= Peatio::Member.find_by(uid: user_uid)
+      @member ||= Peatio::Member.find_by(uid: barong_uid)
     end
 
-    def month_income_exchange(period: :monthly)
+    def income_exchange(period: :monthly)
       income = Peatio::Deposit.select('sum(amount) as sum_amount, currency_id')
                               .success
                               .period(period)
@@ -21,7 +21,7 @@ module PeatioMethods
       {origin: {}, converted: {}}
     end
 
-    def month_outcome_exchange(period: :monthly)
+    def outcome_exchange(period: :monthly)
       outcome = Peatio::Withdraw.select('sum(amount) as sum_amount, currency_id')
                                 .success
                                 .period(period)
