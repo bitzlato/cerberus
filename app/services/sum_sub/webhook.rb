@@ -39,17 +39,6 @@ module SumSub
     def attributes
       {
         sumsub_applicant_id: @params[:applicantId],
-        inspection_id: @params[:inspectionId],
-        user_uid: @params[:externalUserId],
-        source_key: @params[:sourceKey],
-        create_date: @params[:createdAt],
-        reject_labels: @params.dig(:reviewResult, :rejectLabels),
-        moderation_comment: @params.dig(:reviewResult, :moderationComment),
-        client_comment: @params.dig(:reviewResult, :clientComment),
-        review_reject_type: @params.dig(:reviewResult, :reviewRejectType),
-        review_answer: @params.dig(:reviewResult, :reviewAnswer),
-        review_status: @params.dig(:reviewStatus),
-        webhook_type: @params[:type],
         sumsub_request: @params
       }
     end
