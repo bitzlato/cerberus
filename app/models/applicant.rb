@@ -41,11 +41,11 @@ class Applicant < ApplicationRecord
       applicant = Applicant.find()
       #TODO: find or create applicant by response['externalUserId']
       #TODO: update fields this applicant from response
-      Applicant.create! sumsub_applicant_id: response['id'],
-                        create_date: response['createdAt'],
-                        inspection_id: response['inspectionId'],
-                        user_uid: response['externalUserId'], #TODO: тут
-                        review_status: response.dig('review','reviewStatus')
+      # Applicant.create! sumsub_applicant_id: response['id'],
+      #                   create_date: response['createdAt'],
+      #                   inspection_id: response['inspectionId'],
+      #                   user_uid: response['externalUserId'], #TODO: тут
+      #                   review_status: response.dig('review','reviewStatus')
     end
   end
 
