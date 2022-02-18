@@ -9,9 +9,8 @@ class Applicant < ApplicationRecord
   include Limit
   has_paper_trail
 
-  before_validation :assign_uid
+  before_create :init_status
 
-  validates :uid, presence: true
   validates :sumsub_applicant_id, uniqueness: true
 
   enum status: {
@@ -30,6 +29,9 @@ class Applicant < ApplicationRecord
     @sumsub_url ||= SumSub::GenerateUrl.new(applicant_id: uid).call
   end
 
+  def applicant_id
+    "#{id}-#{Rails.env}"
+  end
 
   # Create Applicant(on sumsub) with reviewStatus: init
   def self.init_applicant(applicant_id)
@@ -49,6 +51,7 @@ class Applicant < ApplicationRecord
 
   def reset_applicant
     raise "Unknown sumsub_applicant_id in Applicant##{uid}" if self.sumsub_applicant_id.nil?
+
     response = Sumsub::Request.new.reset_applicant(sumsub_applicant_id)
     if response['ok'] == 1
       true
@@ -57,6 +60,12 @@ class Applicant < ApplicationRecord
     end
   rescue Dry::Struct::MissingAttributeError
     false
+  end
+
+  private
+
+  def init_status
+    self.status = 'init'
   end
 end
 
