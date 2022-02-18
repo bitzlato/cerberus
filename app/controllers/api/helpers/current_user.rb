@@ -8,7 +8,11 @@ module API
       end
 
       def current_user_uid
-        current_user_info[:uid]
+        current_user_info.try(:[], :uid)
+      end
+
+      def current_user
+        @current_user ||= Barong::User.find_by(uid: current_user_uid)
       end
     end
   end
