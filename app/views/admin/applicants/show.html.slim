@@ -44,48 +44,48 @@ hr
     table.table.table-striped.table-hover.table-narrow
       tr
         th class='text-right' = I18n.t 'income.monthly.total'
-        td class='text-right' = "#{@applicant.monthly_usd_income} / #{@applicant.monthly_btc_income}"
+        td class='text-right' = "#{@applicant.monthly_usdc_summarize_income} / #{@applicant.monthly_btc_summarize_income}"
       tr
         th class='text-right' = I18n.t 'income.monthly.exchange'
-        td class='text-right' = "#{@applicant.monthly_usd_exchange_income} / #{@applicant.monthly_btc_exchange_income}"
+        td class='text-right' = "#{@applicant.monthly_usdc_exchange_income} / #{@applicant.monthly_btc_exchange_income}"
       tr
         th class='text-right' = I18n.t 'income.monthly.p2p'
-        td class='text-right' = "#{@applicant.monthly_usd_p2p_income} / #{@applicant.monthly_btc_p2p_income}"
+        td class='text-right' = "#{@applicant.monthly_usdc_p2p_income} / #{@applicant.monthly_btc_p2p_income}"
       tr
         th class='text-right'  --------------
         td class='text-right'  --------------
       tr
         th class='text-right' = I18n.t 'outcome.monthly.total'
-        td class='text-right' = "#{@applicant.monthly_usd_outcome} / #{@applicant.monthly_btc_outcome}"
+        td class='text-right' = "#{@applicant.monthly_usdc_summarize_outcome} / #{@applicant.monthly_btc_summarize_outcome}"
       tr
         th class='text-right' = I18n.t 'outcome.monthly.exchange'
-        td class='text-right' = "#{@applicant.monthly_usd_exchange_outcome} / #{@applicant.monthly_btc_exchange_outcome}"
+        td class='text-right' = "#{@applicant.monthly_usdc_exchange_outcome} / #{@applicant.monthly_btc_exchange_outcome}"
       tr
         th class='text-right' = I18n.t 'outcome.monthly.p2p'
-        td class='text-right' = "#{@applicant.monthly_usd_p2p_outcome} / #{@applicant.monthly_btc_p2p_outcome}"
+        td class='text-right' = "#{@applicant.monthly_usdc_p2p_outcome} / #{@applicant.monthly_btc_p2p_outcome}"
 
 
   .col-md-3
     table.table.table-striped.table-hover.table-narrow
       tr
         th class='text-right' = I18n.t 'income.daily.total'
-        td class='text-right' = "#{@applicant.daily_usd_income} / #{@applicant.daily_btc_income}"
+        td class='text-right' = "#{@applicant.daily_usdc_summarize_income} / #{@applicant.daily_btc_summarize_income}"
       tr
         th class='text-right' = I18n.t 'income.daily.exchange'
-        td class='text-right' = "#{@applicant.daily_usd_exchange_income} / #{@applicant.daily_btc_exchange_income}"
+        td class='text-right' = "#{@applicant.daily_usdc_exchange_income} / #{@applicant.daily_btc_exchange_income}"
       tr
         th class='text-right' = I18n.t 'income.daily.p2p'
-        td class='text-right' = "#{@applicant.daily_usd_p2p_income} / #{@applicant.daily_btc_p2p_income}"
+        td class='text-right' = "#{@applicant.daily_usdc_p2p_income} / #{@applicant.daily_btc_p2p_income}"
       tr
         th class='text-right'  --------------
         td class='text-right'  --------------
       tr
         th class='text-right' = I18n.t 'outcome.daily.total'
-        td class='text-right' = "#{@applicant.daily_usd_outcome} / #{@applicant.daily_btc_outcome}"
+        td class='text-right' = "#{@applicant.daily_usdc_summarize_outcome} / #{@applicant.daily_btc_summarize_outcome}"
       tr
         th class='text-right' = I18n.t 'outcome.daily.exchange'
-        td class='text-right' = "#{@applicant.daily_usd_exchange_outcome} / #{@applicant.daily_btc_exchange_outcome}"
+        td class='text-right' = "#{@applicant.daily_usdc_exchange_outcome} / #{@applicant.daily_btc_exchange_outcome}"
       tr
         th class='text-right' = I18n.t 'outcome.daily.p2p'
-        td class='text-right' = "#{@applicant.daily_usd_p2p_outcome} / #{@applicant.daily_btc_p2p_outcome}"
+        td class='text-right' = "#{@applicant.daily_usdc_p2p_outcome} / #{@applicant.daily_btc_p2p_outcome}"
 
