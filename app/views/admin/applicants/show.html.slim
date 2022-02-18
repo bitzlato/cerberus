@@ -4,20 +4,23 @@ hr
   .col-md-4
     table.table.table-striped.table-hover.table-narrow
       tr
+        th class='text-right' Applicant ID
+        td class='text-right' = @applicant.applicant_id
+      tr
         th class='text-right' SumSub Applicant ID
         td class='text-right' = @applicant.sumsub_applicant_id
       tr
         th class='text-right' Bitzlato ID
         td class='text-right' = @applicant.bitzlato_id
       tr
+        th class='text-right' Barong UID
+        td class='text-right' = @applicant.barong_uid
+      tr
         th class='text-right' Email
         td class='text-right' = @applicant.email
       tr
         th class='text-right' status
         td class='text-right' = @applicant.status_colored
-      tr
-        th class='text-right' review status
-        td class='text-right' = @applicant.review_status
       tr
         th class='text-right' Create Date
         td class='text-right' = @applicant.create_date
