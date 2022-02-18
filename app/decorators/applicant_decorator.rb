@@ -6,8 +6,7 @@ class ApplicantDecorator < Draper::Decorator
                   'rejected' => 'badge badge-warning',
                   'verified' => 'badge badge-success',
                   'banned' => 'badge badge-danger',
-                  'init' => 'badge badge-info',
-  }
+                  'init' => 'badge badge-info', }
 
 
   def status_colored
