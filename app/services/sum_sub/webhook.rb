@@ -28,10 +28,10 @@ module SumSub
     end
 
     def set_status
-      status = 'verified' if @params.dig(:reviewResult, :reviewAnswer) == 'GREEN'
-      status = 'banned'   if @params.dig(:reviewResult, :reviewAnswer) == 'RED' && @params.dig(:reviewResult, :reviewRejectType) == 'FINAL'
-      status = 'rejected' if @params.dig(:reviewResult, :reviewAnswer) == 'RED' && @params.dig(:reviewResult, :reviewRejectType) == 'RETRY'
-      status = 'init'     if @params.dig(:reviewStatus) == 'init'
+      status = 'verified' if review_result == 'GREEN'
+      status = 'banned'   if review_result == 'RED' && review_reject_type == 'FINAL'
+      status = 'rejected' if review_result == 'RED' && review_reject_type == 'RETRY'
+      status = 'init'     if review_status == 'init'
       status = 'reseted'  if @params[:type] == 'applicantReset'
       applicant.update(status: status)
     end
@@ -41,6 +41,18 @@ module SumSub
         sumsub_applicant_id: @params[:applicantId],
         sumsub_request: @params
       }
+    end
+
+    def review_reject_type
+      @params.dig(:reviewResult, :reviewRejectType)
+    end
+
+    def review_status
+      @params.dig(:reviewStatus)
+    end
+
+    def review_result
+      @params.dig(:reviewResult, :reviewAnswer)
     end
 
     def applicant
