@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :applicant do
     barong_uid { rand (999999) }
-    batlzato_uid { rand (999999) }
+    bitzlato_id { rand (999999) }
 
     trait :rejected do
       status { 'rejected' }
