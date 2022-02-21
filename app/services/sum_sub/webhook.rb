@@ -56,7 +56,7 @@ module SumSub
     end
 
     def applicant
-      @applicant ||= Applicant.find_by_applicant_id(@params[:applicantId])
+      @applicant ||= Applicant.find_by_sumsub_applicant_id(@params[:applicantId])
     end
 
     def validate_request
