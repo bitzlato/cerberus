@@ -26,7 +26,7 @@ class Applicant < ApplicationRecord
   end
 
   def sumsub_url
-    @sumsub_url ||= SumSub::GenerateUrl.new(public_id: uid).call
+    @sumsub_url ||= SumSub::GenerateUrl.new(public_id: public_id).call
   end
 
   def public_id
