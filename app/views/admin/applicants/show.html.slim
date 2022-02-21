@@ -21,18 +21,19 @@ hr
       tr
         th class='text-right' Status
         td class='text-right' = @applicant.status_colored
-      tr
-        th class='text-right' Create Date
-        td class='text-right' = @applicant.create_date
-      -if @applicant.moderation_comment
+      -if @applicant.try(:moderation_comment)
+        tr
+          th class='text-right' Create Date
+          td class='text-right' = @applicant.create_date
+      -if @applicant.try(:moderation_comment)
         tr
           th class='text-right' Moderation Comment
           td class='text-right' = @applicant.moderation_comment
-      -if @applicant.client_comment
+      -if @applicant.try(:client_comment)
         tr
           th class='text-right' Client Comment
           td class='text-right' = @applicant.client_comment
-      -if @applicant.reject_labels
+      -if @applicant.try(:reject_labels)
         tr
           th class='text-right' Reject Labels
           td class='text-right' = @applicant.reject_labels.split(' ,') rescue nil
