@@ -35,7 +35,7 @@ describe Applicant, type: :model do
       stub_create_applicant(sumsub_applicant_id: 1111)
     end
     it 'ok' do
-      applicant = Applicant.init_applicant(1111)
+      applicant = Applicant.find_or_init_applicant(1111)
       expect(applicant.user_uid).to eq('1111')
       expect(applicant.status).to eq('init')
     end

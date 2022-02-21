@@ -12,6 +12,8 @@ class Applicant < ApplicationRecord
   before_create :init_status
 
   validates :sumsub_applicant_id, uniqueness: true
+  validates :barong_uid, uniqueness: true
+  validates :barong_uid, presence: true
 
   enum status: {
     banned: -1,
@@ -34,19 +36,24 @@ class Applicant < ApplicationRecord
   end
 
   # Create Applicant(on sumsub) with reviewStatus: init
-  def self.init_applicant(applicant_id)
-    applicant = Applicant.find()
-    p response = Sumsub::Request.new.create_applicant('basic-kyc-level', {externalUserId: applicant_id, sourceKey: "cerberus-#{Rails.env}"})
+  def self.find_or_init_applicant(barong_uid)
+    applicant = Applicant.find_by(barong_uid: barong_uid)
+    return applicant if applicant
+
+    applicant = Applicant.create!(barong_uid: barong_uid, status: 'init')
+
+    response = Sumsub::Request.new.create_applicant(
+      'basic-kyc-level',
+      {externalUserId: applicant.public_id, sourceKey: "cerberus-#{Rails.env}"}
+    )
+
     unless response.is_a? Sumsub::Struct::ErrorResponse
-      applicant = Applicant.find()
-      #TODO: find or create applicant by response['externalUserId']
-      #TODO: update fields this applicant from response
-      # Applicant.create! sumsub_applicant_id: response['id'],
-      #                   create_date: response['createdAt'],
-      #                   inspection_id: response['inspectionId'],
-      #                   user_uid: response['externalUserId'], #TODO: тут
-      #                   review_status: response.dig('review','reviewStatus')
+      applicant = Applicant.update(
+        sumsub_applicant_id: response['id'],
+      )
     end
+
+    applicant
   end
 
   def reset_applicant

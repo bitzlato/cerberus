@@ -8,6 +8,7 @@ module API
         desc 'Get verification KYC url for current user'
         post 'verification' do
           applicant = Applicant.find_or_create_by(barong_uid: current_user_uid)
+
           url = SumSub::GenerateUrl.new(public_id: applicant.public_id).call
           response = {url: url}
 
@@ -16,13 +17,9 @@ module API
 
         desc 'Get kyc status info for current user'
         get 'verification' do
-          applicant = Applicant.find_by(barong_uid: current_user_uid)
-          unless applicant
-            applicant = Applicant.init_applicant(current_user_uid)
-            raise "Applicant not created after init_applicant: " if applicant.nil?
-          end
+          applicant = Applicant.find_or_init_applicant(current_user_uid)
 
-          present applicant.as_json(only: [:status, :reject_labels, :client_comment, :review_status])
+          present applicant.as_json(only: [:status])
         end
       end
     end
