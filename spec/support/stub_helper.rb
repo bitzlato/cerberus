@@ -7,9 +7,9 @@ module StubHelper
     response
   end
 
-  def stub_reset(public_id: 1111, body: nil)
+  def stub_reset(sumsub_applicant_id: 1111, body: nil)
     response = body || {'ok': 1}
-    stub_request(:post, "https://test-api.sumsub.com/resources/applicants/#{public_id}/reset").
+    stub_request(:post, "https://test-api.sumsub.com/resources/applicants/#{sumsub_applicant_id}/reset").
       to_return(status: 200, body: response.to_json, headers: {})
   end
 
