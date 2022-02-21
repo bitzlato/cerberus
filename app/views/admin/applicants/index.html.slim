@@ -11,7 +11,7 @@ table.table.table-striped
     th email
   tbody
     -@applicants.each do |applicant|
-      tr is='dapi-tr' data-href=admin_applicant_path(applicant)
+      tr is='dapi-tr' data-href=admin_applicant_path(applicant) onclick="location.href='#{admin_applicant_path(applicant)}';"
         td =applicant.public_id
         td =applicant.status_colored
         td =applicant.sumsub_applicant_id
