@@ -34,7 +34,9 @@ en:
     total: 'Total Income'
     exchange: 'Income from Exchange'
     p2p: 'Income from P2P'
+    voucher: 'Income from Voucher'
   outcome:
     total: 'Total Outcome'
     exchange: 'Outcome from Exchange'
     p2p: 'Outcome from P2P'
+    voucher: 'Outcome from Voucher'

@@ -3,23 +3,24 @@ module Limit
   included do
     def income(period: :monthly)
       incomes = []
-      incomes << p2p_income(period: :monthly)
-      incomes << income_exchange(period: :monthly)
+      incomes << p2p_income(period: period)
+      incomes << exchange_income(period: period)
+      incomes << p2p_voucher_income(period: period)
+
       summarize = summarize_hash_limits(incomes)
 
-      {p2p: incomes[0], exchange: incomes[1], summarize: summarize}.with_indifferent_access
+      {p2p: incomes[0], exchange: incomes[1], voucher: incomes[2], summarize: summarize}.with_indifferent_access
     end
 
     def outcome(period: :monthly)
       outcomes = []
-      outcomes << p2p_outcome(period: :monthly)
-      outcomes << p2p_voucher_withdraw(period: :monthly)
-      outcomes << outcome_exchange(period: :monthly)
+      outcomes << p2p_outcome(period: period)
+      outcomes << exchange_outcome(period: period)
+      outcomes << p2p_voucher_outcome(period: period)
 
       summarize = summarize_hash_limits(outcomes)
-      p2p_summarize = summarize_hash_limits([outcomes[0], outcomes[1]])
 
-      {p2p: p2p_summarize, exchange: outcomes[2], summarize: summarize}.with_indifferent_access
+      {p2p: outcomes[0], exchange: outcomes[1], voucher: outcomes[2], summarize: summarize}.with_indifferent_access
     end
 
     private

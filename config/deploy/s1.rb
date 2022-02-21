@@ -4,7 +4,7 @@ set :user, 'app'
 set :rails_env, :staging
 
 set :disallow_pushing, false
-set :application, -> { 'kyc-' + fetch(:stage).to_s }
+set :application, -> { 'cerberus-' + fetch(:stage).to_s }
 set :deploy_to, -> { "/home/#{fetch(:user)}/#{fetch(:stage)}/#{fetch(:application)}" }
 
 server ENV.fetch('STAGING_SERVER'),
