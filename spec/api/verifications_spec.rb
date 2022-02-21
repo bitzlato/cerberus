@@ -1,12 +1,12 @@
 require 'rails_helper'
 
 describe 'API::Kyc', type: :api do
-  include Rack::Test::Methods
+  # include Rack::Test::Methods
 
 
   shared_context 'authorized' do
     before do
-      API.helpers do
+      API::Private::Mount.helpers do
         def current_user_uid
           1111
         end
@@ -15,66 +15,38 @@ describe 'API::Kyc', type: :api do
   end
 
   def app
-    API::Verifications
+    API::Private::KYC
   end
 
-  context 'GET /api/kyc/status' do
+  context 'GET /api/private/kyc/verification' do
     include_context 'authorized'
     describe 'ok' do
       before do
-        @applicant = create(:applicant, :verified, user_uid: 1111)
-      end
-      it 'ok' do
-        get '/api/kyc/status'
-        expect(last_response.status).to eq(200)
-        expect(json_response['status']).to eq(@applicant.status)
-        expect(json_response['reject_labels']).to eq(@applicant.reject_labels)
-        expect(json_response['client_comment']).to eq(@applicant.client_comment)
-        expect(json_response['review_status']).to eq(@applicant.review_status)
-        expect(json_response['start_date']).to eq(@applicant.start_date)
-      end
-    end
-    describe 'init applicant' do
-      it 'ok' do
         stub_create_applicant(public_id: 1111)
-        get '/api/kyc/status'
+      end
+      it 'ok' do
+        get '/kyc/verification'
         expect(last_response.status).to eq(200)
         applicant = Applicant.last
-        expect(applicant.user_uid).to eq('1111')
-        expect(json_response['status']).to eq('init')
+        expect(applicant.barong_uid).to eq('1111')
+        expect(applicant.sumsub_applicant_id).to eq('61fcc341e552bf0001086cf8')
       end
     end
   end
 
-  context 'POST /api/kyc/verification_url' do
+  context 'POST /api/private/kyc/verification' do
     include_context 'authorized'
     before do
       @params = {
         uid: 1111
       }
-
-      @response = stub_websdk_link(public_id: @params[:uid])
+      stub_create_applicant(public_id: @params[:uid])
+      @response = stub_websdk_link
     end
     it 'ok' do
-      post '/api/kyc/verification_url'
+      post '/kyc/verification'
       expect(last_response.status).to eq(201)
       expect(json_response['url']).to eq(@response[:url])
-    end
-  end
-
-  context 'POST /api/kyc/reset' do
-    include_context 'authorized'
-
-    before do
-      @applicant = create(:applicant, :verified, user_uid: 1111)
-      @params = {
-        public_id: @applicant.user_uid
-      }
-      stub_reset(public_id: @applicant.public_id)
-    end
-    it 'ok' do
-      post '/api/kyc/reset', @params
-      expect(json_response['reset']).to eq(true)
     end
   end
 end
