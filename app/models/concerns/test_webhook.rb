@@ -7,7 +7,7 @@ module TestWebhook
       review_result = verified_review if status == 'verified'
       review_result = rejected_review if status == 'rejected'
       review_result = final_review    if status == 'banned'
-      Sumsub::Request.new.testing_on_test_environment(public_id, review_result)
+      Sumsub::Request.new.testing_on_test_environment(sumsub_applicant_id, review_result)
     end
 
 

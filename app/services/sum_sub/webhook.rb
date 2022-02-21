@@ -19,11 +19,7 @@ module SumSub
     private
 
     def process_webhook
-      if applicant.nil?
-        Applicant.create!(attributes)
-      else
-        applicant.update(attributes)
-      end
+      applicant.update(attributes)
       set_status
     end
 
