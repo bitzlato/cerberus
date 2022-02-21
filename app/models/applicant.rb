@@ -48,7 +48,7 @@ class Applicant < ApplicationRecord
     )
 
     unless response.is_a? Sumsub::Struct::ErrorResponse
-      applicant = Applicant.update(
+      applicant.update(
         sumsub_applicant_id: response['id'],
       )
     end

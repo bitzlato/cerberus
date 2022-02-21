@@ -4,13 +4,14 @@ FactoryBot.define do
   factory :applicant do
     barong_uid { rand (999999) }
     bitzlato_id { rand (999999) }
+    sumsub_applicant_id { rand (999999) }
 
     trait :rejected do
       status { 'rejected' }
     end
 
     trait :verified do
-      status { 'rejected' }
+      status { 'verified' }
     end
 
     trait :banned do
