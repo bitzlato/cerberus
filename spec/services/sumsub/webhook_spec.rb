@@ -22,6 +22,7 @@ describe SumSub::Webhook do
         'sourceKey': '',
         'clientId': 'bitzlato'
       }.with_indifferent_access
+      @applicant = create(:applicant, :init, sumsub_applicant_id: @params['applicantId'])
     end
     it 'ok' do
       webhook = described_class.new(
@@ -30,17 +31,7 @@ describe SumSub::Webhook do
       )
       webhook.call
       applicant = Applicant.last
-      expect(applicant.applicant_id).to eq @params['applicantId']
-      expect(applicant.inspection_id).to eq @params['inspectionId']
-      expect(applicant.user_uid).to eq @params['externalUserId']
-      expect(applicant.source_key).to eq @params['sourceKey']
-      expect(applicant.reject_labels).to eq @params['reviewResult']['rejectLabels']
-      expect(applicant.moderation_comment).to eq @params['reviewResult']['moderationComment']
-      expect(applicant.review_answer).to eq @params['reviewResult']['reviewAnswer']
-      expect(applicant.review_status).to eq @params['reviewStatus']
-      expect(applicant.review_reject_type).to eq @params['reviewResult']['reviewRejectType']
-      expect(applicant.webhook_type).to eq @params['type']
-      expect(applicant.raw_request).to eq @params
+      expect(applicant.sumsub_applicant_id).to eq @params['applicantId']
       expect(applicant.status).to eq 'rejected'
     end
   end
@@ -62,6 +53,7 @@ describe SumSub::Webhook do
         "createdAt": "2021-03-01 11:34:51+0000",
         "clientId": "SumsubClient"
       }.with_indifferent_access
+      @applicant = create(:applicant, :init, sumsub_applicant_id: @params['applicantId'])
     end
 
     it 'ok' do
@@ -77,10 +69,9 @@ describe SumSub::Webhook do
 
   describe 'change applicant' do
     before do
-      @applicant = create(:applicant, :rejected)
       @params = {
-        'applicantId': @applicant.applicant_id,
-        'inspectionId': @applicant.inspection_id,
+        'applicantId': 'f194e74040c3f316bda271c',
+        'inspectionId': '231',
         'applicantType': 'individual',
         'correlationId': 'req-93309875-9699-4eae-8fb4-e4985d8a0ac0',
         'externalUserId': '14577264',
@@ -93,6 +84,7 @@ describe SumSub::Webhook do
         'sourceKey': '',
         'clientId': 'bitzlato'
       }.with_indifferent_access
+      @applicant = create(:applicant, :rejected, sumsub_applicant_id: @params['applicantId'])
     end
 
     it 'ok' do
@@ -101,7 +93,6 @@ describe SumSub::Webhook do
         validate_request: false
       )
       webhook.call
-      expect(@applicant.status).to eq('rejected')
       @applicant.reload
       expect(@applicant.status).to eq('verified')
     end

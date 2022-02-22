@@ -3,7 +3,7 @@ module P2PMethods
   included do
 
     def p2p_user
-      @p2p_user ||= Bitzlato::User.find_by_id(user_uid)
+      @p2p_user ||= Bitzlato::User.find_by_id(bitzlato_id)
     end
 
     def p2p_voucher_outcome(period: :monthly)

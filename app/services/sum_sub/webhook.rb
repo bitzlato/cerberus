@@ -19,39 +19,40 @@ module SumSub
     private
 
     def process_webhook
-      if applicant.nil?
-        Applicant.create!(attributes)
-      else
-        applicant.update(attributes)
-      end
-      reset_condition
+      applicant.update(attributes)
+      set_status
     end
 
-    def reset_condition
-      applicant.update(status: 'reseted', review_answer: '', review_reject_type: '') if @params[:type] == 'applicantReset'
+    def set_status
+      status = 'verified' if review_result == 'GREEN'
+      status = 'banned'   if review_result == 'RED' && review_reject_type == 'FINAL'
+      status = 'rejected' if review_result == 'RED' && review_reject_type == 'RETRY'
+      status = 'init'     if review_status == 'init'
+      status = 'reseted'  if @params[:type] == 'applicantReset'
+      applicant.update(status: status)
     end
 
     def attributes
       {
-        applicant_id: @params[:applicantId],
-        inspection_id: @params[:inspectionId],
-        user_uid: @params[:externalUserId],
-        source_key: @params[:sourceKey],
-        create_date: @params[:createdAt],
-        reject_labels: @params.dig(:reviewResult, :rejectLabels),
-        moderation_comment: @params.dig(:reviewResult, :moderationComment),
-        client_comment: @params.dig(:reviewResult, :clientComment),
-        review_reject_type: @params.dig(:reviewResult, :reviewRejectType),
-        review_answer: @params.dig(:reviewResult, :reviewAnswer),
-        review_status: @params.dig(:reviewStatus),
-        webhook_type: @params[:type],
-        raw_request: @params
+        sumsub_applicant_id: @params[:applicantId],
+        sumsub_request: @params
       }
     end
 
+    def review_reject_type
+      @params.dig(:reviewResult, :reviewRejectType)
+    end
+
+    def review_status
+      @params.dig(:reviewStatus)
+    end
+
+    def review_result
+      @params.dig(:reviewResult, :reviewAnswer)
+    end
 
     def applicant
-      @applicant ||= Applicant.find_by_applicant_id(@params[:applicantId])
+      @applicant ||= Applicant.find_by_sumsub_applicant_id(@params[:applicantId])
     end
 
     def validate_request

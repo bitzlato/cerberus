@@ -1,32 +1,39 @@
 hr
 .row
 
-  .col-md-6
+  .col-md-4
     table.table.table-striped.table-hover.table-narrow
       tr
-        th class='text-right' Applicant ID
-        td class='text-right' = @applicant.applicant_id
+        th class='text-right' Public ID
+        td class='text-right' = @applicant.public_id
+      tr
+        th class='text-right' SumSub Applicant ID
+        td class='text-right' = @applicant.sumsub_applicant_id
+      tr
+        th class='text-right' Bitzlato ID
+        td class='text-right' = @applicant.bitzlato_id
+      tr
+        th class='text-right' Barong UID
+        td class='text-right' = @applicant.barong_uid
       tr
         th class='text-right' Email
         td class='text-right' = @applicant.email
       tr
-        th class='text-right' status
+        th class='text-right' Status
         td class='text-right' = @applicant.status_colored
-      tr
-        th class='text-right' review status
-        td class='text-right' = @applicant.review_status
-      tr
-        th class='text-right' Create Date
-        td class='text-right' = @applicant.create_date
-      -if @applicant.moderation_comment
+      -if @applicant.try(:moderation_comment)
+        tr
+          th class='text-right' Create Date
+          td class='text-right' = @applicant.create_date
+      -if @applicant.try(:moderation_comment)
         tr
           th class='text-right' Moderation Comment
           td class='text-right' = @applicant.moderation_comment
-      -if @applicant.client_comment
+      -if @applicant.try(:client_comment)
         tr
           th class='text-right' Client Comment
           td class='text-right' = @applicant.client_comment
-      -if @applicant.reject_labels
+      -if @applicant.try(:reject_labels)
         tr
           th class='text-right' Reject Labels
           td class='text-right' = @applicant.reject_labels.split(' ,') rescue nil
@@ -34,32 +41,52 @@ hr
         th class='text-right' SumSub URL:
         td class='text-right' = link_to @applicant.sumsub_url, @applicant.sumsub_url, target: '_blank'
 
-  .col-md-6
+  .col-md-3
     table.table.table-striped.table-hover.table-narrow
       tr
-        th class='text-right' = I18n.t 'income.total'
-        td class='text-right' = "#{@applicant.usd_income} / #{@applicant.btc_income}"
+        th class='text-right' = I18n.t 'income.monthly.total'
+        td class='text-right' = "#{@applicant.monthly_usdc_summarize_income} / #{@applicant.monthly_btc_summarize_income}"
       tr
-        th class='text-right' = I18n.t 'income.exchange'
-        td class='text-right' = "#{@applicant.usd_exchange_income} / #{@applicant.btc_exchange_income}"
+        th class='text-right' = I18n.t 'income.monthly.exchange'
+        td class='text-right' = "#{@applicant.monthly_usdc_exchange_income} / #{@applicant.monthly_btc_exchange_income}"
       tr
-        th class='text-right' = I18n.t 'income.p2p'
-        td class='text-right' = "#{@applicant.usd_p2p_income} / #{@applicant.btc_p2p_income}"
+        th class='text-right' = I18n.t 'income.monthly.p2p'
+        td class='text-right' = "#{@applicant.monthly_usdc_p2p_income} / #{@applicant.monthly_btc_p2p_income}"
       tr
-        th class='text-right' = I18n.t 'income.voucher'
-        td class='text-right' = "#{@applicant.usd_voucher_income} / #{@applicant.btc_voucher_income}"
+        th class='text-right'  -------------
+        td class='text-right'  -------------
       tr
-        th class='text-right'  --------------
-        td class='text-right'  --------------
+        th class='text-right' = I18n.t 'outcome.monthly.total'
+        td class='text-right' = "#{@applicant.monthly_usdc_summarize_outcome} / #{@applicant.monthly_btc_summarize_outcome}"
       tr
-        th class='text-right' = I18n.t 'outcome.total'
-        td class='text-right' = "#{@applicant.usd_outcome} / #{@applicant.btc_outcome}"
+        th class='text-right' = I18n.t 'outcome.monthly.exchange'
+        td class='text-right' = "#{@applicant.monthly_usdc_exchange_outcome} / #{@applicant.monthly_btc_exchange_outcome}"
       tr
-        th class='text-right' = I18n.t 'outcome.exchange'
-        td class='text-right' = "#{@applicant.usd_exchange_outcome} / #{@applicant.btc_exchange_outcome}"
+        th class='text-right' = I18n.t 'outcome.monthly.p2p'
+        td class='text-right' = "#{@applicant.monthly_usdc_p2p_outcome} / #{@applicant.monthly_btc_p2p_outcome}"
+
+
+  .col-md-3
+    table.table.table-striped.table-hover.table-narrow
       tr
-        th class='text-right' = I18n.t 'outcome.p2p'
-        td class='text-right' = "#{@applicant.usd_p2p_outcome} / #{@applicant.btc_p2p_outcome}"
+        th class='text-right' = I18n.t 'income.daily.total'
+        td class='text-right' = "#{@applicant.daily_usdc_summarize_income} / #{@applicant.daily_btc_summarize_income}"
       tr
-        th class='text-right' = I18n.t 'outcome.voucher'
-        td class='text-right' = "#{@applicant.usd_voucher_outcome} / #{@applicant.btc_voucher_outcome}"
+        th class='text-right' = I18n.t 'income.daily.exchange'
+        td class='text-right' = "#{@applicant.daily_usdc_exchange_income} / #{@applicant.daily_btc_exchange_income}"
+      tr
+        th class='text-right' = I18n.t 'income.daily.p2p'
+        td class='text-right' = "#{@applicant.daily_usdc_p2p_income} / #{@applicant.daily_btc_p2p_income}"
+      tr
+        th class='text-right'  -------------
+        td class='text-right'  -------------
+      tr
+        th class='text-right' = I18n.t 'outcome.daily.total'
+        td class='text-right' = "#{@applicant.daily_usdc_summarize_outcome} / #{@applicant.daily_btc_summarize_outcome}"
+      tr
+        th class='text-right' = I18n.t 'outcome.daily.exchange'
+        td class='text-right' = "#{@applicant.daily_usdc_exchange_outcome} / #{@applicant.daily_btc_exchange_outcome}"
+      tr
+        th class='text-right' = I18n.t 'outcome.daily.p2p'
+        td class='text-right' = "#{@applicant.daily_usdc_p2p_outcome} / #{@applicant.daily_btc_p2p_outcome}"
+

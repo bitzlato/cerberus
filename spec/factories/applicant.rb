@@ -2,26 +2,24 @@
 
 FactoryBot.define do
   factory :applicant do
-    user_uid { rand (999999) }
-    applicant_id { rand(999999) }
-    inspection_id { rand(999999) }
+    barong_uid { rand (999999) }
+    bitzlato_id { rand (999999) }
+    sumsub_applicant_id { rand (999999) }
 
     trait :rejected do
-      review_answer { 'RED' }
-      review_reject_type { 'RETRY' }
+      status { 'rejected' }
     end
 
     trait :verified do
-      review_answer { 'GREEN' }
+      status { 'verified' }
     end
 
     trait :banned do
-      review_answer { 'RED' }
-      review_reject_type { 'FINAL' }
+      status { 'banned' }
     end
 
     trait :init do
-      review_status { 'init' }
+      status { 'init' }
     end
   end
 end

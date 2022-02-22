@@ -9,9 +9,11 @@ class Applicant < ApplicationRecord
   include Limit
   has_paper_trail
 
-  validates :applicant_id, :user_uid, presence: true
-  validates :applicant_id, uniqueness: true
-  validates :user_uid, uniqueness: true
+  before_create :init_status
+
+  validates :sumsub_applicant_id, uniqueness: true
+  validates :barong_uid, uniqueness: true
+  validates :barong_uid, presence: true
 
   enum status: {
     banned: -1,
@@ -21,37 +23,43 @@ class Applicant < ApplicationRecord
     init: 3
   }
 
-  before_save do
-    self.status = 'verified' if review_answer == 'GREEN'
-    self.status = 'banned'   if review_answer == 'RED' && review_reject_type == 'FINAL'
-    self.status = 'rejected' if review_answer == 'RED' && review_reject_type == 'RETRY'
-    self.status = 'init' if review_status == 'init'
-    self.status = 'reseted' if webhook_type == 'applicantReset'
-  end
-
   def email
     barong_user&.email || p2p_user&.real_email
   end
 
   def sumsub_url
-    @sumsub_url ||= SumSub::GenerateUrl.new(user_id: user_uid).call
+    @sumsub_url ||= SumSub::GenerateUrl.new(public_id: public_id).call
   end
 
+  def public_id
+    "cerberus-#{id}-#{Rails.env}"
+  end
 
   # Create Applicant(on sumsub) with reviewStatus: init
-  def self.init_applicant(external_user_id)
-    p response = Sumsub::Request.new.create_applicant('basic-kyc-level', {externalUserId: external_user_id, sourceKey: "kyc-service-#{Rails.env}"})
+  def self.find_or_init_applicant(barong_uid)
+    applicant = Applicant.find_by(barong_uid: barong_uid)
+    return applicant if applicant
+
+    applicant = Applicant.create!(barong_uid: barong_uid, status: 'init')
+
+    response = Sumsub::Request.new.create_applicant(
+      'basic-kyc-level',
+      {externalUserId: applicant.public_id, sourceKey: "cerberus-#{Rails.env}"}
+    )
+
     unless response.is_a? Sumsub::Struct::ErrorResponse
-      Applicant.create! applicant_id: response['id'],
-                        create_date: response['createdAt'],
-                        inspection_id: response['inspectionId'],
-                        user_uid: response['externalUserId'],
-                        review_status: response.dig('review','reviewStatus')
+      applicant.update(
+        sumsub_applicant_id: response['id'],
+      )
     end
+
+    applicant
   end
 
   def reset_applicant
-    response = Sumsub::Request.new.reset_applicant(applicant_id)
+    raise "Unknown sumsub_applicant_id in Applicant##{uid}" if self.sumsub_applicant_id.nil?
+
+    response = Sumsub::Request.new.reset_applicant(sumsub_applicant_id)
     if response['ok'] == 1
       true
     else
@@ -60,27 +68,22 @@ class Applicant < ApplicationRecord
   rescue Dry::Struct::MissingAttributeError
     false
   end
+
+  private
+
+  def init_status
+    self.status = 'init'
+  end
 end
 
 # == Schema Information
 #
 # Table name: applicants
 #
-#  id                 :bigint           not null, primary key
-#  applicant_id       :string           not null
-#  inspection_id      :string           not null
-#  user_uid           :string           not null
-#  source_key         :string
-#  start_date         :datetime
-#  create_date        :datetime
-#  status             :integer
-#  review_status      :string
-#  moderation_comment :string
-#  client_comment     :string
-#  review_answer      :string
-#  review_reject_type :string
-#  webhook_type       :string
-#  raw_request        :json
-#  fixed_info         :json
-#  reject_labels      :json
+#  id                  :bigint           not null, primary key
+#  sumsub_applicant_id :string           not null
+#  inspection_id       :string           not null
+#  barong_uid          :string           not null
+#  bitzlato_id         :string
+#  uid                 :string
 #

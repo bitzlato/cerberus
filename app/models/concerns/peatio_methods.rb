@@ -3,7 +3,7 @@ module PeatioMethods
   included do
 
     def peatio_member
-      @member ||= Peatio::Member.find_by(uid: user_uid)
+      @member ||= Peatio::Member.find_by(uid: barong_uid)
     end
 
     def exchange_income(period: :monthly)

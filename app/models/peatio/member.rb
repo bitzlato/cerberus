@@ -1,6 +1,6 @@
+# frozen_string_literal: true
 # Copyright (c) 2019 Danil Pismenny <danil@brandymint.ru>
 
-# frozen_string_literal: true
 module Peatio
   class Member < Peatio::Record
     BOT_UIDS = ENV.fetch('STATS_EXCLUDE_MEMBER_UIDS', []).split(',')
@@ -55,3 +55,22 @@ module Peatio
     end
   end
 end
+
+# == Schema Information
+#
+# Table name: members
+#
+#  id                        :bigint           not null, primary key
+#  email                     :string
+#  created_at                :datetime         not null
+#  updated_at                :datetime         not null
+#  uid                       :string(32)       not null
+#  level                     :integer          not null
+#  role                      :string(16)       not null
+#  state                     :string(16)       not null
+#  group                     :string(32)       default("any"), not null
+#  username                  :string
+#  withdraw_disabled_at      :datetime
+#  withdraw_disabled_comment :string
+#  withdraw_disabled_by      :integer
+#

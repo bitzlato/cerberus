@@ -2,125 +2,53 @@ class ApplicantDecorator < Draper::Decorator
   delegate_all
 
 
+  CSS_STATUS_CLASSES = { 'reseted' => 'badge badge-muted',
+                         'rejected' => 'badge badge-warning',
+                         'verified' => 'badge badge-success',
+                         'banned' => 'badge badge-danger',
+                         'init' => 'badge badge-info', }
+
+  CURRENCY_SUMBOLS = { 'usdc': '$',
+                       'btc': '₿' }.with_indifferent_access
+
+
   def status_colored
-    class_name = ''
-    case object.status
-    when 'verified'
-      class_name = 'text-success'
-    when 'banned'
-      class_name = 'text-danger'
-    when 'rejected'
-      class_name = 'text-warning'
-    when 'init'
-      class_name = 'text-info'
-    when 'reseted'
-      class_name = 'text-muted'
+    h.content_tag(:span, object.status, class: CSS_STATUS_CLASSES[object.status])
+  end
+
+
+  ['monthly', 'daily'].each do |period|
+    ['usdc', 'btc'].each do |currency|
+      ['income','outcome'].each do |direction|
+        ['p2p', 'exchange', 'summarize', 'voucher'].each do |from|
+
+          define_method "#{period}_#{currency}_#{from}_#{direction}" do
+            lazy = self.send("#{direction}_#{period}_lazy")
+            "#{lazy.dig(from.to_sym, :converted, currency.upcase).round(2)} #{CURRENCY_SUMBOLS[currency]}"
+          rescue
+            '-'
+          end
+        end
+      end
     end
-    h.content_tag(:span, object.status, class: class_name)
-  end
-
-  ######
-
-  def usd_income
-    "#{income_lazy.dig(:summarize, :converted, 'USDC').round(2) rescue 0} $"
-  end
-
-  def usd_exchange_income
-    "#{income_lazy.dig(:exchange, :converted, 'USDC').round(2) rescue 0} $"
-  end
-
-  def usd_p2p_income
-    "#{income_lazy.dig(:p2p, :converted, 'USDC').round(2) rescue 0} $"
-  end
-
-  def usd_voucher_income
-    "#{income_lazy.dig(:voucher, :converted, 'USDC').round(2) rescue 0} $"
-  end
-
-  #####################################
-
-  def usd_outcome
-    "#{outcome_lazy.dig(:summarize, :converted, 'USDC').round(2) rescue 0} $"
-  end
-
-  def usd_exchange_outcome
-    "#{outcome_lazy.dig(:exchange, :converted, 'USDC').round(2) rescue 0} $"
-  end
-
-  def usd_p2p_outcome
-    "#{outcome_lazy.dig(:p2p, :converted, 'USDC').round(2) rescue 0} $"
-  end
-
-  def usd_voucher_outcome
-    "#{outcome_lazy.dig(:voucher, :converted, 'USDC').round(2) rescue 0} $"
-  end
-
-  #####################################
-  #####################################
-
-  def btc_outcome
-    "#{outcome_lazy.dig(:summarize, :converted, 'BTC').round(4) rescue 0} ₿"
-  end
-
-  def btc_exchange_outcome
-    "#{outcome_lazy.dig(:exchange, :converted, 'BTC').round(4) rescue 0} ₿"
-  end
-
-  def btc_p2p_outcome
-    "#{outcome_lazy.dig(:p2p, :converted, 'BTC').round(4) rescue 0} ₿"
-  end
-
-  def btc_voucher_outcome
-    "#{outcome_lazy.dig(:voucher, :converted, 'BTC').round(4) rescue 0} ₿"
-  end
-
-  #####################################
-
-  def btc_income
-    "#{income_lazy.dig(:summarize, :converted, 'BTC').round(4) rescue 0} ₿"
-  end
-
-  def btc_exchange_income
-    "#{income_lazy.dig(:exchange, :converted, 'BTC').round(4) rescue 0} ₿"
-  end
-
-  def btc_p2p_income
-    "#{income_lazy.dig(:p2p, :converted, 'BTC').round(4) rescue 0} ₿"
-  end
-
-  def btc_voucher_income
-    "#{income_lazy.dig(:voucher, :converted, 'BTC').round(4) rescue 0} ₿"
-  end
-
-  #####################################
-  #####################################
-
-  def outcome_detailed
-    outcome = outcome_lazy
-    "Exchange: (#{usd_exchange_outcome}, #{btc_exchange_outcome})\n
-     p2p: (#{usd_p2p_outcome}, #{btc_p2p_outcome})\n
-     voucher: (#{usd_voucher_outcome}, #{btc_voucher_outcome})\n
-     sum: (#{usd_outcome}, #{btc_outcome})\n
-    "
-  end
-
-  def income_detailed
-    outcome = outcome_lazy
-    "Exchange: (#{usd_exchange_income}, #{btc_exchange_income})\n
-     p2p: (#{usd_p2p_income}, #{btc_p2p_income})\n
-     voucher: (#{usd_voucher_income}, #{btc_voucher_income})\n
-     sum: (#{usd_income}, #{btc_income})\n
-    "
   end
 
   private
 
-  def income_lazy
-    @income_lazy ||= object.income
+  def income_monthly_lazy
+    @income_monthly_lazy ||= object.income(period: :monthly)
   end
 
-  def outcome_lazy
-    @outcome_lazy ||= object.outcome
+  def outcome_monthly_lazy
+    @outcome_monthly_lazy ||= object.outcome(period: :monthly)
+  end
+
+  def income_daily_lazy
+    @income_daily_lazy ||= object.income(period: :daily)
+  end
+
+  def outcome_daily_lazy
+    @outcome_daily_lazy ||= object.outcome(period: :daily)
   end
 
 end

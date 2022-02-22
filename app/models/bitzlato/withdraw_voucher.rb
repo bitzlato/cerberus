@@ -18,3 +18,19 @@ module Bitzlato
     end
   end
 end
+
+# == Schema Information
+#
+# Table name: withdraw_voucher
+#
+#  id                       :integer          not null, primary key
+#  user_id                  :integer
+#  payment_id               :integer
+#  created_at               :datetime         not null
+#  used_at                  :datetime
+#  secret_key               :text             not null
+#  expire_at                :datetime         not null
+#  first_notification_sent  :boolean          default(FALSE), not null
+#  second_notification_sent :boolean          default(FALSE), not null
+#  prime_time_event_name    :string(64)
+#
