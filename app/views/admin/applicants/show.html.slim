@@ -44,6 +44,12 @@ hr
   .col-md-3
     table.table.table-striped.table-hover.table-narrow
       tr
+        th class='text-right' = I18n.t 'period'
+        td class='text-right'
+          | #{1.month.ago.strftime("%d.%m.%Y %k:%M:%S")}
+          br
+          | #{Time.now.strftime("%d.%m.%Y %k:%M:%S")}
+      tr
         th class='text-right' = I18n.t 'income.monthly.total'
         td class='text-right' = "#{@applicant.monthly_usdc_summarize_income} / #{@applicant.monthly_btc_summarize_income}"
       tr
@@ -68,6 +74,12 @@ hr
 
   .col-md-3
     table.table.table-striped.table-hover.table-narrow
+      tr
+        th class='text-right' = I18n.t 'period'
+        td class='text-right'
+          | #{1.day.ago.strftime("%d.%m.%Y %k:%M:%S")}
+          br
+          | #{Time.now.strftime("%d.%m.%Y %k:%M:%S")}
       tr
         th class='text-right' = I18n.t 'income.daily.total'
         td class='text-right' = "#{@applicant.daily_usdc_summarize_income} / #{@applicant.daily_btc_summarize_income}"
