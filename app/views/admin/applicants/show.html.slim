@@ -3,9 +3,9 @@ hr
 
   .col-md-4
     table.table.table-striped.table-hover.table-narrow
-      tr
+      tr.thead-dark
         th class='text-right' Public ID
-        td class='text-right' = @applicant.public_id
+        th class='text-right' = @applicant.public_id
       tr
         th class='text-right' SumSub Applicant ID
         td class='text-right' = @applicant.sumsub_applicant_id
@@ -43,9 +43,9 @@ hr
 
   .col-md-3
     table.table.table-striped.table-hover.table-narrow
-      tr
+      tr.thead-dark
         th class='text-right' = I18n.t 'period'
-        td class='text-right'
+        th class='text-right'
           | #{1.month.ago.strftime("%d.%m.%Y %k:%M:%S")}
           br
           | #{Time.now.strftime("%d.%m.%Y %k:%M:%S")}
@@ -74,9 +74,9 @@ hr
 
   .col-md-3
     table.table.table-striped.table-hover.table-narrow
-      tr
+      tr.thead-dark
         th class='text-right' = I18n.t 'period'
-        td class='text-right'
+        th class='text-right'
           | #{1.day.ago.strftime("%d.%m.%Y %k:%M:%S")}
           br
           | #{Time.now.strftime("%d.%m.%Y %k:%M:%S")}
