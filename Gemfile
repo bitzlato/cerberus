@@ -63,7 +63,7 @@ end
 group :test do
   gem 'timecop'
 end
-gem 'semver2', '~> 3.4'
+gem 'semver'
 
 group :deploy do
   gem 'pry-rails'

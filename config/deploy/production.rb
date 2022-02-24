@@ -5,8 +5,8 @@ set :rails_env, :production
 fetch(:default_env)[:rails_env] = :production
 
 set :disallow_pushing, false
-set :application, -> { 'cerberus-' + fetch(:stage).to_s }
-set :deploy_to, -> { "/home/#{fetch(:user)}/#{fetch(:stage)}/#{fetch(:application)}" }
+set :application, -> { 'cerberus' }
+set :deploy_to, -> { "/home/#{fetch(:user)}/#{fetch(:application)}" }
 
 
 server ENV.fetch('PRODUCTION_SERVER'),
