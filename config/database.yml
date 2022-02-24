@@ -1,106 +1,71 @@
 default: &default
-  adapter: <%= ENV.fetch('DATABASE_ADAPTER', 'postgresql') %>
-  encoding: utf8
-  support_json: <%= ENV.fetch('DATABASE_SUPPORT_JSON', 'true') %>
-  <% if ENV.key?('DATABASE_COLLATION') %>
-  collation: <%= ENV.fetch('DATABASE_COLLATION', 'C') %>
-  <% end %>
-  pool: <%= ENV.fetch('DATABASE_POOL', ENV.fetch("RAILS_MAX_THREADS", 8).to_i * ENV.fetch("WEB_CONCURRENCY", 1).to_i) %>
-  <% if ENV.key?('DATABASE_HOST') %>
-  host: <%= ENV.fetch('DATABASE_HOST', '127.0.0.1') %>
-  <% end %>
-  port: <%= ENV.fetch('DATABASE_PORT', 5432) %>
-  <% if ENV.key?('DATABASE_USER') %>
-  username: <%= ENV.fetch('DATABASE_USER', `whoami`.chomp) %>
-  <% end %>
-  <% if ENV.key?('DATABASE_PASS') %>
-  password: <%= ENV['DATABASE_PASS'] %>
-  <% end %>
-
-peatio: &peatio
-  <<: *default
-  migrations_paths: db/peatio_migrate
-barong: &barong
-  <<: *default
-
-bitzlato_default: &bitzlato_default
   adapter: postgresql
   encoding: utf8
-  schema_search_path: p2p,public
-  <% if ENV.key?('DATABASE_COLLATION') %>
-  collation: <%= ENV.fetch('DATABASE_COLLATION', 'C') %>
-  <% end %>
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS", 8).to_i * ENV.fetch("WEB_CONCURRENCY", 1).to_i %>
-  <% if ENV.key?('DATABASE_HOST') %>
-  host: <%= ENV.fetch('DATABASE_HOST', '127.0.0.1') %>
-  <% end %>
-  port: <%= ENV.fetch('DATABASE_PORT', 5432) %>
-  <% if ENV.key?('DATABASE_USER') %>
-  username: <%= ENV.fetch('DATABASE_USER', `whoami`.chomp) %>
-  <% end %>
-  <% if ENV.key?('DATABASE_PASS') %>
-  password: <%= ENV['DATABASE_PASS'] %>
-  <% end %>
-  migrations_paths: db/migrate_bitzlato
+  schema_search_path: public
+
+primary_default: &primary_default
+  <<: *default
+  url: <%= ENV.fetch( 'CERBERUS_DATABASE_URL', 'postgres://localhost/cerberus_development'  ) %>
+  migrations_paths: db/primary_migrations
+
+bitzlato_default: &bitzlato_default
+  <<: *default
+  url: <%= ENV.fetch( 'BITZLATO_DATABASE_URL', 'postgres://localhost/bitzlato_development'  ) %>
+  migrations_paths: db/bitzlato_migrations
+
+peatio_default: &peatio_default
+  <<: *default
+  url: <%= ENV.fetch( 'BITZLATO_DATABASE_URL', 'postgres://localhost/peatio_development'  ) %>
+  migrations_paths: db/peatio_migrations
+
+barong_default: &barong_default
+  <<: *default
+  url: <%= ENV.fetch( 'BARONG_DATABASE_URL', 'postgres://localhost/barong_development'  ) %>
+  migrations_paths: db/barong_migrations
+
+production:
+  primary:
+    <<: *primary_default
+  bitzlato:
+    <<: *bitzlato_default
+  peatio:
+    <<: *peatio_default
+  barong:
+    <<: *barong_default
 
 development:
   primary:
-    <<: *default
-    database: <%= ENV.fetch('DATABASE_NAME', 'kyc_service_development') %>
+    <<: *primary_default
   bitzlato:
     <<: *bitzlato_default
-    database: bitzlato_development
+    database: <%= ENV.fetch('BITZLATO_DATABASE_NAME', 'bitzlato_development') %>
   peatio:
-    <<: *peatio
-    database: <%= ENV.fetch('PEATIO_DATABASE_NAME', 'peatio_development') %>
+    <<: *peatio_default
+    database: <%= ENV.fetch('PEATIO_DATABASE_NAME', 'barong_development') %>
   barong:
-    <<: *barong
+    <<: *barong_default
     database: <%= ENV.fetch('BARONG_DATABASE_NAME', 'barong_development') %>
 
 staging:
   primary:
-    <<: *default
-    url: <%= ENV.fetch('DATABASE_URL', '') %>
+    <<: *primary_default
   bitzlato:
     <<: *bitzlato_default
-    url: <%= ENV['BITZLATO_DATABASE_URL'] %>
   peatio:
-    <<: *peatio
-    url:  <%= ENV.fetch('PEATIO_DATABASE_URL', '') %>
+    <<: *peatio_default
   barong:
-    <<: *barong
-    url: <%= ENV.fetch('BARONG_DATABASE_URL', '') %>
-
-
-production:
-  primary:
-    <<: *default
-    url: <%= ENV.fetch('DATABASE_URL', '') %>
-  bitzlato:
-    <<: *bitzlato_default
-    url: <%= ENV['BITZLATO_DATABASE_URL'] %>
-  peatio:
-    <<: *peatio
-    url: <%= ENV.fetch('PEATIO_DATABASE_URL', '') %>
-  barong:
-    <<: *barong
-    url: <%= ENV.fetch('BARONG_DATABASE_URL', '') %>
+    <<: *barong_default
 
 test:
   primary:
-    <<: *default
-    database: kyc_service_test
+    <<: *primary_default
+    database: cerberus_test
   bitzlato:
     <<: *bitzlato_default
+    database: <%= ENV.fetch('BITZLATO_DATABASE_NAME', 'bitzlato_test') %>
   peatio:
-    <<: *peatio
-    database: peatio_test
+    <<: *peatio_default
+    database: <%= ENV.fetch('PEATIO_DATABASE_NAME', 'barong_test') %>
   barong:
-    <<: *barong
-    database: barong_test
-
-
-
-
-
-
+    <<: *barong_default
+    database: <%= ENV.fetch('BARONG_DATABASE_NAME', 'barong_test') %>
