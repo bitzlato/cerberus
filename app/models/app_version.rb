@@ -2,6 +2,8 @@
 
 # frozen_string_literal: true
 
+require 'semver'
+
 AppVersion = SemVer.find
 # Deployed version has ./REVISION file in root directory
 #
