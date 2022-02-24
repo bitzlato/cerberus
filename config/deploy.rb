@@ -3,7 +3,6 @@
 lock '3.16'
 
 set :user, 'app'
-set :application, 'kyc-service'
 
 set :roles, %w[app db].freeze
 
