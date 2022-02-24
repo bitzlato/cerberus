@@ -10,5 +10,5 @@ set :deploy_to, -> { "/home/#{fetch(:user)}/#{fetch(:stage)}/#{fetch(:applicatio
 server ENV.fetch('STAGING_SERVER'),
        user: fetch(:user),
        port: '22',
-       roles: %w[app mailer db].freeze,
+       roles: fetch(:roles),
        ssh_options: { forward_agent: true }
