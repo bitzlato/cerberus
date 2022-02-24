@@ -26,4 +26,4 @@ end
 require "rubygems"
 require "bundler/setup"
 
-load Gem.bin_path("semver", "semver")
+load Gem.bin_path("semver2", "semver")
