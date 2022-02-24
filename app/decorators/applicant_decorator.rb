@@ -1,6 +1,9 @@
 class ApplicantDecorator < Draper::Decorator
   delegate_all
 
+  def self.collection_decorator_class
+    PaginatingDecorator
+  end
 
   CSS_STATUS_CLASSES = { 'reseted' => 'badge badge-muted',
                          'rejected' => 'badge badge-warning',

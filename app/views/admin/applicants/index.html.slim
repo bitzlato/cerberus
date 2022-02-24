@@ -1,20 +1,25 @@
 
 
 
-table.table.table-striped
-  thead
-    th public
-    th status
-    th sumsub_applicant_id
-    th barong_uid
-    th bitzlato_id
-    th email
-  tbody
-    -@applicants.each do |applicant|
-      tr is='dapi-tr' data-href=admin_applicant_path(applicant) onclick="location.href='#{admin_applicant_path(applicant)}';"
-        td =applicant.public_id
-        td =applicant.status_colored
-        td =applicant.sumsub_applicant_id
-        td =applicant.barong_uid
-        td =applicant.bitzlato_id
-        td =applicant.email
+.row
+  .col-8
+    table.table.table-striped.table-narrow.table-hover
+      thead.thead-dark
+        th public_id
+        th status
+        th sumsub_applicant_id
+        th barong_uid
+        th bitzlato_id
+        th email
+      tbody
+        -@applicants.each do |applicant|
+          tr is='dapi-tr' data-href=admin_applicant_path(applicant) onclick="location.href='#{admin_applicant_path(applicant)}';"
+            td =applicant.public_id
+            td =applicant.status_colored
+            td =applicant.sumsub_applicant_id
+            td =applicant.barong_uid
+            td =applicant.bitzlato_id
+            td =applicant.email
+
+
+    = paginate @applicants

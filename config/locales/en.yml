@@ -29,14 +29,34 @@
 # To learn more, please read the Rails Internationalization guide
 # available at https://guides.rubyonrails.org/i18n.html.
 
+
+
 en:
+  period: Period
   income:
-    total: 'Total Income'
-    exchange: 'Income from Exchange'
-    p2p: 'Income from P2P'
-    voucher: 'Income from Voucher'
+    total:
+      total: 'Total Income'
+      exchange: 'Income from exchange'
+      p2p: 'Income from p2p'
+    monthly:
+      total: 'Monthly total income'
+      exchange: 'Monthly exchange income'
+      p2p: 'Monthly p2p income'
+    daily:
+      total: 'Daily total income'
+      exchange: 'Daily exchange income'
+      p2p: 'Daily p2p income'
   outcome:
-    total: 'Total Outcome'
-    exchange: 'Outcome from Exchange'
-    p2p: 'Outcome from P2P'
-    voucher: 'Outcome from Voucher'
+    total:
+      total: 'Total Outcome'
+      exchange: 'Outcome from exchange'
+      p2p: 'Outcome from p2p'
+    monthly:
+      total: 'Monthly total outcome'
+      exchange: 'Monthly exchange outcome'
+      p2p: 'Monthly p2p outcome'
+    daily:
+      total: 'Daily total outcome'
+      exchange: 'Daily exchange outcome'
+      p2p: 'Daily p2p outcome'
+
