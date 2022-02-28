@@ -21,8 +21,7 @@ auth_args = {
   on_error: on_error
 }
 
-# TODO: вернуть
-Rails.application.config.middleware.use JWT::Rack::Auth, auth_args
+# Rails.application.config.middleware.use JWT::Rack::Auth, auth_args
 
 if Rails.env.development? && ENV.key?('DUMMY_JWT_BEARER')
   require 'dummy_jwt_middleware'
