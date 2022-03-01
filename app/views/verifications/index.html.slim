@@ -10,9 +10,9 @@
         th country
       tbody
         -@verifications.each do |verification|
-          tr is='dapi-tr' data-href=admin_verification_path(verification) onclick="location.href='#{admin_verification_path(verification)}';"
-            td =applicant.id
-            td =applicant.applicant_id
-            td =applicant.country
+          tr is='dapi-tr' data-href=verification_path(verification) onclick="location.href='#{verification_path(verification)}';"
+            td =verification.id
+            td =verification.applicant_id
+            td =verification.country
 
     = paginate @verifications
