@@ -109,5 +109,5 @@ gem "simple_form", "~> 5.1"
 gem "simple_form_extension", "~> 1.4"
 gem 'carrierwave', '~> 2.0'
 gem 'country_select'
-# gem 'simple_form_fancy_uploads'
-# gem 'redactor-rails', github: 'glyph-fr/redactor-rails'
+gem 'simple_form_fancy_uploads'
+gem 'redactor-rails', github: 'glyph-fr/redactor-rails'
