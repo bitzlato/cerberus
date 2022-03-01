@@ -103,3 +103,6 @@ gem 'sumsub-ruby-sdk', '~> 0.1.3', require: 'sumsub', github: 'bitzlato/sumsub-r
 
 
 gem "grape", "~> 1.6"
+
+gem "simple_form", "~> 5.1"
+gem "simple_form_extension", "~> 1.4"
