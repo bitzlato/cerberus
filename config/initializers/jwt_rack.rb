@@ -17,11 +17,10 @@ auth_args = {
   secret: Rails.configuration.x.jwt_public_key,
   options: Rails.configuration.x.jwt_options,
   verify: Rails.configuration.x.jwt_public_key.present?,
-  exclude: %w[/api/webhook/sumsub /admin /assets],
+  exclude: %w[/api/cerberus/webhook/sumsub /admin /assets],
   on_error: on_error
 }
 
-# TODO: вернуть
 Rails.application.config.middleware.use JWT::Rack::Auth, auth_args
 
 if Rails.env.development? && ENV.key?('DUMMY_JWT_BEARER')

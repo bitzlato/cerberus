@@ -3,15 +3,15 @@ Rails.application.routes.draw do
     mount API::Admin::Mount => '/'
   end
 
-  scope '/api/private' do
+  scope '/api/cerberus/private' do
     mount API::Private::Mount => '/'
   end
 
-  scope '/api/public' do
+  scope '/api/cerberus/public' do
     mount API::Public::Mount => '/'
   end
 
-  scope '/api/webhook' do
+  scope '/api/cerberus/webhook' do
     mount API::Webhook => '/'
   end
 
