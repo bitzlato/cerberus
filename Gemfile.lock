@@ -419,6 +419,7 @@ GEM
     sd_notify (0.1.1)
     selectize-rails (0.12.6)
     semantic_range (3.0.0)
+    semver (1.0.1)
     semver2 (3.4.2)
     simple_form (5.1.0)
       actionpack (>= 5.2)
@@ -545,6 +546,7 @@ DEPENDENCIES
   rubocop
   sass-rails (>= 6)
   sd_notify (~> 0.1.1)
+  semver
   semver2 (~> 3.4)
   simple_form (~> 5.1)
   simple_form_extension (~> 1.4)
