@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :verifications
+
   scope '/api/admin' do
     mount API::Admin::Mount => '/'
   end
@@ -18,4 +20,5 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :applicants, only: [:show, :index]
   end
+
 end

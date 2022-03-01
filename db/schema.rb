@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_27_072445) do
+ActiveRecord::Schema.define(version: 2022_03_01_070337) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,13 @@ ActiveRecord::Schema.define(version: 2022_01_27_072445) do
     t.string "bitzlato_id"
     t.string "sumsub_applicant_id"
     t.json "sumsub_request", default: {}
+  end
+
+  create_table "verifications", force: :cascade do |t|
+    t.integer "applicant_id"
+    t.string "country", limit: 2
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "versions", force: :cascade do |t|

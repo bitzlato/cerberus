@@ -64,6 +64,8 @@ group :test do
   gem 'timecop'
 end
 gem 'semver2', '~> 3.4'
+gem 'carrierwave', '~> 2.0'
+gem 'country_select', '~> 6.0'
 
 group :deploy do
   gem 'pry-rails'
