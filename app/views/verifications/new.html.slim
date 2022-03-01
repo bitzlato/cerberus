@@ -1,7 +1,7 @@
 = simple_form_for  @verification, as: :form, url: verifications_url do |f|
   .row
     .col-md-4
-      = f.input :country, as: :country, priority: [:UA, :RU, :BY, :KZ]
+      = f.input :country, as: :country, priority: [:UA, :RU, :BY, :KZ], label: 'Гражданство'
   .row
     .col-md-4
       = f.file_field :documents, multiple: true, accept: 'image/png,image/gif,image/jpeg,image/webp,image/*'
