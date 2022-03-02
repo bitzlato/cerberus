@@ -1,0 +1,18 @@
+
+
+
+.row
+  .col-8
+    table.table.table-striped.table-narrow.table-hover
+      thead.thead-dark
+        th id
+        th applicant_id
+        th country
+      tbody
+        -@verifications.each do |verification|
+          tr is='dapi-tr' data-href=verification_path(verification) onclick="location.href='#{verification_path(verification)}';"
+            td =verification.id
+            td =verification.applicant_id
+            td =verification.country
+
+    = paginate @verifications

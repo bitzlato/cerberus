@@ -64,6 +64,7 @@ group :test do
   gem 'timecop'
 end
 gem 'semver2', '~> 3.4'
+gem 'semver'
 
 group :deploy do
   gem 'pry-rails'
@@ -106,3 +107,7 @@ gem "grape", "~> 1.6"
 
 gem "simple_form", "~> 5.1"
 gem "simple_form_extension", "~> 1.4"
+gem 'carrierwave', '~> 2.0'
+gem 'country_select'
+gem 'simple_form_fancy_uploads'
+gem 'redactor-rails', github: 'glyph-fr/redactor-rails'
