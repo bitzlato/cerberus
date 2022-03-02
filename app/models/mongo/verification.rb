@@ -1,6 +1,8 @@
 class Mongo::Verification
     include Mongoid::Document
     store_in collection: 'verifications'
+    mount_uploaders :files, MongoDocumentUploader
+    # mount_uploaders :selectFiles, MongoDocumentUploader
 
     field :lastUpdate, type: DateTime
     field :created, type: DateTime
@@ -20,7 +22,21 @@ class Mongo::Verification
     field :selectFiles, type: Array
     field :cause, type: String
     field :files, type: Array
-    field '__v', type: Integer
     field :comment, type: String
     field :ban, type: Boolean
+    field '__v', type: Integer
+
+
+    def files
+        @files ||= begin
+            array = []
+            grid_fs = Mongoid::GridFs
+
+            self['files'].each do |file_object|
+                array << Tempfile.create { |f| f << "abc\n" }
+                array << grid_fs.get(file_object['file']) rescue nil
+            end
+            array
+        end
+    end
 end
