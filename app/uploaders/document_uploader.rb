@@ -3,7 +3,10 @@ class DocumentUploader < CarrierWave::Uploader::Base
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
 
-  # Choose what kind of storage to use for this uploader:
+  # Choose what kind of storage to use for this uploader:   q4567890-=0 /.,mnbv
+  # ]['poiu ytrewqв
+# эгней ФЫВЭЖЗЩШГ76543  Ш
+  # . с']
   storage :file
   # storage :fog
 

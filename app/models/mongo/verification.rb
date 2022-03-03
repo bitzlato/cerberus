@@ -26,17 +26,26 @@ class Mongo::Verification
     field :ban, type: Boolean
     field '__v', type: Integer
 
+    def postgres_export
+        pg_verifcation = ::Verification.find_or_create_by legacy_verification_id: self['_id']
+        pg_verifcation.documents = []
+        grid_fs = Mongoid::GridFs
 
-    def files
-        @files ||= begin
-            array = []
-            grid_fs = Mongoid::GridFs
+        self['files'].each do |file_object|
+            filename = [File.basename(file_object['filename']), File.extname(file_object['filename'])]
+            tempfile = Tempfile.new filename, binary: true
 
-            self['files'].each do |file_object|
-                array << Tempfile.create { |f| f << "abc\n" }
-                array << grid_fs.get(file_object['file']) rescue nil
-            end
-            array
+            fs = grid_fs.get(file_object['file'])
+            fs.each { |chunk| tempfile.write chunk.force_encoding(Encoding::UTF_8) }
+
+            uploader = DocumentUploader.new pg_verifcation,'documents'
+            uploader.store! tempfile
+            pg_verifcation.documents << uploader
+
+            tempfile.close
+            tempfile.unlink
         end
+
+        pg_verifcation.save
     end
 end

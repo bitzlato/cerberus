@@ -4,6 +4,8 @@ class VerificationDecorator < Draper::Decorator
   def self.collection_decorator_class
     PaginatingDecorator
   end
+
+
   # Define presentation-specific methods here. Helpers are accessed through
   # `helpers` (aka `h`). You can override attributes, for example:
   #
